@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Web Designs Master Suite — Anmol Sharma</title>
+    <meta name="description" content="A curated zero-dependency master collection of 35+ modern HTML/CSS/JS web design templates, spatial glassmorphism 2.0, WebGL shaders, Lenis inertia scroll, and SOTA UI components.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        @property --angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        :root {
+            --bg: #030712;
+            --surface: #0f172a;
+            --card-bg: rgba(15, 23, 42, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-cyan: #06b6d4;
+            --accent-pink: #ec4899;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 100px 24px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 18px;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.25);
+            border-radius: 999px;
+            color: var(--accent-cyan);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 650px;
+            margin: 0 auto 32px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-header {
+            margin: 60px 0 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .section-count {
+            font-family: var(--font-mono);
+            color: var(--accent-cyan);
+            font-size: 0.9rem;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px;
+            backdrop-filter: blur(16px);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(6, 182, 212, 0.4);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+        }
+
+        footer {
+            margin-top: 100px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="badge">Modern Web Architecture & SOTA Front-End Suite</div>
+        <h1 class="title">HTML Web Designs Master Collection</h1>
+        <p class="subtitle">A curated, zero-dependency library of 35+ standalone HTML/CSS/JS portfolio templates, WebGL shaders, SOTA motion engines, and modular UI components.</p>
+        <div class="cta-group">
+            <a href="https://github.com/anmolsharma152/html-web-designs-portfolio" class="btn btn-primary" target="_blank">
+                🐙 View GitHub Repository
+            </a>
+            <a href="DESIGN_SYSTEM_AND_PATTERNS_GUIDE.md" class="btn btn-secondary" target="_blank">
+                📖 Educational Guide
+            </a>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <!-- 👑 FLAGSHIP MASTERS -->
+        <div class="section-header">
+            <h2 class="section-title">👑 Flagship Master Portfolio Templates</h2>
+            <span class="section-count">10 Full Webpages</span>
+        </div>
+
+        <div class="grid">
+            
+            <a href="Master 05 — Lenis Smooth Inertia & GSAP Kinetic.html" class="card">
+                <div>
+                    <div class="card-tag">SOTA MOTION ENGINE</div>
+                    <h3 class="card-title">Master 05 — Lenis Smooth Inertia & GSAP</h3>
+                    <p class="card-desc">Lenis smooth scroll physics (`@studio-freight/lenis`), GSAP ScrollTrigger pinned horizontal scroll, and kinetic typography.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Launch Template →</span>
+                </div>
+            </a>
+
+            <a href="Master 06 — Matter.js Physics & Vercel Border Beam.html" class="card">
+                <div>
+                    <div class="card-tag">PHYSICS + CONIC BEAM</div>
+                    <h3 class="card-title">Master 06 — Matter.js Physics & Vercel Beam</h3>
+                    <p class="card-desc">Matter.js 2D rigid-body gravity box for skill pills and Vercel-style rotating laser border beams.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Launch Template →</span>
+                </div>
+            </a>
+
+            <a href="Master 01 — Modern Bento Spatial 3D.html" class="card">
+                <div>
+                    <div class="card-tag">GLASSMORPHISM 2.0</div>
+                    <h3 class="card-title">Master 01 — Modern Bento Spatial 3D</h3>
+                    <p class="card-desc">Frosted glass cards (`backdrop-filter`), SVG anti-banding noise, 3D tilt math, Three.js 3D wireframe sphere.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Launch Template →</span>
+                </div>
+            </a>
+
+            <a href="Master 02 — Kinetic Cmd-K Enterprise.html" class="card">
+                <div>
+                    <div class="card-tag">ENTERPRISE LIGHT MODE</div>
+                    <h3 class="card-title">Master 02 — Kinetic Cmd-K Enterprise</h3>
+                    <p class="card-desc">Pristine white porcelain theme with Cmd+K command search modal, royal blue accents, elevated cards.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Launch Template →</span>
+                </div>
+            </a>
+
+            <a href="Master 03 — Interactive Architecture Visualizer.html" class="card">
+                <div>
+                    <div class="card-tag">NODE GRAPH FLOW</div>
+                    <h3 class="card-title">Master 03 — Architecture Visualizer</h3>
+                    <p class="card-desc">Interactive node dataflow graph showcasing Disha AI LangGraph and pgvector pipelines.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Launch Template →</span>
+                </div>
+            </a>
+
+            <a href="Master 04 — View Transitions Scrollytelling.html" class="card">
+                <div>
+                    <div class="card-tag">VIEW TRANSITIONS API</div>
+                    <h3 class="card-title">Master 04 — View Transitions Scrollytelling</h3>
+                    <p class="card-desc">Native CSS `view-timeline` scroll progress and `document.startViewTransition()` page morphs.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Launch Template →</span>
+                </div>
+            </a>
+
+            <a href="Master — Raycast Command OS.html" class="card">
+                <div>
+                    <div class="card-tag">RAYCAST BRAND</div>
+                    <h3 class="card-title">Master — Raycast Command OS</h3>
+                    <p class="card-desc">macOS-inspired translucent command panels, keyboard shortcut listeners, floating quick action dock.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Launch Template →</span>
+                </div>
+            </a>
+
+            <a href="Master — Stripe Enterprise Glass.html" class="card">
+                <div>
+                    <div class="card-tag">STRIPE BRAND</div>
+                    <h3 class="card-title">Master — Stripe Enterprise Glass</h3>
+                    <p class="card-desc">Dynamic HTML5 multi-color mesh gradient canvas, fluid particle trails, high-contrast dark typography.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Launch Template →</span>
+                </div>
+            </a>
+
+            <a href="Master — Supabase Developer Hub.html" class="card">
+                <div>
+                    <div class="card-tag">SUPABASE BRAND</div>
+                    <h3 class="card-title">Master — Supabase Developer Hub</h3>
+                    <p class="card-desc">Emerald dark theme with database telemetry cards, terminal code previews, real-time indicators.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Launch Template →</span>
+                </div>
+            </a>
+
+            <a href="Master — Midjourney Cyberpunk Dark.html" class="card">
+                <div>
+                    <div class="card-tag">MIDJOURNEY BRAND</div>
+                    <h3 class="card-title">Master — Midjourney Cyberpunk Dark</h3>
+                    <p class="card-desc">Ambient glowing nebula backdrops, neon accent glows, prompt terminal cards.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Launch Template →</span>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- 🧩 STANDALONE COMPONENTS -->
+        <div class="section-header">
+            <h2 class="section-title">🧩 Standalone Modular UI Components</h2>
+            <span class="section-count">13 Pattern Reference Files</span>
+        </div>
+
+        <div class="grid">
+            <a href="Component — Lenis Inertia Scroll Container.html" class="card">
+                <div>
+                    <div class="card-tag">COMPONENT</div>
+                    <h3 class="card-title">Lenis Inertia Scroll Container</h3>
+                    <p class="card-desc">Pure Lenis inertia scroll engine container setup.</p>
+                </div>
+                <div class="card-footer"><span>View Code & Component →</span></div>
+            </a>
+
+            <a href="Component — Matter.js Interactive Physics Canvas.html" class="card">
+                <div>
+                    <div class="card-tag">COMPONENT</div>
+                    <h3 class="card-title">Matter.js Physics Canvas</h3>
+                    <p class="card-desc">Drag-and-drop 2D rigid body gravity container.</p>
+                </div>
+                <div class="card-footer"><span>View Code & Component →</span></div>
+            </a>
+
+            <a href="Component — Vercel Border Beam & Shimmer Card.html" class="card">
+                <div>
+                    <div class="card-tag">COMPONENT</div>
+                    <h3 class="card-title">Vercel Border Beam Card</h3>
+                    <p class="card-desc">Pure CSS `@property` conic gradient laser border animation.</p>
+                </div>
+                <div class="card-footer"><span>View Code & Component →</span></div>
+            </a>
+
+            <a href="Component — Apple Dynamic Island Pill.html" class="card">
+                <div>
+                    <div class="card-tag">COMPONENT</div>
+                    <h3 class="card-title">Apple Dynamic Island Pill</h3>
+                    <p class="card-desc">Expanding spring-animated status pill micro-drawer container.</p>
+                </div>
+                <div class="card-footer"><span>View Code & Component →</span></div>
+            </a>
+
+            <a href="Component — Fuse.js Fuzzy CmdK Search.html" class="card">
+                <div>
+                    <div class="card-tag">COMPONENT</div>
+                    <h3 class="card-title">Fuse.js Fuzzy CmdK Search</h3>
+                    <p class="card-desc">Weighted fuzzy-search modal with title & tag scoring.</p>
+                </div>
+                <div class="card-footer"><span>View Code & Component →</span></div>
+            </a>
+
+            <a href="Component — CmdK Command Palette.html" class="card">
+                <div>
+                    <div class="card-tag">COMPONENT</div>
+                    <h3 class="card-title">CmdK Command Palette Modal</h3>
+                    <p class="card-desc">Modal backdrop, keyboard Cmd+K listener, focus trap.</p>
+                </div>
+                <div class="card-footer"><span>View Code & Component →</span></div>
+            </a>
+
+            <a href="Component — 3D Tilt Cards & Glass 2.0.html" class="card">
+                <div>
+                    <div class="card-tag">COMPONENT</div>
+                    <h3 class="card-title">3D Tilt Cards & Glass 2.0</h3>
+                    <p class="card-desc">Mouse-tracking perspective tilt math and frosted glass styling.</p>
+                </div>
+                <div class="card-footer"><span>View Code & Component →</span></div>
+            </a>
+        </div>
+
+        <!-- 🎨 CREATIVE EXPLORATIONS -->
+        <div class="section-header">
+            <h2 class="section-title">🎨 Creative Aesthetic Explorations</h2>
+            <span class="section-count">12 Specialized Webpages</span>
+        </div>
+
+        <div class="grid">
+            <a href="Elegant Brutalist.html" class="card">
+                <div>
+                    <div class="card-tag">AESTHETIC</div>
+                    <h3 class="card-title">Elegant Brutalist</h3>
+                    <p class="card-desc">Monochrome black & white typography, stark architectural grid dividers.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Vintage Newspaper.html" class="card">
+                <div>
+                    <div class="card-tag">AESTHETIC</div>
+                    <h3 class="card-title">Vintage Newspaper</h3>
+                    <p class="card-desc">Cream paper texture (`#fbf9f5`), multi-column CSS newspaper layout, drop caps.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Swiss Minimalist.html" class="card">
+                <div>
+                    <div class="card-tag">AESTHETIC</div>
+                    <h3 class="card-title">Swiss Minimalist</h3>
+                    <p class="card-desc">Helvetica typography, asymmetric grid alignment, red accent lines.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Hacker.html" class="card">
+                <div>
+                    <div class="card-tag">AESTHETIC</div>
+                    <h3 class="card-title">Hacker Terminal</h3>
+                    <p class="card-desc">Pitch black canvas, neon green matrix text, ASCII art headers, prompt input.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Cinematic Spotlight.html" class="card">
+                <div>
+                    <div class="card-tag">AESTHETIC</div>
+                    <h3 class="card-title">Cinematic Spotlight</h3>
+                    <p class="card-desc">Cursor-following radial spotlight illumination, filmic blur overlays, gold text.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Neo Brutalist.html" class="card">
+                <div>
+                    <div class="card-tag">AESTHETIC</div>
+                    <h3 class="card-title">Neo Brutalist</h3>
+                    <p class="card-desc">Bold primary pop colors, 3px solid black outlines, hard offset box shadows.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Anmol Sharma — Built zero-dependency with HTML5, Vanilla CSS & JavaScript</p>
+    </footer>
+
+</body>
+</html>

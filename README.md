@@ -1,6 +1,6 @@
 # 🎨 Modern Web Design & Front-End Architecture Master Suite
 
-> A curated, zero-dependency educational library of **35+ modern HTML/CSS/JS portfolio templates**, **flagship master layouts**, and **standalone UI component patterns**. Designed to showcase cutting-edge web design aesthetics, modern CSS primitives, WebGL graphics, SOTA motion engines (Lenis, GSAP, Matter.js), and micro-interactions.
+> A curated, zero-dependency educational library of **35+ modern HTML/CSS/JS web design templates**, **flagship master layouts**, and **standalone UI component patterns**. Designed to showcase cutting-edge web design aesthetics, modern CSS primitives, WebGL graphics, SOTA motion engines (Lenis, GSAP, Matter.js), and micro-interactions.
 
 ---
 
@@ -20,12 +20,12 @@
 
 ```
 ├── 👑 Flagship Master Templates
-│   ├── Master 01 — Modern Bento Spatial 3D.html
-│   ├── Master 02 — Kinetic Cmd-K Enterprise.html
-│   ├── Master 03 — Interactive Architecture Visualizer.html
-│   ├── Master 04 — View Transitions Scrollytelling.html
-│   ├── Master 05 — Lenis Smooth Inertia & GSAP Kinetic.html
-│   ├── Master 06 — Matter.js Physics & Vercel Border Beam.html
+│   ├── Master — Modern Bento Spatial 3D.html
+│   ├── Master — Kinetic Cmd-K Enterprise.html
+│   ├── Master — Interactive Architecture Visualizer.html
+│   ├── Master — View Transitions Scrollytelling.html
+│   ├── Master — Lenis Smooth Inertia & GSAP Kinetic.html
+│   ├── Master — Matter.js Physics & Vercel Border Beam.html
 │   ├── Master — Raycast Command OS.html
 │   ├── Master — Stripe Enterprise Glass.html
 │   ├── Master — Supabase Developer Hub.html
@@ -47,12 +47,12 @@
 │   └── Component — Fuse.js Fuzzy CmdK Search.html
 │
 ├── 🎨 Creative Design Exploration Templates
-│   ├── Enterprise Kinetic Light.html
+│   ├── Elegant Brutalist.html
 │   ├── Spatial Glass 3D Bento.html
 │   ├── Cybernetic Shader HUD.html
 │   ├── Kinetic Scroll Master.html
 │   ├── Kinetic Scroll Architect.html
-│   ├── Elegant Brutalist.html
+│   ├── Enterprise Kinetic Light.html
 │   ├── Neo Brutalist.html
 │   ├── Vintage Newspaper.html
 │   ├── Swiss Minimalist.html
@@ -80,63 +80,6 @@
 6. **Pristine Porcelain Enterprise Light**: Clean white background (`#ffffff` / `#f8fafc`), radial dot grid pattern, deep royal blue accents.
 7. **Raycast Command OS**: macOS-inspired dark translucent panels, glowing search inputs, keyboard shortcut badges.
 8. **Cybernetic Telemetry HUD**: Neon cyan/pink glows, custom WebGL liquid shader grids, Web Audio sound effects.
-
----
-
-## ⚡ Key SOTA Technical Code Snippets
-
-### 1. Lenis Smooth Scroll Setup
-```javascript
-const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothWheel: true
-});
-
-function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
-```
-
-### 2. Vercel Conic Border Beam (Pure CSS)
-```css
-@property --angle {
-    syntax: '<angle>';
-    initial-value: 0deg;
-    inherits: false;
-}
-
-.beam-card::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: 22px;
-    padding: 2px;
-    background: conic-gradient(from var(--angle), transparent 70%, #06b6d4, #ec4899, transparent);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    animation: rotate-beam 4s linear infinite;
-}
-
-@keyframes rotate-beam {
-    to { --angle: 360deg; }
-}
-```
-
-### 3. Matter.js 2D Skill Pill Physics
-```javascript
-const { Engine, Render, Bodies, Composite } = Matter;
-const engine = Engine.create();
-const pill = Bodies.rectangle(x, y, 110, 36, {
-    chamfer: { radius: 18 },
-    restitution: 0.8,
-    render: { fillStyle: '#38bdf8' }
-});
-Composite.add(engine.world, pill);
-```
 
 ---
 

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Pattern — Fuse.js Fuzzy CmdK Search</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #030712;
+            color: #f9fafb;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 60px 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .search-box {
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 550px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .input-wrapper {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #f9fafb;
+            font-size: 1.1rem;
+            width: 100%;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .results {
+            list-style: none;
+            padding: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .result-item {
+            padding: 12px 16px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .result-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .item-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .item-desc {
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="search-box">
+        <div class="input-wrapper">
+            <span>🔍</span>
+            <input type="text" id="search-input" placeholder="Type to fuzzy search systems (e.g. 'rust', 'rag', 'auth')...">
+        </div>
+        <ul class="results" id="results-list"></ul>
+    </div>
+
+    <!-- FUSE.JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+
+    <script>
+        const projects = [
+            { title: "Disha", category: "Agentic AI", desc: "LangGraph personal intelligence & pgvector", tech: "Python, AsyncPG" },
+            { title: "CodexEngine", category: "RAG Engine", desc: "Hybrid BM25 search & FastAPI", tech: "FastAPI, FAISS" },
+            { title: "vad_processor", category: "WASM Audio", desc: "Real-time client-side VAD in Rust", tech: "Rust, ONNX" },
+            { title: "Aura", category: "Linux Security", desc: "Biometric authentication daemon & PAM", tech: "Arch Linux, PAM" },
+            { title: "WellnessMate", category: "Computer Vision", desc: "CrewAI multi-agent desktop health shell", tech: "Tauri, MediaPipe" }
+        ];
+
+        const fuse = new Fuse(projects, {
+            keys: ['title', 'category', 'desc', 'tech'],
+            threshold: 0.4
+        });
+
+        const input = document.getElementById('search-input');
+        const list = document.getElementById('results-list');
+
+        function renderResults(items) {
+            list.innerHTML = items.map(item => `
+                <li class="result-item">
+                    <div>
+                        <div class="item-title">${item.title}</div>
+                        <div class="item-desc">${item.desc}</div>
+                    </div>
+                    <span class="tag">${item.category}</span>
+                </li>
+            `).join('');
+        }
+
+        renderResults(projects);
+
+        input.addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            if (!query) {
+                renderResults(projects);
+            } else {
+                const searchResults = fuse.search(query).map(r => r.item);
+                renderResults(searchResults);
+            }
+        });
+    </script>
+
+</body>
+</html>

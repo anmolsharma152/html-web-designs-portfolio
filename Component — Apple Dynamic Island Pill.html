@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Pattern — Apple Dynamic Island Pill</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #030712;
+            color: #f9fafb;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 60px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Dynamic Island Floating Container */
+        .dynamic-pill {
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 999px;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: auto;
+            max-width: 320px;
+            overflow: hidden;
+        }
+
+        .dynamic-pill.expanded {
+            border-radius: 24px;
+            padding: 24px;
+            max-width: 480px;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .pill-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #10b981;
+        }
+
+        .pill-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .pill-content {
+            display: none;
+            opacity: 0;
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: #9ca3af;
+            line-height: 1.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .dynamic-pill.expanded .pill-content {
+            display: block;
+            opacity: 1;
+        }
+
+        .hint {
+            margin-top: 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dynamic-pill" id="pill">
+        <div class="pill-header">
+            <div class="dot"></div>
+            <div class="pill-title">Disha Swarm Active • 4 Agents</div>
+        </div>
+        <div class="pill-content">
+            LangGraph multi-agent loop executing async tasks across PostgreSQL and pgvector backend node clusters.
+        </div>
+    </div>
+
+    <div class="hint">💡 Click the pill to toggle Apple Dynamic Island expansion</div>
+
+    <script>
+        const pill = document.getElementById('pill');
+        pill.addEventListener('click', () => {
+            pill.classList.toggle('expanded');
+        });
+    </script>
+
+</body>
+</html>

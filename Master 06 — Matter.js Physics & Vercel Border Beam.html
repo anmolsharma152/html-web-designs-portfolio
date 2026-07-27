@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma — Matter.js Physics & Vercel Border Beam</title>
+    <meta name="description" content="State-of-the-Art portfolio featuring Matter.js 2D rigid-body gravity physics playground and Vercel-style rotating conic border beams.">
+    
+    <!-- Fonts & Libraries -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        @property --angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        :root {
+            --bg: #030712;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --accent-cyan: #06b6d4;
+            --accent-pink: #ec4899;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Container & Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.25);
+            border-radius: 999px;
+            color: var(--accent-cyan);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+        }
+
+        .title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff 0%, #9ca3af 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* VERCEL BORDER BEAM CARD GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 80px;
+        }
+
+        .beam-card {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 36px;
+            backdrop-filter: blur(16px);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Vercel Conic Gradient Border Beam Effect */
+        .beam-card::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 22px;
+            padding: 2px;
+            background: conic-gradient(from var(--angle), transparent 70%, var(--accent-cyan), var(--accent-pink), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: rotate-beam 4s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotate-beam {
+            to {
+                --angle: 360deg;
+            }
+        }
+
+        .card-tag {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+
+        .card-footer {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag-pill {
+            padding: 4px 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: #d1d5db;
+        }
+
+        /* MATTER.JS PHYSICS CANVAS CONTAINER */
+        .physics-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .physics-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .physics-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .physics-hint {
+            font-family: var(--font-mono);
+            color: var(--accent-cyan);
+            font-size: 0.85rem;
+        }
+
+        #physics-canvas-container {
+            width: 100%;
+            height: 400px;
+            background: #02040a;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="header">
+            <div class="badge">Vercel Border Beam + Matter.js Physics Engine</div>
+            <h1 class="title">Interactive Systems & Physics</h1>
+            <p class="subtitle">Experience high-performance UI components driven by conic gradient border beams and real-time rigid-body gravity mechanics.</p>
+        </div>
+
+        <!-- VERCEL BORDER BEAM CARDS -->
+        <div class="grid">
+            
+            <div class="beam-card">
+                <div class="card-tag">01 / PRODUCTION AGENTIC SYSTEM</div>
+                <h3 class="card-title">Disha</h3>
+                <p class="card-desc">Personal Intelligence platform built with LangGraph multi-agent loops, pgvector storage, and async PostgreSQL backends.</p>
+                <div class="card-footer">
+                    <span class="tag-pill">LangGraph</span>
+                    <span class="tag-pill">pgvector</span>
+                    <span class="tag-pill">Python</span>
+                </div>
+            </div>
+
+            <div class="beam-card">
+                <div class="card-tag">02 / HYBRID VECTOR SEARCH</div>
+                <h3 class="card-title">CodexEngine</h3>
+                <p class="card-desc">High-throughput RAG search engine leveraging hybrid BM25 + dense vector indexing served over FastAPI microservices.</p>
+                <div class="card-footer">
+                    <span class="tag-pill">FastAPI</span>
+                    <span class="tag-pill">BM25</span>
+                    <span class="tag-pill">FAISS</span>
+                </div>
+            </div>
+
+            <div class="beam-card">
+                <div class="card-tag">03 / WASM ONNX RUNTIME</div>
+                <h3 class="card-title">vad_processor</h3>
+                <p class="card-desc">Zero-latency client-side Voice Activity Detection compiled from Rust to WebAssembly with ONNX model execution.</p>
+                <div class="card-footer">
+                    <span class="tag-pill">Rust</span>
+                    <span class="tag-pill">WASM</span>
+                    <span class="tag-pill">ONNX</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- MATTER.JS PHYSICS PLAYGROUND -->
+        <div class="physics-section">
+            <div class="physics-header">
+                <h2 class="physics-title">Interactive Gravity Skill Playground</h2>
+                <span class="physics-hint">💡 Drag, throw, and bounce tech pills</span>
+            </div>
+            <div id="physics-canvas-container"></div>
+        </div>
+
+    </div>
+
+    <!-- MATTER.JS CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+
+    <script>
+        // Matter.js Module Aliases
+        const { Engine, Render, Runner, Bodies, Composite, Mouse, MouseConstraint } = Matter;
+
+        const container = document.getElementById('physics-canvas-container');
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+
+        // 1. Create Engine
+        const engine = Engine.create();
+        engine.world.gravity.y = 0.8;
+
+        // 2. Create Renderer
+        const render = Render.create({
+            element: container,
+            engine: engine,
+            options: {
+                width: width,
+                height: height,
+                wireframes: false,
+                background: '#02040a'
+            }
+        });
+
+        Render.run(render);
+
+        // 3. Create Runner
+        const runner = Runner.create();
+        Runner.run(runner, engine);
+
+        // 4. Create Boundaries (Walls & Floor)
+        const wallOptions = { isStatic: true, render: { fillStyle: 'transparent' } };
+        const ground = Bodies.rectangle(width / 2, height + 20, width, 40, wallOptions);
+        const leftWall = Bodies.rectangle(-20, height / 2, 40, height, wallOptions);
+        const rightWall = Bodies.rectangle(width + 20, height / 2, 40, height, wallOptions);
+
+        Composite.add(engine.world, [ground, leftWall, rightWall]);
+
+        // 5. Spawn Physics Skill Badges
+        const skills = ['LangGraph', 'pgvector', 'FastAPI', 'Rust', 'WebAssembly', 'ONNX Runtime', 'Arch Linux', 'MediaPipe', 'Tauri', 'PostgreSQL', 'CrewAI', 'PyTorch'];
+        const colors = ['#06b6d4', '#ec4899', '#3b82f6', '#10b981', '#8b5cf6', '#f59e0b'];
+
+        skills.forEach((skill, index) => {
+            const x = Math.random() * (width - 100) + 50;
+            const y = -index * 40 - 50;
+            const bodyColor = colors[index % colors.length];
+
+            const pill = Bodies.rectangle(x, y, 110, 36, {
+                chamfer: { radius: 18 },
+                restitution: 0.7,
+                friction: 0.1,
+                render: {
+                    fillStyle: bodyColor,
+                    strokeStyle: '#ffffff',
+                    lineWidth: 1
+                }
+            });
+
+            Composite.add(engine.world, pill);
+        });
+
+        // 6. Add Mouse Drag Controls
+        const mouse = Mouse.create(render.canvas);
+        const mouseConstraint = MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.2,
+                render: { visible: false }
+            }
+        });
+
+        Composite.add(engine.world, mouseConstraint);
+        render.mouse = mouse;
+    </script>
+
+</body>
+</html>

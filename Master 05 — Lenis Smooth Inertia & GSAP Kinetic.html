@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma — SOTA Lenis Inertia & GSAP Kinetic Portfolio</title>
+    <meta name="description" content="State-of-the-Art portfolio featuring Lenis smooth inertia scroll, GSAP ScrollTrigger timeline scrubbing, and kinetic typography.">
+    
+    <!-- Fonts & Libraries -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #090d16;
+            --surface: #111827;
+            --surface-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.2);
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), #818cf8);
+            z-index: 1000;
+            width: 0%;
+        }
+
+        /* Header Nav */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1000px;
+            padding: 14px 28px;
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--surface-border);
+            border-radius: 999px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 500;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 24px 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 999px;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            margin-bottom: 24px;
+        }
+
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            max-width: 900px;
+            margin-bottom: 24px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: var(--text-muted);
+            max-width: 650px;
+            font-weight: 400;
+            margin-bottom: 40px;
+        }
+
+        /* Pinned Horizontal Scroll Section */
+        .pin-container {
+            overflow: hidden;
+            background: #060911;
+        }
+
+        .horizontal-section {
+            display: flex;
+            width: 400vw;
+            height: 100vh;
+        }
+
+        .horizontal-panel {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 5vw;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: 24px;
+            padding: 48px;
+            width: 100%;
+            max-width: 850px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transition: border-color 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+        }
+
+        .project-tag {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+        }
+
+        .project-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tech-pill {
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            color: #d1d5db;
+        }
+
+        /* Split Kinetic Typography Section */
+        .kinetic-section {
+            padding: 140px 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .kinetic-quote {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: #e5e7eb;
+        }
+
+        .kinetic-quote .word {
+            display: inline-block;
+            margin-right: 0.25em;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 24px;
+            text-align: center;
+            border-top: 1px solid var(--surface-border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scroll-progress" id="progress"></div>
+
+    <nav>
+        <div class="logo">ANMOL SHARMA</div>
+        <ul class="nav-links">
+            <li><a href="#hero">Overview</a></li>
+            <li><a href="#projects">Systems</a></li>
+            <li><a href="#manifesto">Philosophy</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Lenis Inertia + GSAP ScrollTrigger Active
+        </div>
+        <h1 class="hero-title" id="split-title">Building High-Performance AI & Systems Architecture.</h1>
+        <p class="hero-subtitle">Specialized in autonomous agent swarms, WebAssembly neural runtime engines, and high-throughput vector infrastructure.</p>
+    </section>
+
+    <!-- PINNED HORIZONTAL PROJECTS SECTION -->
+    <div class="pin-container" id="projects">
+        <div class="horizontal-section" id="horizontal">
+            
+            <div class="horizontal-panel">
+                <div class="project-card">
+                    <div class="project-tag">01 / AGENTIC INFRASTRUCTURE</div>
+                    <h2 class="project-title">Disha</h2>
+                    <p class="project-desc">A production-grade, agentic Personal Intelligence platform powered by LangGraph, pgvector, and asynchronous PostgreSQL.</p>
+                    <div class="tech-stack">
+                        <span class="tech-pill">LangGraph</span>
+                        <span class="tech-pill">pgvector</span>
+                        <span class="tech-pill">Python</span>
+                        <span class="tech-pill">AsyncPG</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="horizontal-panel">
+                <div class="project-card">
+                    <div class="project-tag">02 / HYBRID RAG ENGINE</div>
+                    <h2 class="project-title">CodexEngine</h2>
+                    <p class="project-desc">Agentic RAG Engine combining hybrid vector search, graph orchestration, and high-performance FastAPI microservices.</p>
+                    <div class="tech-stack">
+                        <span class="tech-pill">FastAPI</span>
+                        <span class="tech-pill">LangGraph</span>
+                        <span class="tech-pill">Hybrid Search</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="horizontal-panel">
+                <div class="project-card">
+                    <div class="project-tag">03 / EMBEDDED EDGE RUNTIME</div>
+                    <h2 class="project-title">vad_processor</h2>
+                    <p class="project-desc">Real-time, client-side Voice Activity Detection engine compiled with Rust, WebAssembly, and ONNX Runtime.</p>
+                    <div class="tech-stack">
+                        <span class="tech-pill">Rust</span>
+                        <span class="tech-pill">WebAssembly</span>
+                        <span class="tech-pill">ONNX Runtime</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="horizontal-panel">
+                <div class="project-card">
+                    <div class="project-tag">04 / EDGE SECURITY DAEMON</div>
+                    <h2 class="project-title">Aura</h2>
+                    <p class="project-desc">Arch Linux biometric authentication daemon decoupled via Unix domain sockets & PAM integration.</p>
+                    <div class="tech-stack">
+                        <span class="tech-pill">Arch Linux</span>
+                        <span class="tech-pill">PAM</span>
+                        <span class="tech-pill">Unix Sockets</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- KINETIC TYPOGRAPHY SECTION -->
+    <section class="kinetic-section" id="manifesto">
+        <p class="kinetic-quote" id="kinetic-text">
+            "We design digital interfaces not just to look stunning, but to move with fluid physical inertia and sub-millisecond precision."
+        </p>
+    </section>
+
+    <footer>
+        <p>© 2026 Anmol Sharma — Built with Lenis Smooth Scroll & GSAP ScrollTrigger</p>
+    </footer>
+
+    <!-- SOTA LIBRARIES VIA CDN -->
+    <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+        // 1. Initialize Lenis Smooth Scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Synchronize Lenis with GSAP ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+
+        // 2. Register GSAP Plugins
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 3. Scroll Progress Indicator
+        gsap.to("#progress", {
+            width: "100%",
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: true
+            }
+        });
+
+        // 4. Pinned Horizontal Scroll Section
+        const horizontalSection = document.getElementById("horizontal");
+        gsap.to(horizontalSection, {
+            x: () => -(horizontalSection.scrollWidth - window.innerWidth),
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#projects",
+                start: "top top",
+                end: () => "+=" + horizontalSection.scrollWidth,
+                pin: true,
+                scrub: 1,
+                invalidateOnRefresh: true
+            }
+        });
+
+        // 5. Kinetic Text Reveal Effect
+        const kineticText = document.getElementById("kinetic-text");
+        const words = kineticText.innerText.split(" ");
+        kineticText.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
+
+        gsap.from("#kinetic-text .word", {
+            opacity: 0.1,
+            y: 20,
+            stagger: 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: "#manifesto",
+                start: "top 75%",
+                end: "bottom 50%",
+                scrub: true
+            }
+        });
+    </script>
+</body>
+</html>

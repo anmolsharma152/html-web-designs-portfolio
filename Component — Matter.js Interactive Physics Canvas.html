@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Pattern — Matter.js Physics Canvas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #030712;
+            color: #f9fafb;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 40px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .desc {
+            color: #9ca3af;
+            font-size: 0.95rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        #physics-box {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            background: #0b0f19;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h2 class="title">Matter.js 2D Rigid Body Physics Container</h2>
+        <p class="desc">💡 Click & Drag tech pills to throw them around the canvas</p>
+    </div>
+
+    <div id="physics-box"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+
+    <script>
+        const { Engine, Render, Runner, Bodies, Composite, Mouse, MouseConstraint } = Matter;
+
+        const container = document.getElementById('physics-box');
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+
+        const engine = Engine.create();
+        const render = Render.create({
+            element: container,
+            engine: engine,
+            options: {
+                width: width,
+                height: height,
+                wireframes: false,
+                background: '#0b0f19'
+            }
+        });
+
+        Render.run(render);
+        Runner.run(Runner.create(), engine);
+
+        // Boundaries
+        const ground = Bodies.rectangle(width / 2, height + 20, width, 40, { isStatic: true });
+        const leftWall = Bodies.rectangle(-20, height / 2, 40, height, { isStatic: true });
+        const rightWall = Bodies.rectangle(width + 20, height / 2, 40, height, { isStatic: true });
+        Composite.add(engine.world, [ground, leftWall, rightWall]);
+
+        // Skill Badges
+        const items = ['Disha', 'CodexEngine', 'Rust', 'WASM', 'ONNX', 'LangGraph', 'pgvector', 'FastAPI'];
+        items.forEach((item, i) => {
+            const body = Bodies.rectangle(100 + (i * 70) % (width - 150), -i * 50, 100, 36, {
+                chamfer: { radius: 18 },
+                restitution: 0.8,
+                render: { fillStyle: '#38bdf8' }
+            });
+            Composite.add(engine.world, body);
+        });
+
+        // Mouse Controls
+        const mouse = Mouse.create(render.canvas);
+        const mouseConstraint = MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: { stiffness: 0.2, render: { visible: false } }
+        });
+        Composite.add(engine.world, mouseConstraint);
+    </script>
+</body>
+</html>

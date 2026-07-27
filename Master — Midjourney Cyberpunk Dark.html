@@ -4,139 +4,392 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anmol Sharma — Midjourney Cyberpunk AI Studio</title>
-    <meta name="description" content="Midjourney Sci-Fi Cyberpunk portfolio for Anmol Sharma. Features interactive particle canvas physics, neon glow cards, and high-contrast badges.">
+    <meta name="description" content="Futuristic Midjourney-inspired dark cyberpunk studio portfolio. Features glowing nebula mesh backdrops, AI prompt bars, interactive WebGL particles, and high-density telemetry Bento cards.">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-cyber: #030509;
-            --surface-cyber: #090d16;
-            --border-cyber: #1e293b;
-            --accent-gold: #f59e0b;
+            --bg-void: #020208;
+            --surface-dark: rgba(10, 15, 29, 0.75);
+            --surface-border: rgba(255, 255, 255, 0.08);
             --accent-cyan: #06b6d4;
-            --accent-neon: #10b981;
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
-            --font-head: 'Outfit', sans-serif;
+            --accent-magenta: #d946ef;
+            --accent-gold: #f59e0b;
+            --accent-green: #10b981;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --font-main: 'Outfit', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
 
-        *, *::before, *::after {
-            box-sizing: border-box;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            background-color: var(--bg-cyber);
-            color: var(--text-main);
-            font-family: var(--font-head);
+            background-color: var(--bg-void);
+            color: var(--text-primary);
+            font-family: var(--font-main);
             overflow-x: hidden;
-            min-height: 100vh;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
-        #particle-canvas {
+        /* Ambient Glowing Nebula Backdrops */
+        .nebula-glow-1 {
+            position: fixed;
+            top: -200px;
+            left: 20%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(217, 70, 239, 0.15) 0%, rgba(6, 182, 212, 0.08) 50%, transparent 70%);
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .nebula-glow-2 {
+            position: fixed;
+            bottom: -200px;
+            right: 10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        canvas#particle-canvas {
             position: fixed;
             inset: 0;
             z-index: 0;
             pointer-events: none;
         }
 
-        .app-container {
+        .layout-container {
             position: relative;
             z-index: 1;
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 40px 24px 100px 24px;
+            padding: 40px 24px 100px;
+        }
+
+        /* Nav Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 32px;
+            background: rgba(10, 15, 29, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--surface-border);
+            border-radius: 999px;
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff, var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 999px;
+            color: var(--accent-green);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-green);
+        }
+
+        /* Hero Prompt Command Bar */
+        .prompt-bar {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 20px;
+            padding: 20px 28px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 48px;
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.15);
+        }
+
+        .prompt-prefix {
+            font-family: var(--font-mono);
+            color: var(--accent-magenta);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .prompt-text {
+            font-family: var(--font-mono);
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            flex-grow: 1;
+        }
+
+        .prompt-tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            background: rgba(245, 158, 11, 0.15);
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        /* Hero Headlines */
+        .hero {
+            margin-bottom: 80px;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .gradient-cyan {
+            background: linear-gradient(135deg, var(--accent-cyan), #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-magenta {
+            background: linear-gradient(135deg, var(--accent-magenta), #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 720px;
+        }
+
+        /* Cyber Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 24px;
+            margin-bottom: 80px;
         }
 
         .cyber-card {
-            background: var(--surface-cyber);
-            border: 1px solid var(--border-cyber);
+            background: var(--surface-dark);
+            border: 1px solid var(--surface-border);
             border-radius: 24px;
             padding: 36px;
-            box-shadow: 0 0 30px rgba(6, 182, 212, 0.08);
-            margin-bottom: 24px;
+            backdrop-filter: blur(16px);
             transition: all 0.3s ease;
-        }
-        .cyber-card:hover {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 40px rgba(6, 182, 212, 0.25);
+            position: relative;
+            overflow: hidden;
         }
 
-        .badge-gold {
-            display: inline-block;
-            padding: 4px 12px;
-            background: rgba(245, 158, 11, 0.15);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            border-radius: 9999px;
-            color: var(--accent-gold);
+        .cyber-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 40px rgba(6, 182, 212, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .card-num {
+            font-family: var(--font-mono);
+            color: var(--accent-magenta);
+            font-size: 0.85rem;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .card-desc {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .tech-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tech-pill {
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
             font-family: var(--font-mono);
             font-size: 0.8rem;
-            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            padding-top: 60px;
+            border-top: 1px solid var(--surface-border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
+    <div class="nebula-glow-1"></div>
+    <div class="nebula-glow-2"></div>
     <canvas id="particle-canvas"></canvas>
 
-    <div class="app-container">
+    <div class="layout-container">
 
-        <header style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0; margin-bottom: 60px;">
-            <div style="font-size: 1.4rem; font-weight: 900; letter-spacing: -1px;">ANMOL SHARMA // STUDIO</div>
-            <div class="badge-gold">AI SYSTEMS ARCHITECT</div>
+        <header>
+            <div class="logo">ANMOL SHARMA // CYBERNETIC ARCHITECT</div>
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                NEURAL Runtimes Online
+            </div>
         </header>
 
-        <section style="margin-bottom: 60px;">
-            <h1 style="font-size: clamp(2.8rem, 6vw, 4.8rem); font-weight: 900; line-height: 1.05; letter-spacing: -1.5px; margin-bottom: 20px;">
-                NEURAL <span style="color: var(--accent-cyan);">AGENTIC</span> PIPELINES
+        <!-- MIDJOURNEY PROMPT COMMAND BAR -->
+        <div class="prompt-bar">
+            <span class="prompt-prefix">/imagine prompt:</span>
+            <span class="prompt-text">high-performance agentic pipelines --v 6.0 --ar 16:9 --stylize 1000 --fast</span>
+            <span class="prompt-tag">MODE: SOTA 2026</span>
+        </div>
+
+        <section class="hero">
+            <h1 class="hero-title">
+                NEURAL <span class="gradient-cyan">AGENTIC</span> & <span class="gradient-magenta">DUPLEX VOICE</span> SYSTEMS.
             </h1>
-            <p style="font-size: 1.2rem; color: var(--text-dim); max-width: 680px;">
-                Engineering production-grade agentic platforms, sub-150ms audio pipelines, and edge Linux authentication daemons.
+            <p class="hero-subtitle">
+                Designing production-grade agentic platforms, sub-150ms voice pipelines, and edge Linux authentication daemons.
             </p>
         </section>
 
-        <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
-            
-            <article class="cyber-card">
-                <div class="badge-gold" style="margin-bottom: 12px;">01 // DISHA</div>
-                <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 10px;">Personal Intelligence</h3>
-                <p style="color: var(--text-dim); font-size: 0.95rem;">LangGraph, pgvector, and async PostgreSQL memory state management.</p>
-            </article>
+        <!-- CYBER BENTO GRID -->
+        <div class="bento-grid">
 
-            <article class="cyber-card">
-                <div class="badge-gold" style="margin-bottom: 12px;">02 // VAD PROCESSOR</div>
-                <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 10px;">Rust / WASM VAD</h3>
-                <p style="color: var(--text-dim); font-size: 0.95rem;">Real-time, client-side Voice Activity Detection with ONNX Runtime inference.</p>
-            </article>
+            <div class="cyber-card">
+                <div class="card-header">
+                    <span class="card-num">01 // PRODUCTION AGENTIC SYSTEM</span>
+                    <span class="tech-pill">LangGraph</span>
+                </div>
+                <h3 class="card-title">Disha</h3>
+                <p class="card-desc">Personal Intelligence platform engineered with LangGraph multi-agent loops, pgvector storage, and async PostgreSQL memory state management.</p>
+                <div class="tech-tags">
+                    <span class="tech-pill">LangGraph</span>
+                    <span class="tech-pill">pgvector</span>
+                    <span class="tech-pill">Python</span>
+                    <span class="tech-pill">AsyncPG</span>
+                </div>
+            </div>
 
-        </section>
+            <div class="cyber-card">
+                <div class="card-header">
+                    <span class="card-num">02 // HYBRID RAG SEARCH</span>
+                    <span class="tech-pill">FastAPI</span>
+                </div>
+                <h3 class="card-title">CodexEngine</h3>
+                <p class="card-desc">High-throughput RAG search engine combining hybrid BM25 + dense vector indexing served over FastAPI microservices.</p>
+                <div class="tech-tags">
+                    <span class="tech-pill">FastAPI</span>
+                    <span class="tech-pill">FAISS</span>
+                    <span class="tech-pill">BM25</span>
+                </div>
+            </div>
+
+            <div class="cyber-card">
+                <div class="card-header">
+                    <span class="card-num">03 // EDGE RUNTIME</span>
+                    <span class="tech-pill">Rust WASM</span>
+                </div>
+                <h3 class="card-title">vad_processor</h3>
+                <p class="card-desc">Zero-latency client-side Voice Activity Detection compiled from Rust to WebAssembly with ONNX model execution.</p>
+                <div class="tech-tags">
+                    <span class="tech-pill">Rust</span>
+                    <span class="tech-pill">WebAssembly</span>
+                    <span class="tech-pill">ONNX Runtime</span>
+                </div>
+            </div>
+
+            <div class="cyber-card">
+                <div class="card-header">
+                    <span class="card-num">04 // LINUX DAEMON</span>
+                    <span class="tech-pill">Arch PAM</span>
+                </div>
+                <h3 class="card-title">Aura</h3>
+                <p class="card-desc">Arch Linux biometric authentication daemon decoupled via Unix domain sockets and PAM integration.</p>
+                <div class="tech-tags">
+                    <span class="tech-pill">Arch Linux</span>
+                    <span class="tech-pill">PAM</span>
+                    <span class="tech-pill">Unix Sockets</span>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>© 2026 Anmol Sharma — Midjourney Cyberpunk AI Studio</p>
+        </footer>
 
     </div>
 
-    <!-- CANVAS PARTICLE TRAIL SCRIPT -->
+    <!-- CANVAS INTERACTIVE NEON CURSOR PARTICLES -->
     <script>
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
 
-        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
         window.addEventListener('resize', resize);
         resize();
 
         window.addEventListener('mousemove', (e) => {
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < 2; i++) {
                 particles.push({
                     x: e.clientX,
                     y: e.clientY,
-                    vx: (Math.random() - 0.5) * 2,
-                    vy: (Math.random() - 0.5) * 2,
-                    radius: Math.random() * 3 + 1,
-                    alpha: 1
+                    vx: (Math.random() - 0.5) * 1.5,
+                    vy: (Math.random() - 0.5) * 1.5,
+                    radius: Math.random() * 2 + 1,
+                    alpha: 0.8
                 });
             }
         });
@@ -146,7 +399,7 @@
             particles.forEach((p, idx) => {
                 p.x += p.vx;
                 p.y += p.vy;
-                p.alpha -= 0.02;
+                p.alpha -= 0.015;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(6, 182, 212, ${p.alpha})`;
@@ -157,5 +410,6 @@
         }
         animate();
     </script>
+
 </body>
 </html>

@@ -11,12 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
-        @property --angle {
-            syntax: '<angle>';
-            initial-value: 0deg;
-            inherits: false;
-        }
-
         :root {
             --bg: #030712;
             --surface: #0f172a;
@@ -30,11 +24,7 @@
             --font-mono: 'JetBrains Mono', monospace;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg);
@@ -44,7 +34,6 @@
             padding-bottom: 80px;
         }
 
-        /* Hero */
         .hero {
             text-align: center;
             padding: 100px 24px 60px;
@@ -100,34 +89,13 @@
             transition: all 0.3s;
         }
 
-        .btn-primary {
-            background: #2563eb;
-            color: #fff;
-            box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
-        }
+        .btn-primary { background: #2563eb; color: #fff; box-shadow: 0 0 20px rgba(37, 99, 235, 0.4); }
+        .btn-primary:hover { background: #1d4ed8; transform: translateY(-2px); }
 
-        .btn-primary:hover {
-            background: #1d4ed8;
-            transform: translateY(-2px);
-        }
+        .btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text-main); border: 1px solid var(--border); }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-2px); }
 
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-main);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        /* Container */
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 24px; }
 
         .section-header {
             margin: 60px 0 32px;
@@ -138,18 +106,9 @@
             padding-bottom: 16px;
         }
 
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 800;
-        }
+        .section-title { font-size: 1.8rem; font-weight: 800; }
+        .section-count { font-family: var(--font-mono); color: var(--accent-cyan); font-size: 0.9rem; }
 
-        .section-count {
-            font-family: var(--font-mono);
-            color: var(--accent-cyan);
-            font-size: 0.9rem;
-        }
-
-        /* Grid */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -178,26 +137,9 @@
             box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
         }
 
-        .card-tag {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--accent-cyan);
-            margin-bottom: 12px;
-        }
-
-        .card-title {
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            line-height: 1.3;
-        }
-
-        .card-desc {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
+        .card-tag { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan); margin-bottom: 12px; }
+        .card-title { font-size: 1.35rem; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
+        .card-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; flex-grow: 1; }
 
         .card-footer {
             display: flex;
@@ -208,22 +150,15 @@
             color: var(--accent-cyan);
         }
 
-        footer {
-            margin-top: 100px;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border);
-            padding-top: 40px;
-        }
+        footer { margin-top: 100px; text-align: center; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border); padding-top: 40px; }
     </style>
 </head>
 <body>
 
     <section class="hero">
-        <div class="badge">Modern Web Architecture & SOTA Front-End Suite</div>
+        <div class="badge">Modern Web Architecture & Master Portfolio Suite</div>
         <h1 class="title">HTML Web Designs Master Collection</h1>
-        <p class="subtitle">A curated, zero-dependency library of standalone HTML/CSS/JS web design templates, WebGL shaders, SOTA motion engines, and modular UI components.</p>
+        <p class="subtitle">A curated, zero-dependency library of 35+ standalone HTML/CSS/JS portfolio master templates, WebGL shaders, SOTA motion engines, and modular UI components.</p>
         <div class="cta-group">
             <a href="https://github.com/anmolsharma152/html-web-designs-portfolio" class="btn btn-primary" target="_blank">
                 🐙 View GitHub Repository
@@ -238,8 +173,8 @@
 
         <!-- 👑 FLAGSHIP MASTERS -->
         <div class="section-header">
-            <h2 class="section-title">👑 Flagship Master Portfolio Templates</h2>
-            <span class="section-count">10 Full Webpages</span>
+            <h2 class="section-title">👑 Master Portfolio Webpages</h2>
+            <span class="section-count">22 Master Templates</span>
         </div>
 
         <div class="grid">
@@ -247,111 +182,199 @@
             <a href="Master — Lenis Smooth Inertia & GSAP Kinetic.html" class="card">
                 <div>
                     <div class="card-tag">SOTA MOTION ENGINE</div>
-                    <h3 class="card-title">Lenis Smooth Inertia & GSAP Kinetic</h3>
+                    <h3 class="card-title">Master — Lenis Smooth Inertia & GSAP Kinetic</h3>
                     <p class="card-desc">Lenis smooth scroll physics (`@studio-freight/lenis`), GSAP ScrollTrigger pinned horizontal scroll, and kinetic typography.</p>
                 </div>
-                <div class="card-footer">
-                    <span>Launch Template →</span>
-                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
             </a>
 
             <a href="Master — Matter.js Physics & Vercel Border Beam.html" class="card">
                 <div>
                     <div class="card-tag">PHYSICS + CONIC BEAM</div>
-                    <h3 class="card-title">Matter.js Physics & Vercel Border Beam</h3>
+                    <h3 class="card-title">Master — Matter.js Physics & Vercel Border Beam</h3>
                     <p class="card-desc">Matter.js 2D rigid-body gravity box for skill pills and Vercel-style rotating laser border beams.</p>
                 </div>
-                <div class="card-footer">
-                    <span>Launch Template →</span>
-                </div>
-            </a>
-
-            <a href="Master — Modern Bento Spatial 3D.html" class="card">
-                <div>
-                    <div class="card-tag">GLASSMORPHISM 2.0</div>
-                    <h3 class="card-title">Modern Bento Spatial 3D</h3>
-                    <p class="card-desc">Frosted glass cards (`backdrop-filter`), SVG anti-banding noise, 3D tilt math, Three.js 3D wireframe sphere.</p>
-                </div>
-                <div class="card-footer">
-                    <span>Launch Template →</span>
-                </div>
-            </a>
-
-            <a href="Master — Kinetic Cmd-K Enterprise.html" class="card">
-                <div>
-                    <div class="card-tag">ENTERPRISE LIGHT MODE</div>
-                    <h3 class="card-title">Kinetic Cmd-K Enterprise</h3>
-                    <p class="card-desc">Pristine white porcelain theme with Cmd+K command search modal, royal blue accents, elevated cards.</p>
-                </div>
-                <div class="card-footer">
-                    <span>Launch Template →</span>
-                </div>
-            </a>
-
-            <a href="Master — Interactive Architecture Visualizer.html" class="card">
-                <div>
-                    <div class="card-tag">NODE GRAPH FLOW</div>
-                    <h3 class="card-title">Interactive Architecture Visualizer</h3>
-                    <p class="card-desc">Interactive node dataflow graph showcasing Disha AI LangGraph and pgvector pipelines.</p>
-                </div>
-                <div class="card-footer">
-                    <span>Launch Template →</span>
-                </div>
-            </a>
-
-            <a href="Master — View Transitions Scrollytelling.html" class="card">
-                <div>
-                    <div class="card-tag">VIEW TRANSITIONS API</div>
-                    <h3 class="card-title">View Transitions Scrollytelling</h3>
-                    <p class="card-desc">Native CSS `view-timeline` scroll progress and `document.startViewTransition()` page morphs.</p>
-                </div>
-                <div class="card-footer">
-                    <span>Launch Template →</span>
-                </div>
-            </a>
-
-            <a href="Master — Raycast Command OS.html" class="card">
-                <div>
-                    <div class="card-tag">RAYCAST BRAND</div>
-                    <h3 class="card-title">Raycast Command OS</h3>
-                    <p class="card-desc">macOS-inspired translucent command panels, keyboard shortcut listeners, floating quick action dock.</p>
-                </div>
-                <div class="card-footer">
-                    <span>Launch Template →</span>
-                </div>
-            </a>
-
-            <a href="Master — Stripe Enterprise Glass.html" class="card">
-                <div>
-                    <div class="card-tag">STRIPE BRAND</div>
-                    <h3 class="card-title">Stripe Enterprise Glass</h3>
-                    <p class="card-desc">Dynamic HTML5 multi-color mesh gradient canvas, fluid particle trails, high-contrast dark typography.</p>
-                </div>
-                <div class="card-footer">
-                    <span>Launch Template →</span>
-                </div>
-            </a>
-
-            <a href="Master — Supabase Developer Hub.html" class="card">
-                <div>
-                    <div class="card-tag">SUPABASE BRAND</div>
-                    <h3 class="card-title">Supabase Developer Hub</h3>
-                    <p class="card-desc">Emerald dark theme with database telemetry cards, terminal code previews, real-time indicators.</p>
-                </div>
-                <div class="card-footer">
-                    <span>Launch Template →</span>
-                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
             </a>
 
             <a href="Master — Midjourney Cyberpunk Dark.html" class="card">
                 <div>
                     <div class="card-tag">MIDJOURNEY BRAND</div>
-                    <h3 class="card-title">Midjourney Cyberpunk Dark</h3>
-                    <p class="card-desc">Ambient glowing nebula backdrops, neon accent glows, prompt terminal cards.</p>
+                    <h3 class="card-title">Master — Midjourney Cyberpunk Dark</h3>
+                    <p class="card-desc">Ambient glowing nebula mesh backdrops, prompt command bars, neon accent glows, interactive particle canvas.</p>
                 </div>
-                <div class="card-footer">
-                    <span>Launch Template →</span>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — Enterprise Kinetic Light.html" class="card">
+                <div>
+                    <div class="card-tag">ENTERPRISE LIGHT</div>
+                    <h3 class="card-title">Master — Enterprise Kinetic Light</h3>
+                    <p class="card-desc">Porcelain white background (`#f8fafc`), radial dot grid pattern, royal blue accents, async GitHub repo fetching.</p>
                 </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — Spatial Glass 3D Bento.html" class="card">
+                <div>
+                    <div class="card-tag">SPATIAL GLASS 2.0</div>
+                    <h3 class="card-title">Master — Spatial Glass 3D Bento</h3>
+                    <p class="card-desc">Multi-layered frosted glass panels, SVG anti-banding noise, 3D mouse card tilt math, Three.js 3D wireframe canvas.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — Cybernetic Shader HUD.html" class="card">
+                <div>
+                    <div class="card-tag">GPU SHADER + AUDIO</div>
+                    <h3 class="card-title">Master — Cybernetic Shader HUD</h3>
+                    <p class="card-desc">Custom GLSL fragment shaders (`gl_FragCoord`), laser tracking cursor, Web Audio API frequency sweep synthesis.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — Kinetic Cmd-K Enterprise.html" class="card">
+                <div>
+                    <div class="card-tag">ENTERPRISE LIGHT MODE</div>
+                    <h3 class="card-title">Master — Kinetic Cmd-K Enterprise</h3>
+                    <p class="card-desc">Pristine white porcelain theme with Cmd+K command search modal, royal blue accents, elevated cards.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — Interactive Architecture Visualizer.html" class="card">
+                <div>
+                    <div class="card-tag">NODE GRAPH FLOW</div>
+                    <h3 class="card-title">Master — Interactive Architecture Visualizer</h3>
+                    <p class="card-desc">Interactive node dataflow graph showcasing Disha AI LangGraph and pgvector pipelines.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — View Transitions Scrollytelling.html" class="card">
+                <div>
+                    <div class="card-tag">VIEW TRANSITIONS API</div>
+                    <h3 class="card-title">Master — View Transitions Scrollytelling</h3>
+                    <p class="card-desc">Native CSS `view-timeline` scroll progress and `document.startViewTransition()` page morphs.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — Raycast Command OS.html" class="card">
+                <div>
+                    <div class="card-tag">RAYCAST BRAND</div>
+                    <h3 class="card-title">Master — Raycast Command OS</h3>
+                    <p class="card-desc">macOS-inspired translucent command panels, keyboard shortcut listeners, floating quick action dock.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — Stripe Enterprise Glass.html" class="card">
+                <div>
+                    <div class="card-tag">STRIPE BRAND</div>
+                    <h3 class="card-title">Master — Stripe Enterprise Glass</h3>
+                    <p class="card-desc">Dynamic HTML5 multi-color mesh gradient canvas, fluid particle trails, high-contrast dark typography.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — Supabase Developer Hub.html" class="card">
+                <div>
+                    <div class="card-tag">SUPABASE BRAND</div>
+                    <h3 class="card-title">Master — Supabase Developer Hub</h3>
+                    <p class="card-desc">Emerald dark theme with database telemetry cards, terminal code previews, real-time indicators.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — Elegant Brutalist.html" class="card">
+                <div>
+                    <div class="card-tag">AESTHETIC</div>
+                    <h3 class="card-title">Master — Elegant Brutalist</h3>
+                    <p class="card-desc">Monochrome black & white typography, stark architectural grid dividers.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — Vintage Newspaper.html" class="card">
+                <div>
+                    <div class="card-tag">AESTHETIC</div>
+                    <h3 class="card-title">Master — Vintage Newspaper</h3>
+                    <p class="card-desc">Cream paper texture (`#fbf9f5`), multi-column CSS newspaper layout, drop caps.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — Swiss Minimalist.html" class="card">
+                <div>
+                    <div class="card-tag">AESTHETIC</div>
+                    <h3 class="card-title">Master — Swiss Minimalist</h3>
+                    <p class="card-desc">Helvetica typography, asymmetric grid alignment, red accent lines.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — Hacker Terminal.html" class="card">
+                <div>
+                    <div class="card-tag">AESTHETIC</div>
+                    <h3 class="card-title">Master — Hacker Terminal</h3>
+                    <p class="card-desc">Pitch black canvas, neon green matrix text, ASCII art headers, prompt input.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — Cinematic Spotlight.html" class="card">
+                <div>
+                    <div class="card-tag">AESTHETIC</div>
+                    <h3 class="card-title">Master — Cinematic Spotlight</h3>
+                    <p class="card-desc">Cursor-following radial spotlight illumination, filmic blur overlays, gold text.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — Neo Brutalist.html" class="card">
+                <div>
+                    <div class="card-tag">AESTHETIC</div>
+                    <h3 class="card-title">Master — Neo Brutalist</h3>
+                    <p class="card-desc">Bold primary pop colors, 3px solid black outlines, hard offset box shadows.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — Technical Grid.html" class="card">
+                <div>
+                    <div class="card-tag">AESTHETIC</div>
+                    <h3 class="card-title">Master — Technical Grid</h3>
+                    <p class="card-desc">CAD blueprint schematic grid, coordinate crosshairs, architectural dimension markers.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — Kinetic Scroll Master.html" class="card">
+                <div>
+                    <div class="card-tag">KINETIC SCROLL</div>
+                    <h3 class="card-title">Master — Kinetic Scroll Master</h3>
+                    <p class="card-desc">Scroll progress timeline, floating WebGL 3D wireframe mesh, async repo data layer.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — The Systems Architect.html" class="card">
+                <div>
+                    <div class="card-tag">SYSTEMS ARCHITECT</div>
+                    <h3 class="card-title">Master — The Systems Architect</h3>
+                    <p class="card-desc">High-density engineering cards for distributed Rust and Python systems.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
+            </a>
+
+            <a href="Master — Bento Grid.html" class="card">
+                <div>
+                    <div class="card-tag">BENTO GRID</div>
+                    <h3 class="card-title">Master — Bento Grid</h3>
+                    <p class="card-desc">12-column responsive Bento grid layout with infinite tech stack marquee.</p>
+                </div>
+                <div class="card-footer"><span>Launch Template →</span></div>
             </a>
 
         </div>
@@ -424,68 +447,6 @@
                     <p class="card-desc">Mouse-tracking perspective tilt math and frosted glass styling.</p>
                 </div>
                 <div class="card-footer"><span>View Code & Component →</span></div>
-            </a>
-        </div>
-
-        <!-- 🎨 CREATIVE EXPLORATIONS -->
-        <div class="section-header">
-            <h2 class="section-title">🎨 Creative Aesthetic Explorations</h2>
-            <span class="section-count">12 Specialized Webpages</span>
-        </div>
-
-        <div class="grid">
-            <a href="Elegant Brutalist.html" class="card">
-                <div>
-                    <div class="card-tag">AESTHETIC</div>
-                    <h3 class="card-title">Elegant Brutalist</h3>
-                    <p class="card-desc">Monochrome black & white typography, stark architectural grid dividers.</p>
-                </div>
-                <div class="card-footer"><span>Launch Template →</span></div>
-            </a>
-
-            <a href="Vintage Newspaper.html" class="card">
-                <div>
-                    <div class="card-tag">AESTHETIC</div>
-                    <h3 class="card-title">Vintage Newspaper</h3>
-                    <p class="card-desc">Cream paper texture (`#fbf9f5`), multi-column CSS newspaper layout, drop caps.</p>
-                </div>
-                <div class="card-footer"><span>Launch Template →</span></div>
-            </a>
-
-            <a href="Swiss Minimalist.html" class="card">
-                <div>
-                    <div class="card-tag">AESTHETIC</div>
-                    <h3 class="card-title">Swiss Minimalist</h3>
-                    <p class="card-desc">Helvetica typography, asymmetric grid alignment, red accent lines.</p>
-                </div>
-                <div class="card-footer"><span>Launch Template →</span></div>
-            </a>
-
-            <a href="Hacker.html" class="card">
-                <div>
-                    <div class="card-tag">AESTHETIC</div>
-                    <h3 class="card-title">Hacker Terminal</h3>
-                    <p class="card-desc">Pitch black canvas, neon green matrix text, ASCII art headers, prompt input.</p>
-                </div>
-                <div class="card-footer"><span>Launch Template →</span></div>
-            </a>
-
-            <a href="Cinematic Spotlight.html" class="card">
-                <div>
-                    <div class="card-tag">AESTHETIC</div>
-                    <h3 class="card-title">Cinematic Spotlight</h3>
-                    <p class="card-desc">Cursor-following radial spotlight illumination, filmic blur overlays, gold text.</p>
-                </div>
-                <div class="card-footer"><span>Launch Template →</span></div>
-            </a>
-
-            <a href="Neo Brutalist.html" class="card">
-                <div>
-                    <div class="card-tag">AESTHETIC</div>
-                    <h3 class="card-title">Neo Brutalist</h3>
-                    <p class="card-desc">Bold primary pop colors, 3px solid black outlines, hard offset box shadows.</p>
-                </div>
-                <div class="card-footer"><span>Launch Template →</span></div>
             </a>
         </div>
 

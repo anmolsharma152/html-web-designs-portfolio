@@ -19,19 +19,35 @@
 ## 🏛️ Repository Structure
 
 ```
-├── 👑 Flagship Master Templates
+├── 👑 Master Portfolio Templates (22 Webpages)
 │   ├── Master — Modern Bento Spatial 3D.html
 │   ├── Master — Kinetic Cmd-K Enterprise.html
 │   ├── Master — Interactive Architecture Visualizer.html
 │   ├── Master — View Transitions Scrollytelling.html
 │   ├── Master — Lenis Smooth Inertia & GSAP Kinetic.html
 │   ├── Master — Matter.js Physics & Vercel Border Beam.html
+│   ├── Master — Midjourney Cyberpunk Dark.html
+│   ├── Master — Enterprise Kinetic Light.html
+│   ├── Master — Spatial Glass 3D Bento.html
+│   ├── Master — Cybernetic Shader HUD.html
+│   ├── Master — Kinetic Scroll Master.html
+│   ├── Master — Kinetic Scroll Architect.html
 │   ├── Master — Raycast Command OS.html
 │   ├── Master — Stripe Enterprise Glass.html
 │   ├── Master — Supabase Developer Hub.html
-│   └── Master — Midjourney Cyberpunk Dark.html
+│   ├── Master — Elegant Brutalist.html
+│   ├── Master — Vintage Newspaper.html
+│   ├── Master — Swiss Minimalist.html
+│   ├── Master — Neo Brutalist.html
+│   ├── Master — Hacker Terminal.html
+│   ├── Master — Technical Grid.html
+│   ├── Master — Cinematic Spotlight.html
+│   ├── Master — Cinematic Noir.html
+│   ├── Master — The Systems Architect.html
+│   ├── Master — Bento Grid.html
+│   └── Master — Linear.html
 │
-├── 🧩 Standalone Modular UI Components
+├── 🧩 Standalone Modular UI Components (13 Files)
 │   ├── Component — CmdK Command Palette.html
 │   ├── Component — 3D Tilt Cards & Glass 2.0.html
 │   ├── Component — Pipeline Dataflow Visualizer.html
@@ -46,40 +62,9 @@
 │   ├── Component — Apple Dynamic Island Pill.html
 │   └── Component — Fuse.js Fuzzy CmdK Search.html
 │
-├── 🎨 Creative Design Exploration Templates
-│   ├── Elegant Brutalist.html
-│   ├── Spatial Glass 3D Bento.html
-│   ├── Cybernetic Shader HUD.html
-│   ├── Kinetic Scroll Master.html
-│   ├── Kinetic Scroll Architect.html
-│   ├── Enterprise Kinetic Light.html
-│   ├── Neo Brutalist.html
-│   ├── Vintage Newspaper.html
-│   ├── Swiss Minimalist.html
-│   ├── Bento Grid.html
-│   ├── Linear.html
-│   ├── Technial Grid.html
-│   ├── Cinematic Spotlight.html
-│   ├── Cinematic Noir.html
-│   ├── Hacker.html
-│   └── The Systems Architect.html
-│
 └── 📖 Architectural & Educational Guides
     └── DESIGN_SYSTEM_AND_PATTERNS_GUIDE.md
 ```
-
----
-
-## 🎨 Visual Design & Motion Paradigms
-
-1. **Lenis Momentum Scroll + GSAP ScrollTrigger**: Ultra-smooth 60fps inertia scrolling with pinned timeline sections and kinetic split typography.
-2. **Matter.js Interactive 2D Gravity Field**: Interactive rigid-body skill pills reacting to mouse collisions, floor bounces, and drag gestures.
-3. **Vercel Conic Border Beam**: Rotating laser glow traveling along card edges using CSS `@property --angle`.
-4. **Apple Dynamic Island Pill**: Spring-animated status pill morphing dynamically into quick-action quick drawers.
-5. **Spatial Glassmorphism 2.0**: Frosted glass cards with `backdrop-filter: blur(20px)`, specular top-border highlights, and inline SVG noise.
-6. **Pristine Porcelain Enterprise Light**: Clean white background (`#ffffff` / `#f8fafc`), radial dot grid pattern, deep royal blue accents.
-7. **Raycast Command OS**: macOS-inspired dark translucent panels, glowing search inputs, keyboard shortcut badges.
-8. **Cybernetic Telemetry HUD**: Neon cyan/pink glows, custom WebGL liquid shader grids, Web Audio sound effects.
 
 ---
 

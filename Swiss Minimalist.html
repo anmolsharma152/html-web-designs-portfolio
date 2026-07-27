@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma - Minimalist Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600&display=swap');
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #FAFAFA;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hover-underline {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .hover-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: #1a1a1a;
+            transform-origin: bottom right;
+            transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+
+        .hover-underline:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Subtle grid background */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, #e5e5e5 1px, transparent 1px),
+                              linear-gradient(to bottom, #e5e5e5 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-grid">
+
+    <div class="max-w-5xl mx-auto px-6 py-12 md:py-20 border-x border-gray-200 min-h-screen bg-[#FAFAFA]">
+        
+        <!-- Header -->
+        <header class="flex justify-between items-end mb-24">
+            <div>
+                <h1 class="text-4xl md:text-6xl font-medium tracking-tight mb-2">Anmol Sharma.</h1>
+                <p class="text-gray-500 text-sm tracking-widest uppercase">Full-Stack Engineer & Data Scientist</p>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-medium">
+                <a href="#work" class="hover-underline">Work</a>
+                <a href="#expertise" class="hover-underline">Expertise</a>
+                <a href="#about" class="hover-underline">About</a>
+                <a href="#contact" class="hover-underline">Contact</a>
+            </nav>
+        </header>
+
+        <!-- Hero Statement -->
+        <section class="mb-32">
+            <p class="text-2xl md:text-4xl leading-tight font-light text-gray-800">
+                Building <span class="italic font-serif">human-centered</span> technology with a liberal arts perspective. I specialize in data-driven solutions that deliver real business value, bridging the gap between <span class="border-b border-gray-300 pb-0.5">complex data</span> and <span class="border-b border-gray-300 pb-0.5">user experience</span>.
+            </p>
+            <div class="mt-12 flex items-center space-x-6">
+                <a href="#contact" class="bg-black text-white px-8 py-3 text-sm uppercase tracking-widest hover:bg-gray-800 transition-colors">Get in Touch</a>
+                <a href="https://github.com/anmolsharma152" target="_blank" class="text-sm uppercase tracking-widest border-b border-black pb-1 hover:text-gray-600 hover:border-gray-600 transition-colors">Github Profile</a>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <hr class="border-gray-200 mb-24">
+
+        <!-- Selected Works -->
+        <section id="work" class="mb-32">
+            <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-16">
+                <h2 class="text-3xl font-serif italic">Selected Works</h2>
+                <span class="text-xs uppercase tracking-widest text-gray-500 mt-2 md:mt-0">2024 — 2025</span>
+            </div>
+
+            <div class="space-y-20">
+                <!-- Project 1 -->
+                <div class="group cursor-pointer">
+                    <div class="flex flex-col md:flex-row justify-between items-start border-t border-gray-200 pt-6 transition-all group-hover:border-black">
+                        <div class="md:w-1/3 mb-4 md:mb-0">
+                            <span class="text-xs font-mono text-gray-400">01 /</span>
+                            <span class="text-xs font-mono text-gray-400 uppercase ml-2">Civic Tech</span>
+                        </div>
+                        <div class="md:w-2/3">
+                            <h3 class="text-2xl md:text-3xl mb-3 group-hover:translate-x-2 transition-transform duration-300">ProspectiveName</h3>
+                            <p class="text-gray-600 mb-4 max-w-lg font-light">
+                                A Civic Connect web application allowing citizens to report, track, and view resolutions of civic issues (potholes, garbage) in a transparent manner.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 border border-gray-200 text-xs text-gray-500 uppercase">TypeScript</span>
+                                <span class="px-2 py-1 border border-gray-200 text-xs text-gray-500 uppercase">React</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="group cursor-pointer">
+                    <div class="flex flex-col md:flex-row justify-between items-start border-t border-gray-200 pt-6 transition-all group-hover:border-black">
+                        <div class="md:w-1/3 mb-4 md:mb-0">
+                            <span class="text-xs font-mono text-gray-400">02 /</span>
+                            <span class="text-xs font-mono text-gray-400 uppercase ml-2">Dev Tools</span>
+                        </div>
+                        <div class="md:w-2/3">
+                            <h3 class="text-2xl md:text-3xl mb-3 group-hover:translate-x-2 transition-transform duration-300">omarchy-nvim</h3>
+                            <p class="text-gray-600 mb-4 max-w-lg font-light">
+                                Customized LazyVim-based Neovim configuration optimized for full-stack speed.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 border border-gray-200 text-xs text-gray-500 uppercase">Lua</span>
+                                <span class="px-2 py-1 border border-gray-200 text-xs text-gray-500 uppercase">Neovim</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="group cursor-pointer">
+                    <div class="flex flex-col md:flex-row justify-between items-start border-t border-gray-200 pt-6 transition-all group-hover:border-black">
+                        <div class="md:w-1/3 mb-4 md:mb-0">
+                            <span class="text-xs font-mono text-gray-400">03 /</span>
+                            <span class="text-xs font-mono text-gray-400 uppercase ml-2">AI / NLP</span>
+                        </div>
+                        <div class="md:w-2/3">
+                            <h3 class="text-2xl md:text-3xl mb-3 group-hover:translate-x-2 transition-transform duration-300">emotion_voice_assistant</h3>
+                            <p class="text-gray-600 mb-4 max-w-lg font-light">
+                                ML/NLP tool focused on emotion-aware voice interfaces using Python for speech processing.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 border border-gray-200 text-xs text-gray-500 uppercase">Python</span>
+                                <span class="px-2 py-1 border border-gray-200 text-xs text-gray-500 uppercase">PyTorch</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expertise (Grid Layout) -->
+        <section id="expertise" class="mb-32">
+            <h2 class="text-3xl font-serif italic mb-16">Technical Expertise</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-widest mb-6 border-b border-black pb-2">Full Stack</h4>
+                    <ul class="space-y-3 text-gray-600 font-light">
+                        <li>React / Next.js</li>
+                        <li>TypeScript</li>
+                        <li>Node.js / Express</li>
+                        <li>Tailwind CSS</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-widest mb-6 border-b border-black pb-2">AI / ML</h4>
+                    <ul class="space-y-3 text-gray-600 font-light">
+                        <li>TensorFlow</li>
+                        <li>PyTorch</li>
+                        <li>Transformers</li>
+                        <li>OpenCV</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-widest mb-6 border-b border-black pb-2">Data Science</h4>
+                    <ul class="space-y-3 text-gray-600 font-light">
+                        <li>Python</li>
+                        <li>Pandas / NumPy</li>
+                        <li>Scikit-learn</li>
+                        <li>SQL</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-widest mb-6 border-b border-black pb-2">DevOps</h4>
+                    <ul class="space-y-3 text-gray-600 font-light">
+                        <li>Docker</li>
+                        <li>AWS / GCP</li>
+                        <li>Linux / Unix</li>
+                        <li>Git / GitHub</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section class="mb-32">
+            <div class="bg-gray-50 p-8 md:p-12 border border-gray-200">
+                <h2 class="text-3xl font-serif italic mb-10">Experience</h2>
+                
+                <div class="space-y-10">
+                    <div class="flex flex-col md:flex-row justify-between">
+                        <div class="md:w-1/4">
+                            <span class="text-xs uppercase tracking-widest text-gray-500">2024 — Present</span>
+                        </div>
+                        <div class="md:w-3/4">
+                            <h3 class="text-xl font-medium mb-2">Independent Creator</h3>
+                            <p class="text-gray-600 font-light">Building ML/NLP tools focused on emotion-aware voice interfaces and minimalist UX.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row justify-between">
+                        <div class="md:w-1/4">
+                            <span class="text-xs uppercase tracking-widest text-gray-500">2023 — 2024</span>
+                        </div>
+                        <div class="md:w-3/4">
+                            <h3 class="text-xl font-medium mb-2">Technical Support Executive</h3>
+                            <p class="text-gray-600 font-light">Teleperformance — Delivered support for billing and technical issues, maintaining SLA benchmarks for Japanese clients.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row justify-between">
+                        <div class="md:w-1/4">
+                            <span class="text-xs uppercase tracking-widest text-gray-500">2022 — 2024</span>
+                        </div>
+                        <div class="md:w-3/4">
+                            <h3 class="text-xl font-medium mb-2">Freelance Developer</h3>
+                            <p class="text-gray-600 font-light">Delivered modular CLI utilities in Python. Mentored peers on Neovim and Linux workflows.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer / Contact -->
+        <footer id="contact" class="pb-20">
+            <h2 class="text-4xl md:text-6xl font-serif italic mb-8">Let's build something.</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <p class="text-gray-600 mb-8 max-w-sm font-light">
+                        I'm always interested in hearing about new opportunities and exciting projects.
+                    </p>
+                    <a href="mailto:ozymandias.work@gmail.com" class="text-2xl hover-underline font-medium">ozymandias.work@gmail.com</a>
+                </div>
+                <div class="flex flex-col space-y-4 md:items-end">
+                    <a href="https://linkedin.com/in/anmolsharma152" target="_blank" class="hover-underline uppercase text-sm tracking-widest">LinkedIn</a>
+                    <a href="https://github.com/anmolsharma152" target="_blank" class="hover-underline uppercase text-sm tracking-widest">GitHub</a>
+                </div>
+            </div>
+            
+            <div class="mt-24 text-xs text-gray-400 uppercase tracking-widest">
+                © 2025 Anmol Sharma. Jaipur, India.
+            </div>
+        </footer>
+
+    </div>
+</body>
+</html>

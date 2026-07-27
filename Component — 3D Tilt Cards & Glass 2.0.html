@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Pattern — 3D Tilt Cards & Glass 2.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #f8fafc;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        /* ── GLASSMORPHISM 2.0 CARD ─────────────────────── */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            padding: 36px;
+            box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.25), 0 20px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.15s ease-out, border-color 0.3s ease;
+        }
+
+        /* SVG Noise Layer */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(56, 189, 248, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="margin-bottom: 8px;">3D Card Tilt Physics & Glassmorphism 2.0</h1>
+    <p style="color: #94a3b8; margin-bottom: 40px;">Hover mouse over cards to observe 3D perspective tilt & specular border glare.</p>
+
+    <div class="cards-grid">
+        
+        <div class="glass-card tilt-card">
+            <div style="color: #38bdf8; font-weight: 700; font-size: 0.85rem; margin-bottom: 10px;">PATTERN 01</div>
+            <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 12px;">3D Perspective Tilt</h3>
+            <p style="color: #94a3b8; font-size: 0.95rem;">Calculates cursor offsets relative to card width/height and applies real-time 3D rotation matrix transformations.</p>
+        </div>
+
+        <div class="glass-card tilt-card">
+            <div style="color: #a855f7; font-weight: 700; font-size: 0.85rem; margin-bottom: 10px;">PATTERN 02</div>
+            <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 12px;">SVG Noise Filter</h3>
+            <p style="color: #94a3b8; font-size: 0.95rem;">Layers an inline SVG fractal noise texture over frosted glass to eliminate CSS blur gradient banding artifacts.</p>
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                const rotateX = (-y / rect.height) * 12;
+                const rotateY = (x / rect.width) * 12;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+    </script>
+</body>
+</html>

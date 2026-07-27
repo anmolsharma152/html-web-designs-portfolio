@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Pattern — Pipeline Dataflow Visualizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #f8fafc;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 24px;
+            padding: 36px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .diagram-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 24px;
+            background: #030712;
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            overflow-x: auto;
+            margin-bottom: 24px;
+        }
+
+        .node {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #06b6d4;
+            border-radius: 12px;
+            padding: 14px 18px;
+            text-align: center;
+            min-width: 150px;
+        }
+        .node-title { font-weight: 800; color: #fff; font-size: 0.9rem; }
+        .node-sub { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #06b6d4; margin-top: 4px; }
+        .arrow { color: #6366f1; font-weight: 800; font-size: 1.3rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 style="margin-bottom: 8px;">Interactive Dataflow Visualizer Component</h2>
+        <p style="color: #94a3b8; margin-bottom: 24px;">Demonstrates dynamic system pipeline rendering for audio processing & agent workflows.</p>
+
+        <div class="diagram-box">
+            <div class="node">
+                <div class="node-title">Audio Input</div>
+                <div class="node-sub">Microphone Stream</div>
+            </div>
+            <div class="arrow">➔</div>
+            <div class="node">
+                <div class="node-title">Rust WASM VAD</div>
+                <div class="node-sub">vad_processor</div>
+            </div>
+            <div class="arrow">➔</div>
+            <div class="node">
+                <div class="node-title">ONNX Inference</div>
+                <div class="node-sub">Sub-150ms Output</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

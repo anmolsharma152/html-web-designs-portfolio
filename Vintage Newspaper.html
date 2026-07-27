@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Architect | Anmol Sharma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=UnifrakturMaguntia&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper-bg: #fdfbf7;
+            --ink-black: #1a1a1a;
+            --sepia-border: #dcd6ce;
+        }
+
+        body {
+            background-color: var(--paper-bg);
+            color: var(--ink-black);
+            font-family: 'Lora', serif;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        /* Typography */
+        .masthead {
+            font-family: 'UnifrakturMaguntia', cursive;
+        }
+        
+        .headline {
+            font-family: 'Playfair Display', serif;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+        }
+
+        .deck {
+            font-family: 'Lora', serif;
+            font-style: italic;
+        }
+
+        /* Layout Utilities */
+        .double-rule-top {
+            border-top: 4px solid var(--ink-black);
+            border-bottom: 1px solid var(--ink-black);
+            height: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .double-rule-bottom {
+            border-bottom: 4px solid var(--ink-black);
+            border-top: 1px solid var(--ink-black);
+            height: 8px;
+            margin-top: 1rem;
+        }
+
+        .col-rule {
+            border-right: 1px solid var(--sepia-border);
+            padding-right: 1.5rem;
+            margin-right: 1.5rem;
+        }
+
+        .drop-cap {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            line-height: 0.8;
+            margin-right: 0.5rem;
+            margin-top: 0.2rem;
+            font-weight: 900;
+        }
+
+        /* Components */
+        .weather-box {
+            border: 1px solid var(--ink-black);
+            padding: 0.5rem;
+            font-size: 0.75rem;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .classified-item {
+            border-bottom: 1px dotted var(--ink-black);
+            padding-bottom: 0.25rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .btn-stamp {
+            display: inline-block;
+            border: 2px solid var(--ink-black);
+            padding: 0.5rem 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.2s;
+            background: var(--paper-bg);
+        }
+        
+        .btn-stamp:hover {
+            background: var(--ink-black);
+            color: var(--paper-bg);
+            transform: rotate(-1deg);
+        }
+
+        /* Animations */
+        @keyframes print {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .print-in {
+            animation: print 0.8s ease-out forwards;
+        }
+
+        ::selection {
+            background: #f4d03f; /* Highlighter yellow */
+            color: black;
+        }
+    </style>
+</head>
+<body class="p-2 md:p-8 min-h-screen">
+
+    <div class="max-w-[1200px] mx-auto bg-[#fdfbf7] p-4 md:p-8 shadow-2xl relative">
+        
+        <!-- Header / Masthead -->
+        <header class="mb-8 text-center">
+            <div class="flex justify-between items-end border-b-2 border-black pb-2 mb-2 font-bold text-xs uppercase tracking-widest">
+                <span>Vol. MMXXV No. 1</span>
+                <span>Jaipur, India — Remote Compatible</span>
+                <span>Price: Free (Open Source)</span>
+            </div>
+            
+            <h1 class="masthead text-6xl md:text-8xl lg:text-9xl mb-4">The Daily Architect</h1>
+            
+            <div class="flex justify-between items-center border-t-2 border-b-2 border-black py-2 font-serif italic text-sm md:text-base">
+                <span class="flex-1 text-left">"Human-Centered Engineering"</span>
+                <span class="flex-1 text-center font-bold uppercase not-italic tracking-widest text-xs">Late Edition</span>
+                <span class="flex-1 text-right">Anmol Sharma, Editor-in-Chief</span>
+            </div>
+        </header>
+
+        <!-- Main Layout Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 lg:gap-8">
+            
+            <!-- LEFT COLUMN (Main Story) -->
+            <div class="lg:col-span-8 col-rule border-r-0 lg:border-r border-[#dcd6ce]">
+                <article class="mb-12 print-in">
+                    <div class="mb-2 font-bold uppercase text-xs tracking-widest border-b border-black inline-block pb-1">Cover Story</div>
+                    <h2 class="headline text-5xl md:text-7xl font-bold mb-4 leading-tight">
+                        ENGINEER BRIDGES GAP BETWEEN DATA AND EXPERIENCE
+                    </h2>
+                    <h3 class="deck text-xl md:text-2xl text-gray-700 mb-6 leading-relaxed">
+                        Full-Stack Developer & AI Specialist creates "Intelligent Systems" with a liberal arts perspective.
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-justify">
+                        <div>
+                            <p class="mb-4 text-lg">
+                                <span class="drop-cap">J</span>AIPUR — In a digital landscape often devoid of nuance, Anmol Sharma has emerged as a distinct voice. Combining rigorous backend architecture with intuitive frontend design, Sharma argues that code is not merely functional, but a form of expression.
+                            </p>
+                            <p class="mb-4">
+                                "Technology should work for people," Sharma was quoted as saying from his remote office. "I build solutions that empower users and drive meaningful outcomes."
+                            </p>
+                        </div>
+                        <div class="flex flex-col justify-between">
+                            <p class="mb-6">
+                                With expertise spanning Python, TypeScript, and Rust, Sharma has deployed scalable applications that handle complex data without sacrificing user experience. The industry is taking note of this "human-centered" approach.
+                            </p>
+                            <div class="bg-[#f0ece5] p-6 border border-[#dcd6ce] text-center">
+                                <p class="font-bold uppercase text-xs mb-2 tracking-widest">Action Required</p>
+                                <a href="mailto:ozymandias.work@gmail.com" class="btn-stamp">Hire This Engineer</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="double-rule-top"></div>
+
+                <!-- Featured Projects Section -->
+                <section class="print-in" style="animation-delay: 0.2s">
+                    <h4 class="font-sans font-bold uppercase text-2xl mb-6 text-center tracking-wider">Feature: Selected Works</h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Project 1 -->
+                        <div class="border-r border-[#dcd6ce] pr-6 last:border-0 last:pr-0">
+                            <span class="block text-4xl font-bold mb-2 font-serif">I.</span>
+                            <h5 class="headline text-2xl font-bold mb-2">ProspectiveName</h5>
+                            <p class="text-sm italic mb-3">Civic Connect Platform</p>
+                            <p class="text-sm mb-4 leading-relaxed">
+                                A revolutionary tool enabling citizens to report and track city issues. Transparency meets technology in this React & TypeScript application.
+                            </p>
+                            <a href="#" class="text-xs font-bold uppercase underline decoration-1 underline-offset-2">Read Case Study</a>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="border-r border-[#dcd6ce] pr-6 last:border-0 last:pr-0">
+                            <span class="block text-4xl font-bold mb-2 font-serif">II.</span>
+                            <h5 class="headline text-2xl font-bold mb-2">omarchy-nvim</h5>
+                            <p class="text-sm italic mb-3">Dev Environment</p>
+                            <p class="text-sm mb-4 leading-relaxed">
+                                Critics are calling this Neovim configuration "blazing fast." Optimized for full-stack developers who demand efficiency and speed.
+                            </p>
+                            <a href="#" class="text-xs font-bold uppercase underline decoration-1 underline-offset-2">View Config</a>
+                        </div>
+
+                        <!-- Project 3 -->
+                        <div class="border-r border-[#dcd6ce] pr-6 last:border-0 last:pr-0">
+                            <span class="block text-4xl font-bold mb-2 font-serif">III.</span>
+                            <h5 class="headline text-2xl font-bold mb-2">Voice AI</h5>
+                            <p class="text-sm italic mb-3">Emotion NLP</p>
+                            <p class="text-sm mb-4 leading-relaxed">
+                                Can computers feel? Not yet, but this Python-based NLP tool detects human emotion in voice interfaces with startling accuracy.
+                            </p>
+                            <a href="#" class="text-xs font-bold uppercase underline decoration-1 underline-offset-2">See Research</a>
+                        </div>
+                    </div>
+                </section>
+                
+                <div class="double-rule-bottom"></div>
+            </div>
+
+            <!-- RIGHT COLUMN (Sidebar / Classifieds) -->
+            <div class="lg:col-span-4 flex flex-col gap-8 mt-8 lg:mt-0">
+                
+                <!-- Weather / Status -->
+                <div class="weather-box print-in" style="animation-delay: 0.3s">
+                    <div class="flex justify-between border-b border-black pb-1 mb-1">
+                        <span>Status</span>
+                        <span>Open to Work</span>
+                    </div>
+                    <div class="text-3xl font-serif py-2">Avbl. Now</div>
+                    <div class="text-xs italic">Remote / Hybrid / Contract</div>
+                </div>
+
+                <!-- Classifieds (Skills) -->
+                <div class="border-t-4 border-black pt-1 print-in" style="animation-delay: 0.4s">
+                    <h4 class="font-sans font-bold uppercase text-center text-lg mb-4 bg-black text-white py-1">Classifieds & Skills</h4>
+                    
+                    <div class="mb-6">
+                        <h5 class="font-bold uppercase text-xs mb-2 border-b border-gray-400">Help Wanted: Languages</h5>
+                        <div class="classified-item">
+                            <strong>PYTHON EXPERT NEEDED?</strong> I bring 90% proficiency. Also fluent in TypeScript and Rust. Serious inquiries only.
+                        </div>
+                        <div class="classified-item">
+                            <strong>FULL STACK WIZARD:</strong> React, Next.js, Tailwind. Will build beautiful UIs for food (or money).
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h5 class="font-bold uppercase text-xs mb-2 border-b border-gray-400">For Sale: AI Knowledge</h5>
+                        <div class="classified-item">
+                            <strong>TENSORFLOW MODELS:</strong> Freshly trained. Optimized for performance. PyTorch included at no extra cost.
+                        </div>
+                        <div class="classified-item">
+                            <strong>NLP SOLUTIONS:</strong> Emotion detection, text analysis. Make your app listen.
+                        </div>
+                    </div>
+
+                     <div class="mb-6">
+                        <h5 class="font-bold uppercase text-xs mb-2 border-b border-gray-400">Infrastructure</h5>
+                        <div class="classified-item">
+                            <strong>LINUX SYSADMIN:</strong> I use Arch/Ubuntu. Docker containers shipped daily. AWS certified.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advertisement (Experience) -->
+                <div class="border-2 border-black p-4 text-center print-in" style="animation-delay: 0.5s">
+                    <p class="text-xs uppercase tracking-widest mb-2">- Advertisement -</p>
+                    <h4 class="headline text-3xl font-bold mb-2">EXPERIENCE MATTERS</h4>
+                    <p class="text-sm italic mb-4">Proven track record in high-pressure environments.</p>
+                    
+                    <ul class="text-left text-sm space-y-3 mb-6">
+                        <li class="border-b border-gray-300 pb-2">
+                            <span class="font-bold block">Independent Creator</span>
+                            <span class="text-xs text-gray-600">2024—Present • Building the Future</span>
+                        </li>
+                        <li class="border-b border-gray-300 pb-2">
+                            <span class="font-bold block">Teleperformance</span>
+                            <span class="text-xs text-gray-600">2023—2024 • Tech Support Lead</span>
+                        </li>
+                        <li class="border-b border-gray-300 pb-2">
+                            <span class="font-bold block">Freelance Dev</span>
+                            <span class="text-xs text-gray-600">2022—2024 • System Architecture</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="https://linkedin.com/in/anmolsharma152" target="_blank" class="block bg-black text-white font-bold uppercase text-xs py-2 hover:bg-gray-800">Check Credentials</a>
+                </div>
+
+                <!-- Footer Links -->
+                <div class="mt-auto text-center border-t border-black pt-4 print-in" style="animation-delay: 0.6s">
+                    <p class="font-serif italic text-lg mb-4">"All the code that's fit to ship."</p>
+                    <div class="flex justify-center gap-4 text-xs font-bold uppercase">
+                        <a href="https://github.com/anmolsharma152" class="hover:underline">GitHub</a>
+                        <span>•</span>
+                        <a href="https://linkedin.com/in/anmolsharma152" class="hover:underline">LinkedIn</a>
+                        <span>•</span>
+                        <a href="#" class="hover:underline">RSS</a>
+                    </div>
+                    <p class="text-[10px] mt-4 uppercase text-gray-500">© 2025 The Daily Architect. Est. Jaipur.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

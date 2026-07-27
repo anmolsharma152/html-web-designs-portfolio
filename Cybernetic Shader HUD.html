@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma — Cybernetic AI Architect [HUD Interface]</title>
+    <meta name="description" content="AI Systems Architect & Engineer specializing in agentic workflows, real-time voice pipelines, and neuro-symbolic RAG. Built with live GLSL WebGL shaders.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #030712;
+            --cyber-cyan: #06b6d4;
+            --cyber-pink: #ec4899;
+            --cyber-purple: #8b5cf6;
+            --cyber-green: #10b981;
+            --surface-hud: rgba(15, 23, 42, 0.75);
+            --border-hud: rgba(6, 182, 212, 0.3);
+            --border-hud-glow: rgba(6, 182, 212, 0.7);
+            --text-main: #f3f4f6;
+            --text-dim: #9ca3af;
+            --font-head: 'Oxanium', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-mono);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ── GLSL SHADER CANVAS BACKGROUND ───────────────── */
+        #gl-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.85;
+        }
+
+        /* ── HUD OVERLAY GRID & SCANLINE ─────────────────── */
+        .hud-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+            background: linear-gradient(180deg, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0.2) 50%);
+            background-size: 100% 4px;
+        }
+
+        /* ── CUSTOM LASER CURSOR ────────────────────────── */
+        .custom-cursor {
+            width: 24px;
+            height: 24px;
+            border: 1.5px solid var(--cyber-cyan);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, border-color 0.2s;
+            box-shadow: 0 0 10px var(--cyber-cyan);
+        }
+        .custom-cursor-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--cyber-pink);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+        }
+
+        /* ── MAIN CONTENT CONTAINER ──────────────────────── */
+        .app-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 20px;
+        }
+
+        /* ── HUD HEADER / TELEMETRY TOP BAR ─────────────── */
+        .hud-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            background: var(--surface-hud);
+            border: 1px solid var(--border-hud);
+            backdrop-filter: blur(12px);
+            clip-path: polygon(0 0, 100% 0, 98% 100%, 2% 100%);
+            margin-bottom: 30px;
+        }
+        .sys-id {
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--cyber-cyan);
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .pulse-node {
+            width: 8px;
+            height: 8px;
+            background: var(--cyber-green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--cyber-green);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        .sys-metrics {
+            display: flex;
+            gap: 20px;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+        .metric-badge span {
+            color: var(--cyber-cyan);
+            font-weight: 700;
+        }
+
+        /* ── HERO HUD SECTION ───────────────────────────── */
+        .hero-hud {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .hud-card {
+            background: var(--surface-hud);
+            border: 1px solid var(--border-hud);
+            padding: 30px;
+            backdrop-filter: blur(16px);
+            position: relative;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .hud-card::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px;
+            width: 12px; height: 12px;
+            border-top: 2px solid var(--cyber-cyan);
+            border-left: 2px solid var(--cyber-cyan);
+        }
+        .hud-card::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; right: -1px;
+            width: 12px; height: 12px;
+            border-bottom: 2px solid var(--cyber-cyan);
+            border-right: 2px solid var(--cyber-cyan);
+        }
+        .hud-card:hover {
+            border-color: var(--border-hud-glow);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
+        }
+
+        .hero-title {
+            font-family: var(--font-head);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, var(--cyber-cyan) 60%, var(--cyber-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-dim);
+            margin-bottom: 24px;
+        }
+
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .cyber-badge {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.4);
+            color: var(--cyber-cyan);
+            padding: 6px 14px;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ── TELEMETRY SIDEBAR WIDGET ────────────────────── */
+        .telemetry-box {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .telemetry-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            border-bottom: 1px dashed rgba(255,255,255,0.1);
+            padding-bottom: 8px;
+        }
+
+        .bar-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.05);
+            margin-top: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--cyber-cyan), var(--cyber-purple));
+            width: 0%;
+            transition: width 1.5s ease-out;
+        }
+
+        /* ── PROJECTS GRID SECTION ───────────────────────── */
+        .section-header {
+            font-family: var(--font-head);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-header::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border-hud), transparent);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+        .project-card {
+            background: var(--surface-hud);
+            border: 1px solid var(--border-hud);
+            padding: 24px;
+            backdrop-filter: blur(14px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--cyber-pink);
+        }
+        .project-tag {
+            font-size: 0.7rem;
+            color: var(--cyber-pink);
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+        .project-title {
+            font-family: var(--font-head);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .project-desc {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 20px;
+        }
+
+        /* ── INTERACTIVE BUTTONS ─────────────────────────── */
+        .btn-cyber {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: rgba(6, 182, 212, 0.15);
+            border: 1px solid var(--cyber-cyan);
+            color: #fff;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+        .btn-cyber:hover {
+            background: var(--cyber-cyan);
+            color: #000;
+            box-shadow: 0 0 15px var(--cyber-cyan);
+        }
+
+        /* ── RESPONSIVE DESIGN ───────────────────────────── */
+        @media (max-width: 850px) {
+            .hero-hud { grid-template-columns: 1fr; }
+            .sys-metrics { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- GLSL SHADER CANVAS -->
+    <canvas id="gl-canvas"></canvas>
+    
+    <!-- SCANLINE OVERLAY -->
+    <div class="hud-overlay"></div>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="custom-cursor-dot" id="cursor-dot"></div>
+
+    <div class="app-container">
+        
+        <!-- HUD HEADER TOP BAR -->
+        <header class="hud-topbar">
+            <div class="sys-id">
+                <div class="pulse-node"></div>
+                ANMOL_SHARMA // AI_ARCHITECT
+            </div>
+            <div class="sys-metrics">
+                <div class="metric-badge">FPS: <span id="fps-val">60</span></div>
+                <div class="metric-badge">LATENCY: <span id="lat-val">12ms</span></div>
+                <div class="metric-badge">STATUS: <span>ONLINE</span></div>
+            </div>
+        </header>
+
+        <!-- HERO SECTION -->
+        <section class="hero-hud">
+            <div class="hud-card">
+                <div class="project-tag">SYSTEM_ARCHITECT // IIT MANDI DSAI</div>
+                <h1 class="hero-title">ENGINEERING AUTONOMOUS AI AGENTS & PIPELINES</h1>
+                <p class="hero-subtitle">Specializing in real-time multi-agent workflows, low-latency audio/voice streaming pipelines, and neuro-symbolic RAG architectures.</p>
+                <div class="badge-list">
+                    <span class="cyber-badge">AGENTIC AI</span>
+                    <span class="cyber-badge">REAL-TIME VOICE</span>
+                    <span class="cyber-badge">NEURO-SYMBOLIC RAG</span>
+                    <span class="cyber-badge">SYSTEMS ARCHITECTURE</span>
+                </div>
+                <div style="display: flex; gap: 16px;">
+                    <button class="btn-cyber" onclick="playAudioBeep()">INITIALIZE_CONTACT</button>
+                    <a href="#projects" class="btn-cyber" style="background: transparent; border-color: rgba(255,255,255,0.3);">VIEW_PROJECTS</a>
+                </div>
+            </div>
+
+            <div class="hud-card telemetry-box">
+                <div class="project-tag">TELEMETRY_LOGS</div>
+                <div class="telemetry-row">
+                    <span>AGENT_ORCHESTRATION</span>
+                    <style>
+                        .bar-fill { animation: fillBar 1.5s forwards; }
+                    </style>
+                    <span style="color: var(--cyber-cyan);">98.4%</span>
+                </div>
+                <div class="bar-container"><div class="bar-fill" style="width: 98.4%;"></div></div>
+
+                <div class="telemetry-row">
+                    <span>VOICE_LATENCY_SUB_200MS</span>
+                    <span style="color: var(--cyber-pink);">140ms</span>
+                </div>
+                <div class="bar-container"><div class="bar-fill" style="width: 85%;"></div></div>
+
+                <div class="telemetry-row">
+                    <span>GRAPH_RAG_RECALL</span>
+                    <span style="color: var(--cyber-green);">94.2%</span>
+                </div>
+                <div class="bar-container"><div class="bar-fill" style="width: 94.2%;"></div></div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects">
+            <h2 class="section-header">// CORE_SYSTEM_BUILDS</h2>
+            <div class="projects-grid">
+                
+                <div class="project-card">
+                    <div>
+                        <div class="project-tag">01 // MULTI-AGENT SYSTEM</div>
+                        <h3 class="project-title">Autonomous Code Architect</h3>
+                        <p class="project-desc">Multi-agent orchestrator with asynchronous message passing, memory state synthesis, and automatic AST verification.</p>
+                    </div>
+                    <button class="btn-cyber" style="width: 100%;">DEPLOY_SPECS</button>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <div class="project-tag">02 // VOICE PIPELINE</div>
+                        <h3 class="project-title">Real-Time Duplex Audio Engine</h3>
+                        <p class="project-desc">Sub-150ms end-to-end voice AI pipeline using WebSockets, WebRTC, and low-latency LLM stream processing.</p>
+                    </div>
+                    <button class="btn-cyber" style="width: 100%;">DEPLOY_SPECS</button>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <div class="project-tag">03 // KNOWLEDGE GRAPH</div>
+                        <h3 class="project-title">Neuro-Symbolic Graph RAG</h3>
+                        <p class="project-desc">Hybrid vector-graph retrieval engine connecting Neo4j, Qdrant, and embedding models for deterministic reasoning.</p>
+                    </div>
+                    <button class="btn-cyber" style="width: 100%;">DEPLOY_SPECS</button>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- GLSL SHADER SCRIPT -->
+    <script>
+        // Custom Laser Cursor
+        const cursor = document.getElementById('cursor');
+        const cursorDot = document.getElementById('cursor-dot');
+        let mouseX = 0, mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = `${mouseX}px`;
+            cursor.style.top = `${mouseY}px`;
+            cursorDot.style.left = `${mouseX}px`;
+            cursorDot.style.top = `${mouseY}px`;
+        });
+
+        // Web Audio Synthesizer Beep
+        function playAudioBeep() {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(880, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.15);
+            gain.gain.setValueAtTime(0.1, ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.15);
+            alert("TELEMETRY CONTACT INITIALIZED: Anmol Sharma — AI Systems Architect");
+        }
+
+        // WebGL GLSL Shader Background Setup
+        const canvas = document.getElementById('gl-canvas');
+        const gl = canvas.getContext('webgl');
+
+        if (gl) {
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                gl.viewport(0, 0, canvas.width, canvas.height);
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            const vsSource = `
+                attribute vec2 position;
+                void main() {
+                    gl_Position = vec4(position, 0.0, 1.0);
+                }
+            `;
+
+            const fsSource = `
+                precision mediump float;
+                uniform vec2 u_resolution;
+                uniform float u_time;
+                uniform vec2 u_mouse;
+
+                void main() {
+                    vec2 st = gl_FragCoord.xy / u_resolution.xy;
+                    vec2 mouse = u_mouse / u_resolution;
+                    
+                    float grid = sin(st.x * 40.0 + u_time) * sin(st.y * 40.0 + u_time);
+                    float dist = distance(st, mouse);
+                    float ripple = sin(dist * 30.0 - u_time * 3.0) * 0.05;
+                    
+                    vec3 col1 = vec3(0.01, 0.04, 0.08);
+                    vec3 col2 = vec3(0.02, 0.35, 0.45);
+                    vec3 col3 = vec3(0.4, 0.05, 0.35);
+                    
+                    vec3 finalCol = mix(col1, col2, grid * 0.3 + ripple);
+                    finalCol = mix(finalCol, col3, (1.0 - dist) * 0.2);
+
+                    gl_FragColor = vec4(finalCol, 1.0);
+                }
+            `;
+
+            function createShader(gl, type, source) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                return shader;
+            }
+
+            const vs = createShader(gl, gl.VERTEX_SHADER, vsSource);
+            const fs = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
+            const program = gl.createProgram();
+            gl.attachShader(program, vs);
+            gl.attachShader(program, fs);
+            gl.linkProgram(program);
+            gl.useProgram(program);
+
+            const buffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+                -1, -1,  1, -1, -1,  1,
+                -1,  1,  1, -1,  1,  1
+            ]), gl.STATIC_DRAW);
+
+            const posAttr = gl.getAttribLocation(program, "position");
+            gl.enableVertexAttribArray(posAttr);
+            gl.vertexAttribPointer(posAttr, 2, gl.FLOAT, false, 0, 0);
+
+            const uRes = gl.getUniformLocation(program, "u_resolution");
+            const uTime = gl.getUniformLocation(program, "u_time");
+            const uMouse = gl.getUniformLocation(program, "u_mouse");
+
+            let startTime = performance.now();
+
+            function render() {
+                const now = (performance.now() - startTime) * 0.001;
+                gl.uniform2f(uRes, canvas.width, canvas.height);
+                gl.uniform1f(uTime, now);
+                gl.uniform2f(uMouse, mouseX, canvas.height - mouseY);
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
+                requestAnimationFrame(render);
+            }
+            render();
+        }
+    </script>
+</body>
+</html>

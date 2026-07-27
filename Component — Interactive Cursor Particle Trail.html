@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Pattern — Interactive Cursor Particle Trail</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: #030509;
+            color: #fff;
+            font-family: sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="trail"></canvas>
+
+    <div style="text-align: center; pointer-events: none;">
+        <h1 style="font-size: 2.5rem;">Interactive Particle Cursor Trail</h1>
+        <p style="color: #94a3b8;">Move mouse cursor across screen to emit glowing sparkles</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('trail');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize);
+        resize();
+
+        window.addEventListener('mousemove', (e) => {
+            for (let i = 0; i < 4; i++) {
+                particles.push({
+                    x: e.clientX,
+                    y: e.clientY,
+                    vx: (Math.random() - 0.5) * 3,
+                    vy: (Math.random() - 0.5) * 3,
+                    radius: Math.random() * 3 + 1,
+                    alpha: 1
+                });
+            }
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, idx) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha -= 0.025;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(6, 182, 212, ${p.alpha})`;
+                ctx.fill();
+                if (p.alpha <= 0) particles.splice(idx, 1);
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>

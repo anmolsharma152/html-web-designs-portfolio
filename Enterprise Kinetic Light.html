@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma — Enterprise AI Systems & Engineering Architecture</title>
+    <meta name="description" content="Enterprise AI Systems Architect specializing in autonomous agentic workflows, sub-150ms voice pipelines, neuro-symbolic RAG, and edge intelligence. IIT Mandi DSAI.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        :root {
+            --bg-body: #ffffff;
+            --bg-section-subtle: #f8fafc;
+            --surface-card: #ffffff;
+            --border-card: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --accent-primary: #2563eb;   /* Royal Blue */
+            --accent-indigo: #4f46e5;    /* Deep Indigo */
+            --accent-violet: #7c3aed;    /* Violet */
+            --text-heading: #0f172a;    /* Deep Slate */
+            --text-body: #334155;       /* Muted Slate */
+            --text-muted: #64748b;      /* Slate Grey */
+            --font-head: 'Plus Jakarta Sans', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 20px 25px -5px rgba(0, 0, 0, 0.02);
+            --card-shadow-hover: 0 10px 15px -3px rgba(37, 99, 235, 0.08), 0 25px 30px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-body);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ── BACKGROUND GRID DOT PATTERN ─────────────────── */
+        .bg-pattern {
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(#cbd5e1 1.2px, transparent 1.2px);
+            background-size: 28px 28px;
+            opacity: 0.45;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ── THREE.JS 3D CANVAS BACKGROUND ───────────────── */
+        #three-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        /* ── SCROLL PROGRESS BAR ────────────────────────── */
+        .scroll-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-violet));
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+        }
+
+        /* ── MAIN CONTAINER ─────────────────────────────── */
+        .app-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── NAVIGATION BAR ─────────────────────────────── */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 32px;
+            margin-top: 16px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-card);
+            border-radius: 9999px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            position: sticky;
+            top: 16px;
+            z-index: 100;
+        }
+        .nav-brand {
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: var(--text-heading);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-status {
+            width: 8px; height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+        .nav-links a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--accent-primary); }
+
+        /* ── HERO SECTION (SERVICES & ACTIONS FOCUSED) ───── */
+        .hero {
+            padding: 90px 0 70px 0;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(37, 99, 235, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 9999px;
+            color: var(--accent-primary);
+            font-weight: 700;
+            font-size: 0.82rem;
+            margin-bottom: 24px;
+        }
+        .hero-title {
+            font-family: var(--font-head);
+            font-size: clamp(2.6rem, 5.2vw, 4.2rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -1.5px;
+            color: var(--text-heading);
+            margin-bottom: 24px;
+        }
+        .hero-title span {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-violet) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--text-body);
+            line-height: 1.65;
+            margin-bottom: 36px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .btn-enterprise {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 30px;
+            background: var(--accent-primary);
+            color: #ffffff;
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: 12px;
+            text-decoration: none;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
+            transition: all 0.2s ease;
+        }
+        .btn-enterprise:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(37, 99, 235, 0.35);
+        }
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 30px;
+            background: #ffffff;
+            color: var(--text-heading);
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-card);
+            text-decoration: none;
+            box-shadow: var(--card-shadow);
+            transition: all 0.2s ease;
+        }
+        .btn-outline:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        /* ── HERO STATS CARD ────────────────────────────── */
+        .hero-stats-card {
+            background: #ffffff;
+            border: 1px solid var(--border-card);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .stat-row {
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 16px;
+        }
+        .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .stat-value {
+            font-family: var(--font-head);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-heading);
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── SCROLL REVEAL SECTION ──────────────────────── */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+            margin-bottom: 110px;
+        }
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-tag {
+            font-family: var(--font-head);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .section-title {
+            font-family: var(--font-head);
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: var(--text-heading);
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 680px;
+            margin-bottom: 40px;
+        }
+
+        /* ── SERVICES & CAPABILITIES GRID ────────────────── */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 28px;
+        }
+        .service-card {
+            background: #ffffff;
+            border: 1px solid var(--border-card);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .service-card:hover {
+            border-color: var(--accent-primary);
+            box-shadow: var(--card-shadow-hover);
+            transform: translateY(-4px);
+        }
+        .service-num {
+            font-family: var(--font-head);
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--accent-primary);
+            margin-bottom: 16px;
+        }
+        .service-heading {
+            font-family: var(--font-head);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 12px;
+        }
+        .service-text {
+            color: var(--text-body);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        /* ── LIVE GITHUB PROJECTS GRID ───────────────────── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 28px;
+        }
+        .repo-card {
+            background: #ffffff;
+            border: 1px solid var(--border-card);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+        .repo-card:hover {
+            border-color: var(--accent-primary);
+            box-shadow: var(--card-shadow-hover);
+            transform: translateY(-4px);
+        }
+        .repo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .repo-title {
+            font-family: var(--font-head);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-heading);
+        }
+        .repo-badge {
+            padding: 4px 12px;
+            background: #f1f5f9;
+            color: var(--text-heading);
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 9999px;
+        }
+        .repo-desc {
+            color: var(--text-body);
+            font-size: 0.92rem;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+        .repo-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #f1f5f9;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        .repo-link {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        /* ── SPINNER ────────────────────────────────────── */
+        .spinner-box {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 0;
+            color: var(--text-muted);
+        }
+        .spinner {
+            width: 40px; height: 40px;
+            border: 3px solid #e2e8f0;
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1s infinite linear;
+            margin: 0 auto 16px auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* ── ENTERPRISE CONTACT CTA ─────────────────────── */
+        .contact-card {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #ffffff;
+            border-radius: 28px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
+        }
+        .contact-card h2 {
+            font-family: var(--font-head);
+            font-size: 2.6rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        .contact-card p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 36px auto;
+        }
+
+        /* ── RESPONSIVE DESIGN ───────────────────────────── */
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; }
+            .navbar { flex-direction: column; gap: 16px; border-radius: 20px; }
+            .contact-card { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BACKGROUND DOT GRID -->
+    <div class="bg-pattern"></div>
+
+    <!-- THREE.JS 3D WIREFRAME SPHERE CANVAS -->
+    <div id="three-canvas"></div>
+
+    <!-- SCROLL PROGRESS BAR -->
+    <div class="scroll-progress" id="progress-bar"></div>
+
+    <div class="app-container">
+
+        <!-- ENTERPRISE NAVIGATION -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <span class="nav-status"></span>
+                ANMOL SHARMA // ENTERPRISE AI
+            </div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#expertise">Capabilities</a></li>
+                <li><a href="#projects">GitHub Repos</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- HERO SECTION (SERVICES & ACTIONS FOCUSED) -->
+        <section class="hero">
+            <div>
+                <div class="hero-badge">⚡ SSLA Alumni // IIT Mandi CCE Deep Learning</div>
+                <h1 class="hero-title">
+                    Architecting <span>Autonomous AI Agents</span> & Duplex Voice Systems
+                </h1>
+                <p class="hero-desc">
+                    Engineering production-grade multi-agent swarms, sub-150ms voice pipelines, and neuro-symbolic RAG architectures for high-throughput enterprise systems.
+                </p>
+                <div class="cta-group">
+                    <a href="#projects" class="btn-enterprise">View Live Code Repos →</a>
+                    <a href="#contact" class="btn-outline">Initiate Architecture Call</a>
+                </div>
+            </div>
+
+            <div class="hero-stats-card">
+                <div class="stat-row">
+                    <div class="stat-value">Sub-150ms</div>
+                    <div class="stat-label">Real-Time Duplex Voice Latency</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-value">99.4%</div>
+                    <div class="stat-label">Agent AST Code Verification</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-value">SSLA & IIT Mandi CCE</div>
+                    <div class="stat-label">Economics & Deep Learning Credentials</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES & ACTION-ORIENTED CAPABILITIES -->
+        <section class="scroll-reveal" id="services">
+            <div class="section-tag">// ENTERPRISE SERVICES & CAPABILITIES</div>
+            <h2 class="section-title">End-to-End AI Engineering Solutions</h2>
+            <p class="section-desc">Transforming advanced research into scalable, fault-tolerant production infrastructure.</p>
+
+            <div class="services-grid">
+                
+                <div class="service-card">
+                    <div>
+                        <div class="service-num">01 / DISHA & CODEXENGINE</div>
+                        <h3 class="service-heading">Agentic Platforms & RAG</h3>
+                        <p class="service-text">Building production-grade Agentic RAG engines with LangGraph orchestration, pgvector hybrid search, async PostgreSQL memory, and FastAPI.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div>
+                        <div class="service-num">02 / VAD PROCESSOR</div>
+                        <h3 class="service-heading">Rust & WebAssembly VAD</h3>
+                        <p class="service-text">Engineering real-time, client-side Voice Activity Detection (VAD) engines using Rust, WebAssembly, and ONNX Runtime inference.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div>
+                        <div class="service-num">03 / AURA DAEMON</div>
+                        <h3 class="service-heading">Edge Linux Biometrics</h3>
+                        <p class="service-text">Developing privacy-focused, edge-optimized Arch Linux biometric auth daemons decoupled via Unix domain sockets and PAM integration.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div>
+                        <div class="service-num">04 / WELLNESSMATE</div>
+                        <h3 class="service-heading">Multi-Agent Vision Shells</h3>
+                        <p class="service-text">Orchestrating CrewAI multi-agent desktop health companions with real-time MediaPipe computer vision posture tracking in Tauri.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- LIVE GITHUB REPOSITORIES -->
+        <section class="scroll-reveal" id="projects">
+            <div class="section-tag">// LIVE GITHUB REPOSITORIES</div>
+            <h2 class="section-title">Production Repositories & Builds</h2>
+            <p class="section-desc">Live production code fetched directly from <a href="https://github.com/anmolsharma152" target="_blank" style="color: var(--accent-primary); font-weight: 700;">@anmolsharma152</a>.</p>
+
+            <div class="projects-grid" id="github-container">
+                <div class="spinner-box">
+                    <div class="spinner"></div>
+                    <div>Connecting to GitHub API...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ENTERPRISE CONTACT -->
+        <section class="scroll-reveal" id="contact">
+            <div class="contact-card">
+                <h2>Ready to Build Scalable AI Infrastructure?</h2>
+                <p>Available for Systems Engineering, Multi-Agent Architecture Consulting, and Technical Advisory.</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="mailto:anmolsharma152@gmail.com" class="btn-enterprise" style="background: #ffffff; color: #0f172a;">Contact via Email →</a>
+                    <a href="https://github.com/anmolsharma152" target="_blank" class="btn-outline" style="background: transparent; color: #ffffff; border-color: rgba(255,255,255,0.2);">GitHub Profile ↗</a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- THREE.JS 3D CANVAS & GITHUB API SCRIPTS -->
+    <script>
+        // ── 1. SCROLL PROGRESS & REVEALS ──────────────────
+        const progressBar = document.getElementById('progress-bar');
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+
+        const reveals = document.querySelectorAll('.scroll-reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.15 });
+        reveals.forEach(el => observer.observe(el));
+
+        // ── 2. THREE.JS SAPPHIRE WIREFRAME SPHERE ──────────
+        const container = document.getElementById('three-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 4.8;
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        const geometry = new THREE.IcosahedronGeometry(2.5, 2);
+        const material = new THREE.MeshBasicMaterial({
+            color: 0x2563eb,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.25
+        });
+        const sphereMesh = new THREE.Mesh(geometry, material);
+        scene.add(sphereMesh);
+
+        let targetX = 0, targetY = 0;
+        document.addEventListener('mousemove', (e) => {
+            targetX = (e.clientX / window.innerWidth - 0.5) * 1.2;
+            targetY = (e.clientY / window.innerHeight - 0.5) * 1.2;
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            sphereMesh.rotation.x += 0.0025;
+            sphereMesh.rotation.y += 0.0035;
+            sphereMesh.rotation.x += (targetY * 0.3 - sphereMesh.rotation.x) * 0.05;
+            sphereMesh.rotation.y += (targetX * 0.3 - sphereMesh.rotation.y) * 0.05;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // ── 3. LIVE GITHUB API FETCHING ───────────────────
+        const REPO_DESCS = {
+            Disha: 'A production-grade, agentic Personal Intelligence platform powered by LangGraph, pgvector, and async PostgreSQL.',
+            Aura: 'A privacy-focused, edge-optimized Arch Linux biometric auth daemon decoupled via Unix domain sockets and PAM.',
+            CodexEngine: 'A production-ready Agentic RAG engine with hybrid search, pgvector, LangGraph, and async FastAPI.',
+            WellnessMate: 'Multi-agent health companion built with CrewAI and MediaPipe real-time posture tracking in a Tauri desktop shell.',
+            vad_processor: 'Real-time, client-side Voice Activity Detection (VAD) built with Rust, WebAssembly, and ONNX Runtime.',
+            wikirag: 'A lightweight, fully offline RAG engine for Wikipedia querying using FAISS, RoBERTa, and Python.'
+        };
+
+        async function fetchRepos() {
+            const container = document.getElementById('github-container');
+            try {
+                const res = await fetch('https://api.github.com/users/anmolsharma152/repos?sort=updated&per_page=50');
+                if (!res.ok) throw new Error('API request failed');
+                const data = await res.json();
+
+                const filtered = data
+                    .filter(r => !r.fork && !['anmolsharma152', 'nextjs-portfolio', 'anmolsharma152.github.io'].includes(r.name.toLowerCase()))
+                    .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+                    .slice(0, 6);
+
+                container.innerHTML = '';
+
+                filtered.forEach(repo => {
+                    const desc = REPO_DESCS[repo.name] || repo.description || 'Production software & machine learning system build.';
+                    const lang = repo.language || 'Python';
+                    
+                    const card = document.createElement('div');
+                    card.className = 'repo-card';
+                    card.innerHTML = `
+                        <div>
+                            <div class="repo-header">
+                                <span class="repo-title">${repo.name}</span>
+                                <span class="repo-badge">${lang}</span>
+                            </div>
+                            <p class="repo-desc">${desc}</p>
+                        </div>
+                        <div class="repo-footer">
+                            <span>⭐ ${repo.stargazers_count} stars &nbsp;•&nbsp; 🍴 ${repo.forks_count} forks</span>
+                            <a href="${repo.html_url}" target="_blank" class="repo-link">View Repo ↗</a>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (e) {
+                container.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #dc2626;">
+                        Unable to connect to GitHub API. <a href="https://github.com/anmolsharma152" target="_blank" style="color: #2563eb;">View GitHub Profile ↗</a>
+                    </div>
+                `;
+            }
+        }
+        fetchRepos();
+    </script>
+</body>
+</html>

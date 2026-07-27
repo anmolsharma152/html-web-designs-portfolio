@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma - Engineering Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0B0C10;
+            color: #C5C6C7;
+            overflow-x: hidden;
+        }
+
+        /* The Aurora Background */
+        .aurora-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(76, 29, 149, 0.15), transparent 25%), 
+                radial-gradient(circle at 85% 30%, rgba(37, 99, 235, 0.15), transparent 25%);
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* Text Gradients */
+        .text-glow {
+            background: linear-gradient(90deg, #FFFFFF, #94A3B8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94A3B8;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            transition: all 0.2s;
+        }
+        .skill-tag:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Subtle Grid Lines */
+        .grid-lines {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="grid-lines min-h-screen">
+    <div class="aurora-bg"></div>
+
+    <div class="max-w-4xl mx-auto px-6 py-20">
+        
+        <!-- Header -->
+        <header class="flex items-center justify-between mb-24">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center text-white text-xs font-bold">AS</div>
+                <span class="font-medium text-white tracking-tight">Anmol Sharma</span>
+            </div>
+            <nav class="hidden md:flex gap-6 text-sm text-gray-400">
+                <a href="#projects" class="hover:text-white transition-colors">Projects</a>
+                <a href="#stack" class="hover:text-white transition-colors">Stack</a>
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+            </nav>
+            <a href="mailto:ozymandias.work@gmail.com" class="text-sm px-4 py-2 rounded-full border border-white/10 hover:bg-white/5 transition-colors text-white">Contact</a>
+        </header>
+
+        <!-- Hero -->
+        <section class="mb-32">
+            <h1 class="text-5xl md:text-6xl font-semibold tracking-tight mb-6 text-glow leading-[1.1]">
+                Designing intelligence <br> into the web.
+            </h1>
+            <p class="text-xl text-gray-400 max-w-2xl leading-relaxed">
+                Full-Stack & AI Engineer building human-centered technology. 
+                Bridging the gap between <span class="text-blue-400">complex models</span> and <span class="text-purple-400">intuitive UX</span>.
+            </p>
+        </section>
+
+        <!-- Projects Grid -->
+        <section id="projects" class="mb-32">
+            <div class="flex items-baseline justify-between mb-8">
+                <h2 class="text-white text-lg font-medium">Selected Work</h2>
+                <span class="text-xs text-gray-500 font-mono">2024 — 2025</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Project 1 -->
+                <a href="#" class="glass-card rounded-2xl p-8 group">
+                    <div class="flex justify-between items-start mb-12">
+                        <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                        </div>
+                        <span class="text-gray-500 group-hover:text-white transition-colors">↗</span>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-2">ProspectiveName</h3>
+                    <p class="text-sm text-gray-400 mb-6">Civic Connect platform for transparent city issue resolution.</p>
+                    <div class="flex gap-2">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">TypeScript</span>
+                    </div>
+                </a>
+
+                <!-- Project 2 -->
+                <a href="#" class="glass-card rounded-2xl p-8 group">
+                    <div class="flex justify-between items-start mb-12">
+                        <div class="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <span class="text-gray-500 group-hover:text-white transition-colors">↗</span>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-2">omarchy-nvim</h3>
+                    <p class="text-sm text-gray-400 mb-6">High-performance Neovim configuration for full-stack speed.</p>
+                    <div class="flex gap-2">
+                        <span class="skill-tag">Lua</span>
+                        <span class="skill-tag">Neovim</span>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="#" class="glass-card rounded-2xl p-8 group md:col-span-2 flex flex-col md:flex-row md:items-center justify-between">
+                    <div>
+                        <h3 class="text-xl font-medium text-white mb-2">Voice AI Assistant</h3>
+                        <p class="text-sm text-gray-400 max-w-md">Emotion-aware voice interface using Python & NLP.</p>
+                    </div>
+                    <div class="flex gap-2 mt-4 md:mt-0">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">NLP</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section id="stack" class="mb-32">
+            <h2 class="text-white text-lg font-medium mb-8">Technical Stack</h2>
+            <div class="border-t border-white/10">
+                <!-- Stack Items -->
+                <div class="flex py-4 border-b border-white/10 items-center justify-between group hover:bg-white/5 px-4 -mx-4 transition-colors rounded-lg">
+                    <span class="text-gray-400 group-hover:text-white">Languages</span>
+                    <span class="text-sm text-gray-500 font-mono">Python, TypeScript, Lua</span>
+                </div>
+                <div class="flex py-4 border-b border-white/10 items-center justify-between group hover:bg-white/5 px-4 -mx-4 transition-colors rounded-lg">
+                    <span class="text-gray-400 group-hover:text-white">Frontend</span>
+                    <span class="text-sm text-gray-500 font-mono">React, Next.js, Tailwind</span>
+                </div>
+                <div class="flex py-4 border-b border-white/10 items-center justify-between group hover:bg-white/5 px-4 -mx-4 transition-colors rounded-lg">
+                    <span class="text-gray-400 group-hover:text-white">AI / ML</span>
+                    <span class="text-sm text-gray-500 font-mono">TensorFlow, PyTorch, OpenCV</span>
+                </div>
+                <div class="flex py-4 border-b border-white/10 items-center justify-between group hover:bg-white/5 px-4 -mx-4 transition-colors rounded-lg">
+                    <span class="text-gray-400 group-hover:text-white">DevOps</span>
+                    <span class="text-sm text-gray-500 font-mono">Docker, AWS, Linux</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="flex justify-between items-center text-sm text-gray-500 border-t border-white/10 pt-8">
+            <p>© 2025 Anmol Sharma</p>
+            <div class="flex gap-6">
+                <a href="https://github.com/anmolsharma152" class="hover:text-white transition-colors">GitHub</a>
+                <a href="https://linkedin.com/in/anmolsharma152" class="hover:text-white transition-colors">LinkedIn</a>
+            </div>
+        </footer>
+
+    </div>
+</body>
+</html>

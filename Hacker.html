@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>anmol@dev:~/portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0D1117;
+            color: #58A6FF;
+            font-family: 'Fira Code', monospace;
+            overflow-x: hidden;
+        }
+
+        /* CRT Effect */
+        .scanlines {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.2) 50%,
+                rgba(0,0,0,0.2)
+            );
+            background-size: 100% 4px;
+            position: fixed;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: 50;
+            pointer-events: none;
+        }
+
+        .glow-text {
+            text-shadow: 0 0 5px rgba(88, 166, 255, 0.5);
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: #58A6FF;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .prompt { color: #7EE787; }
+        .cmd { color: #E1E4E8; }
+        .comment { color: #8B949E; }
+        .string { color: #A5D6FF; }
+        .keyword { color: #FF7B72; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { bg: #0D1117; }
+        ::-webkit-scrollbar-thumb { background: #30363D; border: 1px solid #58A6FF; }
+
+        .border-term {
+            border: 1px solid #30363D;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 min-h-screen relative">
+    <div class="scanlines"></div>
+
+    <div class="max-w-5xl mx-auto z-10 relative">
+        
+        <!-- Header / Top Bar -->
+        <header class="flex justify-between items-center mb-12 border-b border-gray-800 pb-4">
+            <div class="text-sm text-gray-500">
+                <span class="text-green-500">●</span> Connected: 127.0.0.1
+            </div>
+            <div class="text-sm text-gray-500 uppercase">
+                Anmol_Sharma_Portfolio.sh (RO)
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="mb-20">
+            <div class="mb-6">
+                <span class="prompt">anmol@dev:~$</span> <span class="cmd">cat ./about_me.txt</span>
+            </div>
+            <div class="pl-4 md:pl-8 border-l-2 border-gray-800">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white glow-text">
+                    Hi, I'm Anmol Sharma.
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl leading-relaxed">
+                    > Full-Stack Developer & AI/ML Engineer.<br>
+                    > Building <span class="keyword">human-centered technology</span> with a liberal arts perspective.<br>
+                    > Bridging the gap between <span class="string">"complex data"</span> and <span class="string">"user experience"</span>.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects" class="border border-green-500 text-green-500 px-6 py-2 hover:bg-green-500 hover:text-black transition-colors">
+                        ./view_projects.sh
+                    </a>
+                    <a href="mailto:ozymandias.work@gmail.com" class="border border-gray-600 text-gray-400 px-6 py-2 hover:border-white hover:text-white transition-colors">
+                        ./send_email.sh
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Grid (Like a top/htop output) -->
+        <section class="mb-20">
+            <div class="mb-6">
+                <span class="prompt">anmol@dev:~$</span> <span class="cmd">./show_skills.py --verbose</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="border-term p-4 bg-[#161B22]">
+                    <div class="text-gray-500 border-b border-gray-800 mb-4 pb-2">[STACK_TRACE]</div>
+                    <ul class="space-y-2">
+                        <li class="flex justify-between">
+                            <span>Python</span>
+                            <span class="text-green-400">[██████████] 90%</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>React/Next.js</span>
+                            <span class="text-green-400">[█████████░] 85%</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>TypeScript</span>
+                            <span class="text-green-400">[█████████░] 85%</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Linux/Unix</span>
+                            <span class="text-green-400">[██████████] 90%</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="border-term p-4 bg-[#161B22]">
+                    <div class="text-gray-500 border-b border-gray-800 mb-4 pb-2">[AI_MODULES]</div>
+                    <ul class="space-y-2">
+                        <li class="flex justify-between">
+                            <span>TensorFlow</span>
+                            <span class="text-blue-400">[█████████░] 85%</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>PyTorch</span>
+                            <span class="text-blue-400">[████████░░] 80%</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Transformers</span>
+                            <span class="text-blue-400">[████████░░] 80%</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>OpenCV</span>
+                            <span class="text-blue-400">[███████░░░] 75%</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Directory -->
+        <section id="projects" class="mb-20">
+            <div class="mb-6">
+                <span class="prompt">anmol@dev:~$</span> <span class="cmd">ls -la ./projects/</span>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Project 1 -->
+                <div class="border-term p-6 hover:border-white transition-colors group">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                        <h3 class="text-xl font-bold text-white group-hover:text-green-400 transition-colors">
+                            <span class="text-gray-500 mr-2">drwxr-x</span> ProspectiveName/
+                        </h3>
+                        <span class="text-sm text-gray-500">Updated: Oct 2025</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 comment"># Civic Connect web application. Report & track city issues transparently.</p>
+                    <div class="flex gap-3 text-sm">
+                        <span class="text-blue-300"><span class="prompt">></span> TypeScript</span>
+                        <span class="text-blue-300"><span class="prompt">></span> React</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="border-term p-6 hover:border-white transition-colors group">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                        <h3 class="text-xl font-bold text-white group-hover:text-green-400 transition-colors">
+                            <span class="text-gray-500 mr-2">drwxr-x</span> omarchy-nvim/
+                        </h3>
+                        <span class="text-sm text-gray-500">Updated: Nov 2025</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 comment"># Customized LazyVim configuration. Optimized for speed.</p>
+                    <div class="flex gap-3 text-sm">
+                        <span class="text-blue-300"><span class="prompt">></span> Lua</span>
+                        <span class="text-blue-300"><span class="prompt">></span> Neovim</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="border-term p-6 hover:border-white transition-colors group">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                        <h3 class="text-xl font-bold text-white group-hover:text-green-400 transition-colors">
+                            <span class="text-gray-500 mr-2">drwxr-x</span> emotion_voice_assistant/
+                        </h3>
+                        <span class="text-sm text-gray-500">Updated: Jul 2025</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 comment"># ML/NLP tool for emotion-aware voice interfaces.</p>
+                    <div class="flex gap-3 text-sm">
+                        <span class="text-blue-300"><span class="prompt">></span> Python</span>
+                        <span class="text-blue-300"><span class="prompt">></span> NLP</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Log -->
+        <section class="mb-20">
+            <div class="mb-6">
+                <span class="prompt">anmol@dev:~$</span> <span class="cmd">tail -n 5 ./experience.log</span>
+            </div>
+            
+            <div class="font-mono text-sm leading-7">
+                <div><span class="text-gray-500">[2024-NOW]</span> <span class="keyword">INFO:</span> Role="Independent Creator" Status="Building ML Tools"</div>
+                <div><span class="text-gray-500">[2023-2024]</span> <span class="keyword">INFO:</span> Role="Tech Support @ Teleperformance" Status="Resolved Billing/Tech Issues"</div>
+                <div><span class="text-gray-500">[2022-2024]</span> <span class="keyword">INFO:</span> Role="Freelance Dev" Status="Python CLI Utils & Linux Mentorship"</div>
+                <div><span class="text-gray-500">[SYSTEM]</span> <span class="keyword">SUCCESS:</span> All modules loaded correctly.</div>
+                <div><span class="prompt">anmol@dev:~$</span> <span class="cursor"></span></div>
+            </div>
+        </section>
+
+        <footer class="text-center text-gray-600 text-xs border-t border-gray-800 pt-8 pb-4">
+             --- END OF FILE --- <br>
+             &copy; 2025 Anmol Sharma
+        </footer>
+
+    </div>
+</body>
+</html>

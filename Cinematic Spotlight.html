@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma | Creative Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cursor-x: 50%;
+            --cursor-y: 50%;
+            --spotlight-color: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            background-color: #050505;
+            color: #e5e5e5;
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        /* Serif Font for accents */
+        .serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* The Moving Spotlight Background */
+        .spotlight-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(
+                600px circle at var(--cursor-x) var(--cursor-y), 
+                var(--spotlight-color),
+                transparent 40%
+            );
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Noise Texture Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Reveal Animation Classes */
+        .reveal-text {
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
+        }
+        
+        .reveal-text.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .mask-container {
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        /* Custom Project Card Hover */
+        .project-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .project-card:hover {
+            padding-left: 2rem;
+            background: rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.4);
+        }
+
+        .project-arrow {
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.5s ease;
+        }
+
+        .project-card:hover .project-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+    </style>
+</head>
+<body class="relative">
+
+    <!-- Background FX -->
+    <div class="spotlight-bg"></div>
+    <div class="noise-overlay"></div>
+
+    <!-- Main Container -->
+    <div class="relative z-10 max-w-screen-xl mx-auto px-6 md:px-12">
+
+        <!-- Navigation -->
+        <nav class="flex justify-between items-center py-8 md:py-12 fade-in">
+            <a href="#" class="text-xl font-bold tracking-tighter mix-blend-difference hover:opacity-70 transition-opacity">
+                ANMOL<span class="text-gray-500">.SHARMA</span>
+            </a>
+            <div class="hidden md:flex gap-8 text-sm font-medium tracking-wide uppercase text-gray-400">
+                <a href="#work" class="hover:text-white transition-colors">Work</a>
+                <a href="#expertise" class="hover:text-white transition-colors">Expertise</a>
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+                <a href="mailto:ozymandias.work@gmail.com" class="hover:text-white transition-colors">Contact</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="min-h-[80vh] flex flex-col justify-center mb-24">
+            <div class="mask-container">
+                <h1 class="reveal-text text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.9] tracking-tight mb-4">
+                    HUMAN
+                </h1>
+            </div>
+            <div class="mask-container">
+                <h1 class="reveal-text text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.9] tracking-tight mb-4 text-gray-500 serif italic">
+                    CENTERED
+                </h1>
+            </div>
+            <div class="mask-container">
+                <h1 class="reveal-text text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.9] tracking-tight mb-12">
+                    ENGINEERING
+                </h1>
+            </div>
+
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mt-12">
+                <div class="max-w-xl">
+                    <div class="mask-container">
+                        <p class="reveal-text text-xl md:text-2xl text-gray-400 leading-relaxed font-light">
+                            I bridge the gap between <span class="text-white">complex data</span> and <span class="text-white">intuitive user experience</span> with a liberal arts perspective.
+                        </p>
+                    </div>
+                </div>
+                <div class="mask-container delay-200">
+                    <a href="#work" class="reveal-text inline-flex items-center gap-4 text-sm uppercase tracking-widest border border-white/20 px-8 py-4 rounded-full hover:bg-white hover:text-black transition-all duration-300 group">
+                        View Selected Works
+                        <span class="group-hover:rotate-90 transition-transform duration-300">↓</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats / Quick Info -->
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-32 border-t border-white/10 pt-8 text-sm text-gray-500 uppercase tracking-widest">
+            <div>
+                <span class="block text-white mb-1">Role</span>
+                Full-Stack & AI
+            </div>
+            <div>
+                <span class="block text-white mb-1">Location</span>
+                Jaipur, India
+            </div>
+            <div>
+                <span class="block text-white mb-1">Status</span>
+                Available for hire
+            </div>
+            <div>
+                <span class="block text-white mb-1">Stack</span>
+                TS / Python / Rust
+            </div>
+        </section>
+
+        <!-- Selected Work -->
+        <section id="work" class="mb-40">
+            <div class="flex items-end justify-between mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold">Selected Works</h2>
+                <span class="hidden md:block text-gray-500">(2024 — 2025)</span>
+            </div>
+
+            <div class="flex flex-col">
+                <!-- Project 01 -->
+                <a href="#" class="project-card py-12 md:py-16 group block">
+                    <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+                        <div class="flex items-center gap-6">
+                            <span class="text-xs text-gray-600 font-mono">01</span>
+                            <h3 class="text-3xl md:text-5xl font-medium group-hover:italic group-hover:serif transition-all">ProspectiveName</h3>
+                            <svg class="project-arrow w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                        <div class="flex items-center gap-8">
+                            <p class="text-gray-500 text-sm max-w-xs text-right hidden md:block">Civic Connect platform for transparent city issue resolution.</p>
+                            <span class="text-xs border border-white/20 px-3 py-1 rounded-full text-gray-400">React / TS</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 02 -->
+                <a href="#" class="project-card py-12 md:py-16 group block">
+                    <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+                        <div class="flex items-center gap-6">
+                            <span class="text-xs text-gray-600 font-mono">02</span>
+                            <h3 class="text-3xl md:text-5xl font-medium group-hover:italic group-hover:serif transition-all">omarchy-nvim</h3>
+                            <svg class="project-arrow w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                        <div class="flex items-center gap-8">
+                            <p class="text-gray-500 text-sm max-w-xs text-right hidden md:block">High-performance Neovim config for full-stack speed.</p>
+                            <span class="text-xs border border-white/20 px-3 py-1 rounded-full text-gray-400">Lua / Vim</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 03 -->
+                <a href="#" class="project-card py-12 md:py-16 group block">
+                    <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+                        <div class="flex items-center gap-6">
+                            <span class="text-xs text-gray-600 font-mono">03</span>
+                            <h3 class="text-3xl md:text-5xl font-medium group-hover:italic group-hover:serif transition-all">Voice AI</h3>
+                            <svg class="project-arrow w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                        <div class="flex items-center gap-8">
+                            <p class="text-gray-500 text-sm max-w-xs text-right hidden md:block">Emotion-aware voice interface using NLP.</p>
+                            <span class="text-xs border border-white/20 px-3 py-1 rounded-full text-gray-400">Python / NLP</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Expertise Section -->
+        <section id="expertise" class="mb-40">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+                <div class="md:col-span-4">
+                    <h2 class="text-3xl font-bold mb-6">Technical<br><span class="serif italic text-gray-500">Expertise</span></h2>
+                    <p class="text-gray-400 leading-relaxed">
+                        I don't just write code; I design systems. My stack is chosen for scalability, maintainability, and developer experience.
+                    </p>
+                </div>
+                
+                <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
+                    <div>
+                        <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-white border-b border-white/10 pb-4">Full Stack</h4>
+                        <ul class="space-y-4 text-gray-400">
+                            <li class="flex justify-between hover:text-white transition-colors cursor-default">Next.js / React <span>90%</span></li>
+                            <li class="flex justify-between hover:text-white transition-colors cursor-default">TypeScript <span>90%</span></li>
+                            <li class="flex justify-between hover:text-white transition-colors cursor-default">Node.js <span>85%</span></li>
+                            <li class="flex justify-between hover:text-white transition-colors cursor-default">Tailwind <span>95%</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-white border-b border-white/10 pb-4">AI / Data</h4>
+                        <ul class="space-y-4 text-gray-400">
+                            <li class="flex justify-between hover:text-white transition-colors cursor-default">Python <span>95%</span></li>
+                            <li class="flex justify-between hover:text-white transition-colors cursor-default">PyTorch <span>80%</span></li>
+                            <li class="flex justify-between hover:text-white transition-colors cursor-default">Transformers <span>80%</span></li>
+                            <li class="flex justify-between hover:text-white transition-colors cursor-default">Pandas <span>90%</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-white border-b border-white/10 pb-4">System / Ops</h4>
+                        <ul class="space-y-4 text-gray-400">
+                            <li class="flex justify-between hover:text-white transition-colors cursor-default">Linux / Bash <span>90%</span></li>
+                            <li class="flex justify-between hover:text-white transition-colors cursor-default">Docker <span>85%</span></li>
+                            <li class="flex justify-between hover:text-white transition-colors cursor-default">AWS <span>75%</span></li>
+                            <li class="flex justify-between hover:text-white transition-colors cursor-default">Neovim <span>90%</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Timeline -->
+        <section id="about" class="mb-40">
+            <h2 class="text-3xl font-bold mb-16">Journey</h2>
+            
+            <div class="space-y-12">
+                <div class="group flex flex-col md:flex-row gap-8 md:gap-24 transition-all">
+                    <span class="text-sm text-gray-500 font-mono pt-1">2024 — PRES</span>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-gray-300 transition-colors">Independent Creator</h3>
+                        <p class="text-gray-400 max-w-xl">Building ML/NLP tools focused on emotion-aware voice interfaces. Documenting Linux-first, privacy-focused developer workflows.</p>
+                    </div>
+                </div>
+
+                <div class="group flex flex-col md:flex-row gap-8 md:gap-24 transition-all">
+                    <span class="text-sm text-gray-500 font-mono pt-1">2023 — 2024</span>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-gray-300 transition-colors">Technical Support Executive</h3>
+                        <p class="text-sm text-gray-500 mb-2 font-mono uppercase">Teleperformance</p>
+                        <p class="text-gray-400 max-w-xl">Delivered email and chat-based support for billing, invoicing, and complex technical issues for Japanese clients.</p>
+                    </div>
+                </div>
+
+                <div class="group flex flex-col md:flex-row gap-8 md:gap-24 transition-all">
+                    <span class="text-sm text-gray-500 font-mono pt-1">2022 — 2024</span>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-gray-300 transition-colors">Freelance Developer</h3>
+                        <p class="text-gray-400 max-w-xl">Delivered modular CLI utilities in Python. Mentored peers on Neovim, Tmux, Zsh, and DWM usage.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Call to Action -->
+        <footer class="pb-24">
+            <div class="border-t border-white/10 pt-24 flex flex-col items-center text-center">
+                <p class="text-gray-500 uppercase tracking-widest text-sm mb-8">What's Next?</p>
+                <a href="mailto:ozymandias.work@gmail.com" class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter hover:text-white/50 transition-colors mb-12">
+                    LET'S TALK
+                </a>
+                
+                <div class="flex flex-col md:flex-row gap-8 text-sm uppercase tracking-widest text-gray-400">
+                    <a href="https://linkedin.com/in/anmolsharma152" target="_blank" class="hover:text-white transition-colors">LinkedIn</a>
+                    <a href="https://github.com/anmolsharma152" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+                    <a href="#" class="hover:text-white transition-colors">Twitter</a>
+                </div>
+
+                <div class="mt-24 text-xs text-gray-700">
+                    &copy; 2025 Anmol Sharma. Crafted with precision.
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Spotlight Effect
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            document.documentElement.style.setProperty('--cursor-x', x + 'px');
+            document.documentElement.style.setProperty('--cursor-y', y + 'px');
+        });
+
+        // Intersection Observer for Reveal Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-text').forEach(el => observer.observe(el));
+        
+        // Staggered fade-in for nav
+        document.addEventListener('DOMContentLoaded', () => {
+            const nav = document.querySelector('nav');
+            nav.style.opacity = '0';
+            nav.style.transform = 'translateY(-20px)';
+            nav.style.transition = 'opacity 1s ease, transform 1s ease';
+            
+            setTimeout(() => {
+                nav.style.opacity = '1';
+                nav.style.transform = 'translateY(0)';
+            }, 100);
+            
+            // Trigger hero animations immediately
+            document.querySelectorAll('.reveal-text').forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('active');
+                }, index * 150); // Stagger effect
+            });
+        });
+    </script>
+</body>
+</html>

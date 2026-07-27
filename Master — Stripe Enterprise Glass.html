@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma — Stripe Corporate Glass Architecture</title>
+    <meta name="description" content="Stripe Press inspired corporate luxury portfolio for Anmol Sharma. Features animated mesh gradient canvas, glassmorphic cards, and executive typography.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-stripe: #0a051b;
+            --surface-glass: rgba(255, 255, 255, 0.06);
+            --border-glass: rgba(255, 255, 255, 0.15);
+            --accent-purple: #6366f1;
+            --accent-pink: #ec4899;
+            --accent-cyan: #06b6d4;
+            --text-head: #ffffff;
+            --text-body: #cbd5e1;
+            --font-head: 'Plus Jakarta Sans', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-stripe);
+            color: var(--text-body);
+            font-family: var(--font-head);
+            overflow-x: hidden;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* ── ANIMATED STRIPE MESH GRADIENT CANVAS ────────── */
+        .mesh-background {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.35), transparent 40%),
+                        radial-gradient(circle at 80% 60%, rgba(236, 72, 153, 0.3), transparent 40%),
+                        radial-gradient(circle at 50% 90%, rgba(6, 182, 212, 0.25), transparent 50%);
+            filter: blur(60px);
+            z-index: 0;
+            pointer-events: none;
+            animation: meshMove 18s ease-in-out infinite alternate;
+        }
+        @keyframes meshMove {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.15) rotate(6deg); }
+        }
+
+        .app-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px 100px 24px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 36px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--border-glass);
+            border-radius: 9999px;
+            margin-bottom: 60px;
+        }
+
+        .hero {
+            padding: 60px 0 80px 0;
+            text-align: center;
+        }
+        .hero-serif {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-weight: 600;
+            color: var(--accent-pink);
+        }
+        .hero-title {
+            font-size: clamp(2.8rem, 6vw, 4.8rem);
+            font-weight: 800;
+            color: var(--text-head);
+            line-height: 1.08;
+            letter-spacing: -1.5px;
+            margin-bottom: 24px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ── STRIPE LUXURY GLASS CARDS ───────────────────── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 28px;
+        }
+        .stripe-card {
+            background: var(--surface-glass);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--border-glass);
+            border-radius: 28px;
+            padding: 40px;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 20px 40px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+        .stripe-card:hover {
+            border-color: rgba(99, 102, 241, 0.5);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mesh-background"></div>
+
+    <div class="app-container">
+
+        <nav class="navbar">
+            <div style="font-weight: 800; font-size: 1.2rem; color: #fff;">Anmol Sharma</div>
+            <div style="font-size: 0.9rem; color: var(--text-body);">Enterprise Infrastructure</div>
+        </nav>
+
+        <section class="hero">
+            <h1 class="hero-title">Architecting <span class="hero-serif">Autonomous</span> AI Infrastructure</h1>
+            <p style="font-size: 1.2rem; color: var(--text-body); max-width: 680px; margin: 0 auto 36px auto;">
+                Engineering production-grade agentic platforms, sub-150ms audio pipelines, and edge Linux authentication daemons.
+            </p>
+        </section>
+
+        <section class="cards-grid">
+            
+            <article class="stripe-card">
+                <div style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--accent-cyan); margin-bottom: 8px;">01 / Personal Intelligence</div>
+                <h3 style="font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 14px;">Disha Platform</h3>
+                <p style="color: var(--text-body); font-size: 1rem;">Production-grade agentic Personal Intelligence platform powered by LangGraph, pgvector, and async PostgreSQL memory management.</p>
+            </article>
+
+            <article class="stripe-card">
+                <div style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--accent-pink); margin-bottom: 8px;">02 / Agentic RAG</div>
+                <h3 style="font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 14px;">CodexEngine</h3>
+                <p style="color: var(--text-body); font-size: 1rem;">Production-ready Agentic RAG engine featuring hybrid search, pgvector index, LangGraph orchestration, and async FastAPI backend.</p>
+            </article>
+
+            <article class="stripe-card">
+                <div style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--accent-purple); margin-bottom: 8px;">03 / Rust Voice Pipeline</div>
+                <h3 style="font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 14px;">vad_processor</h3>
+                <p style="color: var(--text-body); font-size: 1rem;">Real-time, client-side Voice Activity Detection (VAD) built with Rust, WebAssembly, and ONNX Runtime for low-latency audio.</p>
+            </article>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

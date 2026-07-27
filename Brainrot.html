@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANMOL SHARMA 💀🔥💯</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;
+            background-color: #ff00ff;
+            background-image: 
+                linear-gradient(45deg, #ff00ff 25%, #00ffff 25%, #00ffff 50%, #ff00ff 50%, #ff00ff 75%, #00ffff 75%, #00ffff 100%);
+            background-size: 40px 40px;
+            overflow-x: hidden;
+        }
+
+        .rainbow-text {
+            background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: rainbow 2s linear infinite;
+        }
+
+        @keyframes rainbow {
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .shake-constant {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) infinite;
+            transform: translate3d(0, 0, 0);
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+
+        .spin-slow {
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .brutal-border {
+            border: 4px solid black;
+            box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+        }
+
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 10s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body class="p-2 md:p-4">
+
+    <!-- TOP MARQUEE (Retention Hook) -->
+    <div class="fixed top-0 left-0 w-full bg-yellow-300 border-b-4 border-black z-50 py-2">
+        <div class="marquee-container font-black text-xl uppercase tracking-tighter text-red-600">
+            <div class="marquee-content">
+                ⚠️ HIRE ME OR ELSE ⚠️ FULL STACK GENIUS ⚠️ 10X ENGINEER ⚠️ NO CAP ⚠️ JUST SHIPPED IT ⚠️ HIRE ME OR ELSE ⚠️ FULL STACK GENIUS ⚠️ 10X ENGINEER ⚠️ NO CAP ⚠️ JUST SHIPPED IT
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto mt-16 bg-white brutal-border p-4 md:p-8 relative">
+        
+        <!-- Stimulus Video Placeholders (Split Screen Layout) -->
+        <div class="absolute -right-4 -top-12 w-24 h-24 bg-green-400 rounded-full flex items-center justify-center brutal-border z-10 animate-bounce">
+            <span class="text-xs font-bold text-center leading-tight">FAMILY GUY<br>FUNNY MOMENTS</span>
+        </div>
+        
+        <!-- Hero Section -->
+        <header class="text-center mb-12 border-b-4 border-dashed border-black pb-8">
+            <h1 class="text-6xl md:text-8xl font-black mb-2 rainbow-text drop-shadow-[4px_4px_0_rgba(0,0,0,1)]">
+                ANMOL SHARMA
+            </h1>
+            <div class="bg-red-500 text-white inline-block px-4 py-2 transform -rotate-2 font-bold text-2xl border-4 border-black">
+                ✨ THE RIZZLER OF CODE ✨
+            </div>
+            <p class="mt-6 text-xl font-bold bg-yellow-200 inline-block px-2">
+                Building <span class="line-through decoration-red-600 decoration-4">boring stuff</span> HUMAN-CENTERED TECH 🗣️🔥🔥
+            </p>
+        </header>
+
+        <!-- Stats Grid (Chaotic) -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            <div class="bg-blue-300 p-4 brutal-border transform hover:scale-110 transition-transform">
+                <div class="text-4xl">👨‍💻</div>
+                <div class="font-black text-lg">FULL STACK</div>
+                <div class="text-xs font-bold">REACT / NEXTJS</div>
+            </div>
+            <div class="bg-pink-300 p-4 brutal-border transform hover:-rotate-3 transition-transform">
+                <div class="text-4xl shake-constant inline-block">🤖</div>
+                <div class="font-black text-lg">AI / ML</div>
+                <div class="text-xs font-bold">BIG BRAIN MOVES</div>
+            </div>
+            <div class="bg-green-300 p-4 brutal-border transform hover:rotate-3 transition-transform">
+                <div class="text-4xl">🐧</div>
+                <div class="font-black text-lg">LINUX</div>
+                <div class="text-xs font-bold">I USE ARCH BTW</div>
+            </div>
+            <div class="bg-orange-300 p-4 brutal-border transform hover:scale-90 transition-transform">
+                <div class="text-4xl spin-slow inline-block">🚀</div>
+                <div class="font-black text-lg">SHIPPING</div>
+                <div class="text-xs font-bold">TO PROD ON FRIDAY</div>
+            </div>
+        </div>
+
+        <!-- Retention Check (Subway Surfers Placeholder) -->
+        <div class="w-full bg-black h-32 mb-12 flex items-center justify-center relative overflow-hidden brutal-border">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbm95bWtkYmx6Z2g5a3B6Z2g5a3B6Z2g5a3B6Z2g5a3B6Z2g5a3B6/Lp5c19x8f0h8I/giphy.gif" alt="hypnotic background" class="absolute inset-0 w-full h-full object-cover opacity-50">
+            <div class="relative z-10 text-white font-black text-2xl text-center leading-none">
+                ATTENTION SPAN CHECK<br>
+                <span class="text-yellow-400">DON'T SCROLL PAST ME</span>
+            </div>
+        </div>
+
+        <!-- Projects (Masonry-ish) -->
+        <h2 class="text-5xl font-black mb-6 text-center underline decoration-wavy decoration-blue-500">
+            COOKED THESE PROJECTS 🍳
+        </h2>
+        
+        <div class="space-y-8 mb-16">
+            <!-- Project 1 -->
+            <div class="bg-white p-6 brutal-border relative">
+                <div class="absolute -top-4 -right-4 bg-red-600 text-white font-bold px-3 py-1 border-2 border-black transform rotate-12">
+                    BASED 💯
+                </div>
+                <h3 class="text-3xl font-black bg-blue-200 inline-block px-2 mb-2">ProspectiveName</h3>
+                <p class="font-bold mb-4">Civic Connect app. Basically turning snitching on potholes into a sport. 🕳️🏃‍♂️</p>
+                <div class="flex gap-2 font-bold text-sm">
+                    <span class="bg-gray-200 border-2 border-black px-2">TypeScript</span>
+                    <span class="bg-gray-200 border-2 border-black px-2">React</span>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="bg-yellow-100 p-6 brutal-border transform -rotate-1">
+                <h3 class="text-3xl font-black bg-purple-200 inline-block px-2 mb-2">omarchy-nvim</h3>
+                <p class="font-bold mb-4">My Neovim config. VS Code users are shaking right now. ⚡⌨️</p>
+                <div class="flex gap-2 font-bold text-sm">
+                    <span class="bg-gray-200 border-2 border-black px-2">Lua</span>
+                    <span class="bg-gray-200 border-2 border-black px-2">Neovim</span>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="bg-green-100 p-6 brutal-border transform rotate-1">
+                <h3 class="text-3xl font-black bg-orange-200 inline-block px-2 mb-2">Voice AI</h3>
+                <p class="font-bold mb-4">AI that knows when you're sad. Black Mirror type beat. 🤖😭</p>
+                <div class="flex gap-2 font-bold text-sm">
+                    <span class="bg-gray-200 border-2 border-black px-2">Python</span>
+                    <span class="bg-gray-200 border-2 border-black px-2">NLP</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experience (Chat Bubble Style) -->
+        <div class="mb-16">
+            <h2 class="text-4xl font-black mb-8 text-right bg-black text-white inline-block px-4">LORE (XP)</h2>
+            
+            <div class="flex flex-col gap-6">
+                <div class="self-start max-w-[80%] bg-blue-500 text-white p-4 rounded-3xl rounded-tl-none border-4 border-black">
+                    <div class="font-black text-yellow-300">2024 — NOW</div>
+                    <div class="text-xl font-bold">Independent Creator (Main Character Arc)</div>
+                    <p>Building ML tools & grinding NLP. Documenting Linux workflows for the culture.</p>
+                </div>
+
+                <div class="self-end max-w-[80%] bg-gray-200 text-black p-4 rounded-3xl rounded-tr-none border-4 border-black">
+                    <div class="font-black text-blue-600">2023 — 2024</div>
+                    <div class="text-xl font-bold">Tech Support @ Teleperformance</div>
+                    <p>Fixed Japanese enterprise issues. Carried the team fr.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact (Call to Action) -->
+        <footer class="text-center bg-black text-white p-8 brutal-border">
+            <h2 class="text-4xl md:text-6xl font-black mb-4 animate-pulse text-red-500">
+                DON'T BE AN NPC
+            </h2>
+            <p class="text-xl font-bold mb-8">Send me an email before I ascend to the digital plane.</p>
+            
+            <a href="mailto:ozymandias.work@gmail.com" class="inline-block bg-white text-black font-black text-2xl px-8 py-4 border-4 border-blue-500 hover:bg-blue-500 hover:text-white transition-colors transform hover:scale-110">
+                👉 CLICK HERE TO HIRE 👈
+            </a>
+
+            <div class="mt-8 flex justify-center gap-4 text-2xl">
+                <a href="#" class="hover:text-pink-500 transition-colors">🐙 GitHub</a>
+                <a href="#" class="hover:text-blue-400 transition-colors">💼 LinkedIn</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Floating Emojis Background -->
+    <div class="fixed top-1/4 left-4 text-6xl animate-bounce z-0 opacity-50">💀</div>
+    <div class="fixed bottom-1/4 right-4 text-6xl spin-slow z-0 opacity-50">🗿</div>
+
+</body>
+</html>

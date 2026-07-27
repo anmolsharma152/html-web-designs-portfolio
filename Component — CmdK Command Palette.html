@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Pattern — Cmd+K Command Palette</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .btn-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #94a3b8;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+        .btn-trigger:hover {
+            border-color: #38bdf8;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        .kbd {
+            background: #0f172a;
+            border: 1px solid #475569;
+            border-radius: 6px;
+            padding: 2px 8px;
+            font-size: 0.8rem;
+            color: #38bdf8;
+        }
+
+        /* ── CMD+K MODAL BACKDROP & DIALOG ────────────────── */
+        .cmdk-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            z-index: 9999;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 120px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+        .cmdk-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .cmdk-dialog {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 580px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            transform: scale(0.95);
+            transition: transform 0.2s ease;
+        }
+        .cmdk-backdrop.open .cmdk-dialog {
+            transform: scale(1);
+        }
+
+        .cmdk-header {
+            padding: 18px 24px;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .cmdk-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: inherit;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .cmdk-list {
+            padding: 12px;
+            list-style: none;
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 0;
+        }
+        .cmdk-item {
+            padding: 12px 16px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: #cbd5e1;
+            transition: background 0.15s, color 0.15s;
+        }
+        .cmdk-item:hover, .cmdk-item.selected {
+            background: #334155;
+            color: #38bdf8;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="margin-bottom: 12px;">Cmd + K Command Palette Component</h1>
+    <p style="color: #94a3b8; margin-bottom: 30px;">Press <kbd class="kbd">⌘ K</kbd> or <kbd class="kbd">Ctrl + K</kbd> or click the button below.</p>
+
+    <button class="btn-trigger" id="btn-open">
+        <span>Open Command Palette...</span>
+        <kbd class="kbd">⌘ K</kbd>
+    </button>
+
+    <!-- MODAL COMPONENT -->
+    <div class="cmdk-backdrop" id="modal">
+        <div class="cmdk-dialog">
+            <div class="cmdk-header">
+                🔍 <input type="text" class="cmdk-input" id="search-input" placeholder="Type a command or search..." autofocus>
+            </div>
+            <ul class="cmdk-list" id="item-list">
+                <li class="cmdk-item"><span>🚀 View Disha Project</span><kbd class="kbd">Jump</kbd></li>
+                <li class="cmdk-item"><span>⚡ View CodexEngine RAG</span><kbd class="kbd">Jump</kbd></li>
+                <li class="cmdk-item"><span>🎤 View vad_processor (Rust/WASM)</span><kbd class="kbd">Jump</kbd></li>
+                <li class="cmdk-item"><span>🛡️ View Aura Biometric Daemon</span><kbd class="kbd">Jump</kbd></li>
+                <li class="cmdk-item"><span>📧 Email Anmol Sharma</span><kbd class="kbd">Mail</kbd></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const input = document.getElementById('search-input');
+        const openBtn = document.getElementById('btn-open');
+
+        function openModal() { modal.classList.add('open'); input.focus(); }
+        function closeModal() { modal.classList.remove('open'); }
+
+        openBtn.addEventListener('click', openModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openModal(); }
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+</html>

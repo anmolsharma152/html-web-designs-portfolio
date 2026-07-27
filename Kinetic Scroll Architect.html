@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma — Kinetic Scroll Portfolio</title>
+    <meta name="description" content="Kinetic Scroll Portfolio for Anmol Sharma. Features CSS view-timeline scroll-driven animations, variable font weight kinetics, and magnetic button physics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #09090b;
+            --surface-color: #18181b;
+            --border-color: #27272a;
+            --accent-orange: #f97316;
+            --accent-yellow: #eab308;
+            --text-primary: #fafafa;
+            --text-muted: #a1a1aa;
+            --font-head: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            timeline-scope: --sec-hero, --sec-about, --sec-projects, --sec-skills;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ── TOP SCROLL PROGRESS BAR ────────────────────── */
+        .scroll-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow));
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+        }
+
+        /* ── CONTAINER ──────────────────────────────────── */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── HEADER ─────────────────────────────────────── */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .logo {
+            font-family: var(--font-head);
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
+
+        /* ── KINETIC HERO SECTION ───────────────────────── */
+        .hero {
+            padding: 100px 0 80px 0;
+            view-timeline: --sec-hero block;
+        }
+        .kinetic-title {
+            font-family: var(--font-head);
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            cursor: pointer;
+            transition: font-weight 0.2s ease, letter-spacing 0.2s ease;
+        }
+        .kinetic-title:hover {
+            color: var(--accent-orange);
+        }
+
+        .hero-lead {
+            font-size: 1.35rem;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin-bottom: 40px;
+        }
+
+        /* ── MAGNETIC BUTTON ────────────────────────────── */
+        .btn-magnetic {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 36px;
+            background: var(--accent-orange);
+            color: #000;
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 1rem;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.2s;
+        }
+        .btn-magnetic:hover {
+            background: var(--accent-yellow);
+            transform: scale(1.05);
+        }
+
+        /* ── SCROLL ANIMATED REVEAL SECTIONS ────────────── */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            margin-bottom: 120px;
+        }
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── PROJECT CARDS ──────────────────────────────── */
+        .project-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        .project-row {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+            transition: border-color 0.3s;
+        }
+        .project-row:hover {
+            border-color: var(--accent-orange);
+        }
+        .project-num {
+            font-family: var(--font-head);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+            margin-bottom: 8px;
+        }
+        .project-name {
+            font-family: var(--font-head);
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* ACCESSIBILITY: REDUCED MOTION */
+        @media (prefers-reduced-motion: reduce) {
+            .scroll-reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .project-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SCROLL PROGRESS INDICATOR -->
+    <div class="scroll-progress" id="progress-bar"></div>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <header>
+            <div class="logo">ANMOL SHARMA</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">AI SYSTEMS ARCHITECT</div>
+        </header>
+
+        <!-- KINETIC HERO -->
+        <section class="hero">
+            <h1 class="kinetic-title" id="kinetic-head">ARCHITECTING NEXT-GEN AGENTIC & VOICE PIPELINES</h1>
+            <p class="hero-lead">Specialized in autonomous multi-agent orchestration, ultra-low latency voice streaming engines, and neuro-symbolic knowledge graphs. IIT Mandi DSAI.</p>
+            <a href="#contact" class="btn-magnetic" id="mag-btn">Initialize Connection →</a>
+        </section>
+
+        <!-- PROJECTS SECTION WITH SCROLL REVEAL -->
+        <section class="scroll-reveal" id="projects-sec">
+            <h2 style="font-family: var(--font-head); font-size: 2.5rem; font-weight: 800;">Selected Systems Builds</h2>
+            <div class="project-list">
+                
+                <article class="project-row">
+                    <div>
+                        <div class="project-num">// BUILD 01</div>
+                        <h3 class="project-name">Autonomous Code Synthesis Agent</h3>
+                        <p class="project-desc">A multi-agent swarm orchestrator that parses user goals, generates structured Python ASTs, and executes automated verification loops.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; font-family: monospace; font-size: 0.85rem; color: var(--accent-orange);">
+                        > agents = SwarmOrchestrator()<br>
+                        > agents.dispatch(task)<br>
+                        > STATUS: AST_VERIFIED [100%]
+                    </div>
+                </article>
+
+                <article class="project-row">
+                    <div>
+                        <div class="project-num">// BUILD 02</div>
+                        <h3 class="project-name">Sub-150ms Duplex Voice AI</h3>
+                        <p class="project-desc">Full-duplex WebSocket stream processor integrating VAD, streaming speech-to-text, and low-latency LLM audio output.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; font-family: monospace; font-size: 0.85rem; color: var(--accent-yellow);">
+                        > stream.connect(wss://)<br>
+                        > audio_buffer.flush()<br>
+                        > LATENCY: 138ms [OPTIMAL]
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- FOOTER / CONTACT -->
+        <footer class="scroll-reveal" id="contact" style="padding-bottom: 80px; text-align: center; border-top: 1px solid var(--border-color); padding-top: 60px;">
+            <h2 style="font-family: var(--font-head); font-size: 3rem; font-weight: 900; margin-bottom: 20px;">LET'S BUILD TOGETHER</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px;">Reach out for AI Systems Engineering, Agentic Workflows, or Technical Strategy.</p>
+            <a href="mailto:anmol@example.com" class="btn-magnetic">Send Message →</a>
+        </footer>
+
+    </div>
+
+    <!-- INTERACTIVITY & SCROLL SCRIPTS -->
+    <script>
+        // Scroll Progress Bar Update
+        const progressBar = document.getElementById('progress-bar');
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+
+        // IntersectionObserver Fallback for Scroll Reveal
+        const reveals = document.querySelectorAll('.scroll-reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        reveals.forEach(el => observer.observe(el));
+
+        // Magnetic Button Physics Effect
+        const magBtn = document.getElementById('mag-btn');
+        if (magBtn) {
+            magBtn.addEventListener('mousemove', (e) => {
+                const rect = magBtn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                magBtn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px) scale(1.05)`;
+            });
+            magBtn.addEventListener('mouseleave', () => {
+                magBtn.style.transform = `translate(0px, 0px) scale(1)`;
+            });
+        }
+    </script>
+</body>
+</html>

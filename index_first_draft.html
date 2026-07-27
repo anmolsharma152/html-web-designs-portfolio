@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma | AI Systems Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        bg: '#0a0a0a',
+                        surface: '#171717',
+                        border: '#262626',
+                        accent: '#3b82f6', 
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+        }
+
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, #262626 1px, transparent 1px),
+                              linear-gradient(to bottom, #262626 1px, transparent 1px);
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        }
+
+        .tech-card {
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .tech-card:hover {
+            transform: translateY(-2px);
+            border-color: #525252;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            padding: 0.125rem 0.5rem;
+            border-radius: 4px;
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen relative">
+
+    <div class="fixed inset-0 bg-grid pointer-events-none opacity-[0.15]"></div>
+
+    <nav class="sticky top-0 z-50 border-b border-border bg-bg/80 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
+                <span class="font-mono font-bold tracking-tight">anmol.sharma</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+                <a href="#overview" class="hover:text-white transition-colors">Overview</a>
+                <a href="#stack" class="hover:text-white transition-colors">Architecture</a>
+                <a href="#projects" class="hover:text-white transition-colors">Systems</a>
+                <a href="#experience" class="hover:text-white transition-colors">Experience</a>
+            </div>
+
+            <a href="https://github.com/anmolsharma152" target="_blank" class="hidden md:flex items-center gap-2 text-sm font-mono bg-surface border border-border px-3 py-1.5 rounded hover:bg-white/5 transition-colors">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.11.82-.257.82-.572 0-.28-.01-1.017-.014-2.002-3.337.724-4.04-1.608-4.04-1.608-.546-1.385-1.334-1.75-1.334-1.75-1.087-.745.082-.73.082-.73 1.205.085 1.838 1.24 1.838 1.24 1.07 1.833 2.81 1.304 3.49.997.108-.775.42-1.304.762-1.604-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.467-2.383 1.235-3.22-.12-.3-.535-1.52.117-3.176 0 0 1.008-.322 3.301 1.233.957-.266 1.983-.4 3.003-.404 1.02.004 2.046.138 3.003.404 2.293-1.555 3.3-1.233 3.3-1.233.652 1.656.237 2.876.117 3.176.77.837 1.233 1.91 1.233 3.22 0 4.61-2.805 5.626-5.477 5.92-.42.36-.803 1.094-.803 2.21 0 1.603-.014 2.894-.014 3.284 0 .317.218.687.825.57A12 12 0 0024 12C24 5.373 18.627 0 12 0z"/></svg>
+                <span>GitHub</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 py-16">
+        
+        <section id="overview" class="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-400 text-xs font-mono mb-6">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                    </span>
+                    Open to Work
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
+                    Engineering <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Intelligent Systems.</span>
+                </h1>
+                <p class="text-lg text-gray-400 mb-8 max-w-lg leading-relaxed">
+                    I am an AI Systems & Data Science Engineer focused on scalable backend architectures. I specialize in agentic workflows, edge inference, and bridging mathematical precision with human-centered experiences.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects" class="bg-white text-black px-6 py-3 rounded font-medium hover:bg-gray-200 transition-colors">
+                        View Systems
+                    </a>
+                    <a href="mailto:ozymandias.work@gmail.com" class="border border-border bg-surface px-6 py-3 rounded font-medium hover:bg-border transition-colors text-gray-300">
+                        Initialize Contact
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-surface border border-border rounded-lg p-1 shadow-2xl overflow-hidden font-mono text-xs md:text-sm">
+                <div class="bg-[#1e1e1e] border-b border-border p-3 flex gap-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                </div>
+                <div class="p-6 text-gray-300 space-y-2">
+                    <div class="flex"><span class="text-blue-400 w-16">from</span> <span class="text-yellow-200">dataclasses</span> <span class="text-blue-400 ml-2">import</span> dataclass</div>
+                    <div class="flex mt-4"><span class="text-purple-400">@dataclass</span></div>
+                    <div class="flex"><span class="text-blue-400 w-16">class</span> <span class="text-yellow-200">Architect</span>:</div>
+                    <div class="pl-4 flex"><span class="text-blue-300 w-24">name:</span> str = <span class="text-green-300">"Anmol Sharma"</span></div>
+                    <div class="pl-4 flex"><span class="text-blue-300 w-24">role:</span> str = <span class="text-green-300">"AI Systems Engineer"</span></div>
+                    <div class="pl-4 flex"><span class="text-blue-300 w-24">location:</span> str = <span class="text-green-300">"Jaipur, India"</span></div>
+                    <div class="pl-4 flex"><span class="text-blue-300 w-24">focus:</span> list = [</div>
+                    <div class="pl-8 text-gray-400">"Agentic Workflows", "Edge Inference",</div>
+                    <div class="pl-8 text-gray-400">"Neuro-Symbolic AI", "Deep RL"</div>
+                    <div class="pl-4">]</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stack" class="mb-24">
+            <h2 class="text-xl font-bold mb-8 flex items-center gap-2">
+                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                Core Architecture
+            </h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-surface border border-border p-4 rounded hover:border-accent transition-colors">
+                    <div class="font-mono text-xs text-gray-500 mb-2">LANGUAGES</div>
+                    <div class="font-semibold text-white">Python, TypeScript</div>
+                    <div class="text-sm text-gray-400 mt-1">SQL, Bash</div>
+                </div>
+                <div class="bg-surface border border-border p-4 rounded hover:border-accent transition-colors">
+                    <div class="font-mono text-xs text-gray-500 mb-2">AI / ML</div>
+                    <div class="font-semibold text-white">PyTorch, LangGraph</div>
+                    <div class="text-sm text-gray-400 mt-1">TensorFlow, OpenCV</div>
+                </div>
+                <div class="bg-surface border border-border p-4 rounded hover:border-accent transition-colors">
+                    <div class="font-mono text-xs text-gray-500 mb-2">DATA & INFRA</div>
+                    <div class="font-semibold text-white">PostgreSQL, FAISS</div>
+                    <div class="text-sm text-gray-400 mt-1">Docker, AWS</div>
+                </div>
+                <div class="bg-surface border border-border p-4 rounded hover:border-accent transition-colors">
+                    <div class="font-mono text-xs text-gray-500 mb-2">SYSTEMS / DEV</div>
+                    <div class="font-semibold text-white">Linux, Neovim</div>
+                    <div class="text-sm text-gray-400 mt-1">Tmux, Next.js</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="mb-24">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-xl font-bold flex items-center gap-2">
+                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    Engineered Systems
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <div class="bg-surface border border-border rounded-lg p-6 tech-card flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-bold text-lg text-white">MedPal AI (V5)</h3>
+                        <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow leading-relaxed">
+                        A clinical decision support system utilizing a neuro-symbolic architecture and dual-RAG routing for medical reasoning. Bridging the gap between mathematical precision and medical logic.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge">Neuro-Symbolic AI</span>
+                            <span class="badge">Dual-RAG</span>
+                            <span class="badge">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-surface border border-border rounded-lg p-6 tech-card flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-bold text-lg text-white">Nexus Bot Orchestration</h3>
+                        <div class="w-2 h-2 rounded-full bg-purple-500"></div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow leading-relaxed">
+                        Architected an agentic workflow using LangGraph for cyclic state management. Integrated PostgreSQL for persistent memory and Model Context Protocol (MCP) for complex, multi-step tool calling.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge">LangGraph</span>
+                            <span class="badge">MCP</span>
+                            <span class="badge">Agentic AI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-surface border border-border rounded-lg p-6 tech-card flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-bold text-lg text-white">Emotion-Aware Voice Assistant</h3>
+                        <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow leading-relaxed">
+                        Developed a real-time assistant featuring Llama 3.3 for reasoning. Transitioned from backend VAD to client-side Silero VAD (ONNX Runtime) to achieve ultra low-latency barge-in capability.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge">Llama 3.3</span>
+                            <span class="badge">Silero VAD</span>
+                            <span class="badge">ONNX Runtime</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-surface border border-border rounded-lg p-6 tech-card flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-bold text-lg text-white">Adaptive RecSys via Deep RL</h3>
+                        <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow leading-relaxed">
+                        Architected a dynamic recommendation engine deploying an Advantage Actor-Critic (A2C) policy network. Optimized long-term user engagement rewards by balancing exploration and exploitation in real-time.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge">Deep RL</span>
+                            <span class="badge">A2C</span>
+                            <span class="badge">PyTorch</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="experience" class="mb-24">
+            <h2 class="text-xl font-bold mb-8 flex items-center gap-2">
+                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Experience Log
+            </h2>
+
+            <div class="border-l border-border ml-3 space-y-12">
+                <div class="relative pl-8">
+                    <div class="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-accent border-2 border-bg"></div>
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+                        <h3 class="font-bold text-lg text-white">Independent Creator</h3>
+                        <span class="font-mono text-xs text-gray-500">2024 — PRESENT</span>
+                    </div>
+                    <p class="text-gray-400 text-sm max-w-2xl leading-relaxed">
+                        Building advanced ML/NLP tools, dual-RAG systems, and edge-inference models. Documenting rigorous, terminal-centric Linux developer workflows and engineering robust data pipelines.
+                    </p>
+                </div>
+
+                <div class="relative pl-8">
+                    <div class="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-border border-2 border-bg"></div>
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+                        <h3 class="font-bold text-lg text-white">Technical Support Executive</h3>
+                        <span class="font-mono text-xs text-gray-500">2023 — 2024</span>
+                    </div>
+                    <div class="text-xs font-mono text-blue-400 mb-2">TELEPERFORMANCE</div>
+                    <p class="text-gray-400 text-sm max-w-2xl leading-relaxed">
+                        Managed critical support infrastructure for enterprise clients. Resolved complex technical networking and integration issues while maintaining strict, high-pressure SLA compliance.
+                    </p>
+                </div>
+
+                <div class="relative pl-8">
+                    <div class="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-border border-2 border-bg"></div>
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+                        <h3 class="font-bold text-lg text-white">Freelance Developer</h3>
+                        <span class="font-mono text-xs text-gray-500">2022 — 2024</span>
+                    </div>
+                    <p class="text-gray-400 text-sm max-w-2xl leading-relaxed">
+                        Developed modular CLI utilities and backend solutions using Python. Mentored developers on Linux environment optimization, system maintenance, and terminal-centric productivity.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="border-t border-border pt-12 pb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-4">Let's build intelligent infrastructure.</h2>
+                    <p class="text-gray-400 text-sm max-w-sm">
+                        Available for roles requiring rigorous engineering in AI systems and data science.
+                    </p>
+                </div>
+                <div class="flex flex-col items-start md:items-end gap-4">
+                    <a href="mailto:ozymandias.work@gmail.com" class="text-lg font-mono text-accent hover:text-white transition-colors">
+                        ozymandias.work@gmail.com
+                    </a>
+                    <div class="flex gap-6 text-sm text-gray-400">
+                        <a href="https://linkedin.com/in/anmolsharma152" target="_blank" class="hover:text-white transition-colors">LinkedIn</a>
+                        <a href="https://github.com/anmolsharma152" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center text-xs text-gray-600 font-mono">
+                &copy; 2026 ANMOL SHARMA // ENGINEERED IN JAIPUR
+            </div>
+        </footer>
+
+    </main>
+</body>
+</html>

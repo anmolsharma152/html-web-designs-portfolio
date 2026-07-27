@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma — Modern Bento Spatial 3D Portfolio</title>
+    <meta name="description" content="Spatial 3D Bento Portfolio for Anmol Sharma. Features 12-column Bento Grid, 3D card tilt physics, SVG noise-textured glassmorphism, and Three.js WebGL spatial geometry.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        :root {
+            --bg-dark: #070913;
+            --surface-glass: rgba(255, 255, 255, 0.05);
+            --border-glass: rgba(255, 255, 255, 0.12);
+            --accent-purple: #a855f7;
+            --accent-cyan: #38bdf8;
+            --accent-indigo: #6366f1;
+            --text-heading: #f8fafc;
+            --text-body: #94a3b8;
+            --font-head: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-body);
+            font-family: var(--font-head);
+            overflow-x: hidden;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* ── THREE.JS SPATIAL CANVAS ─────────────────────── */
+        #three-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.55;
+        }
+
+        /* ── MAIN CONTAINER ─────────────────────────────── */
+        .app-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* ── NAVIGATION BAR ─────────────────────────────── */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 32px;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--border-glass);
+            border-radius: 9999px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-body);
+        }
+        .nav-links a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: #fff; }
+
+        /* ── 12-COLUMN RESPONSIVE BENTO GRID ────────────── */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        /* ── GLASSMORPHISM 2.0 CARD CONTAINER ────────────── */
+        .bento-card {
+            background: var(--surface-glass);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--border-glass);
+            border-radius: 28px;
+            padding: 36px;
+            box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.2), 0 20px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.15s ease-out, border-color 0.3s ease;
+            container-type: inline-size;
+        }
+
+        /* SVG Noise Anti-Banding Layer */
+        .bento-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .bento-card:hover {
+            border-color: rgba(168, 85, 247, 0.45);
+        }
+
+        /* Bento Grid Column Spans */
+        .col-span-8 { grid-column: span 8; }
+        .col-span-4 { grid-column: span 4; }
+        .col-span-6 { grid-column: span 6; }
+        .col-span-12 { grid-column: span 12; }
+
+        /* HERO CARD CONTENTS */
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 9999px;
+            color: var(--accent-purple);
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .hero-title {
+            font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -1.5px;
+            color: var(--text-heading);
+            margin-bottom: 20px;
+        }
+        .hero-title span {
+            background: linear-gradient(135deg, #ffffff 20%, var(--accent-cyan) 70%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-body);
+            max-width: 640px;
+            margin-bottom: 28px;
+        }
+
+        .btn-glass {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 30px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-indigo));
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.35);
+            transition: all 0.2s ease;
+        }
+        .btn-glass:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(168, 85, 247, 0.5);
+        }
+
+        /* PROJECT BADGES */
+        .project-tag {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--accent-cyan);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .project-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-heading);
+            margin-bottom: 12px;
+        }
+        .project-desc {
+            font-size: 0.95rem;
+            color: var(--text-body);
+            margin-bottom: 20px;
+        }
+
+        .tech-pill {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            color: var(--text-body);
+            margin-right: 6px;
+            margin-bottom: 6px;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 960px) {
+            .col-span-8, .col-span-4, .col-span-6 { grid-column: span 12; }
+            .navbar { flex-direction: column; gap: 16px; border-radius: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- THREE.JS SPATIAL CANVAS -->
+    <div id="three-canvas"></div>
+
+    <div class="app-container">
+
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <div class="nav-logo">Anmol Sharma</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#capabilities">Capabilities</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- 12-COLUMN BENTO GRID -->
+        <main class="bento-grid">
+
+            <!-- HERO CARD (8 COLS) -->
+            <article class="bento-card col-span-8 tilt-card">
+                <div class="badge-pill">⚡ AI Systems Engineer // SSLA & IIT Mandi CCE</div>
+                <h1 class="hero-title">Architecting <span>Autonomous Platforms</span> & Duplex Voice</h1>
+                <p class="hero-desc">Engineering production-grade agentic platforms, low-latency audio pipelines, and edge Linux authentication daemons.</p>
+                <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+                    <a href="#projects" class="btn-glass">Explore Projects →</a>
+                    <a href="https://github.com/anmolsharma152" target="_blank" style="color: var(--text-body); text-decoration: none; font-weight: 600;">GitHub Profile ↗</a>
+                </div>
+            </article>
+
+            <!-- 3D INTERACTIVE CARD (4 COLS) -->
+            <article class="bento-card col-span-4 tilt-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div class="project-tag">3D SPATIAL CANVAS</div>
+                    <h3 style="font-size: 1.4rem; font-weight: 800; color: #fff;">Interactive Geometry</h3>
+                </div>
+                <p style="font-size: 0.9rem; color: var(--text-body); margin: 20px 0;">Move your cursor to manipulate the floating spatial 3D wireframe mesh in real-time.</p>
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px; text-align: center;">
+                    <div style="font-size: 1.8rem; font-weight: 800; color: #fff;">sub-150ms</div>
+                    <div style="font-size: 0.75rem; color: var(--text-body); text-transform: uppercase;">Voice Pipeline Latency</div>
+                </div>
+            </article>
+
+            <!-- REAL PROJECT 1: DISHA (6 COLS) -->
+            <article class="bento-card col-span-6 tilt-card">
+                <div class="project-tag">01 // PERSONAL INTELLIGENCE</div>
+                <h2 class="project-title">Disha Platform</h2>
+                <p class="project-desc">Production-grade agentic Personal Intelligence platform powered by LangGraph, pgvector, and async PostgreSQL memory state management.</p>
+                <div>
+                    <span class="tech-pill">Python</span>
+                    <span class="tech-pill">LangGraph</span>
+                    <span class="tech-pill">pgvector</span>
+                    <span class="tech-pill">PostgreSQL</span>
+                </div>
+            </article>
+
+            <!-- REAL PROJECT 2: CODEXENGINE (6 COLS) -->
+            <article class="bento-card col-span-6 tilt-card">
+                <div class="project-tag">02 // AGENTIC RAG</div>
+                <h2 class="project-title">CodexEngine</h2>
+                <p class="project-desc">Production-ready Agentic RAG engine featuring hybrid search retrieval, pgvector embedding index, LangGraph orchestration, and async FastAPI backend.</p>
+                <div>
+                    <span class="tech-pill">LangGraph</span>
+                    <span class="tech-pill">FastAPI</span>
+                    <span class="tech-pill">pgvector</span>
+                    <span class="tech-pill">Hybrid Search</span>
+                </div>
+            </article>
+
+            <!-- REAL PROJECT 3: VAD PROCESSOR (6 COLS) -->
+            <article class="bento-card col-span-6 tilt-card">
+                <div class="project-tag">03 // RUST & WASM VOICE</div>
+                <h2 class="project-title">VAD Processor</h2>
+                <p class="project-desc">Real-time client-side Voice Activity Detection (VAD) engine built with Rust, WebAssembly, and ONNX Runtime for low-latency audio processing.</p>
+                <div>
+                    <span class="tech-pill">Rust</span>
+                    <span class="tech-pill">WebAssembly</span>
+                    <span class="tech-pill">ONNX Runtime</span>
+                    <span class="tech-pill">VAD</span>
+                </div>
+            </article>
+
+            <!-- REAL PROJECT 4: AURA DAEMON (6 COLS) -->
+            <article class="bento-card col-span-6 tilt-card">
+                <div class="project-tag">04 // EDGE BIOMETRICS</div>
+                <h2 class="project-title">Aura Auth Daemon</h2>
+                <p class="project-desc">Privacy-focused, edge-optimized Arch Linux biometric authentication daemon decoupled via Unix domain sockets and PAM integration.</p>
+                <div>
+                    <span class="tech-pill">Linux PAM</span>
+                    <span class="tech-pill">Unix Sockets</span>
+                    <span class="tech-pill">C / Rust</span>
+                    <span class="tech-pill">Biometrics</span>
+                </div>
+            </article>
+
+        </main>
+
+    </div>
+
+    <!-- THREE.JS & 3D TILT SCRIPTS -->
+    <script>
+        // 3D Perspective Card Tilt Physics
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                const rotateX = (-y / rect.height) * 10;
+                const rotateY = (x / rect.width) * 10;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+
+        // Three.js 3D Wireframe Dodecahedron Mesh
+        const container = document.getElementById('three-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        const geometry = new THREE.DodecahedronGeometry(2.3, 1);
+        const material = new THREE.MeshBasicMaterial({
+            color: 0xa855f7,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.35
+        });
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+
+        let targetX = 0, targetY = 0;
+        document.addEventListener('mousemove', (e) => {
+            targetX = (e.clientX / window.innerWidth - 0.5) * 1.5;
+            targetY = (e.clientY / window.innerHeight - 0.5) * 1.5;
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            mesh.rotation.x += 0.0025;
+            mesh.rotation.y += 0.004;
+            mesh.rotation.x += (targetY * 0.4 - mesh.rotation.x) * 0.05;
+            mesh.rotation.y += (targetX * 0.4 - mesh.rotation.y) * 0.05;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>

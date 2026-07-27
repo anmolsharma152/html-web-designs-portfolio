@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma | Architectural</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f4f0; /* Off-white like paper */
+            --line-color: #1a1a1a;
+            --accent-color: #ff14ff; /* International Klein Blue */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--line-color);
+            font-family: 'Space Mono', monospace;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* The Grid System */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            border-top: 1px solid var(--line-color);
+            border-left: 1px solid var(--line-color);
+        }
+
+        .grid-item {
+            border-right: 1px solid var(--line-color);
+            border-bottom: 1px solid var(--line-color);
+            padding: 2rem;
+            position: relative;
+            background: transparent;
+            transition: background 0.3s ease;
+        }
+
+        /* Hover States */
+        .hover-invert {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hover-invert:hover {
+            background-color: var(--line-color);
+            color: var(--bg-color);
+        }
+        
+        .hover-accent:hover {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        /* Marquee */
+        .marquee-wrapper {
+            overflow: hidden;
+            border-bottom: 1px solid var(--line-color);
+            background: var(--line-color);
+            color: var(--bg-color);
+            padding: 0.5rem 0;
+        }
+        .marquee-track {
+            display: flex;
+            gap: 2rem;
+            animation: scroll 20s linear infinite;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Utility */
+        .huge-text {
+            font-size: clamp(3rem, 8vw, 8rem);
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+        }
+        
+        .badge {
+            display: inline-block;
+            border: 1px solid currentColor;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            margin-right: 4px;
+            margin-bottom: 4px;
+        }
+
+        ::selection {
+            background: var(--accent-color);
+            color: white;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- Header Marquee -->
+    <div class="marquee-wrapper">
+        <div class="marquee-track uppercase text-sm tracking-widest">
+            <span>Available for Work ///</span>
+            <span>Full Stack Engineering ///</span>
+            <span>Artificial Intelligence ///</span>
+            <span>Systems Architecture ///</span>
+            <span>Available for Work ///</span>
+            <span>Full Stack Engineering ///</span>
+            <span>Artificial Intelligence ///</span>
+            <span>Systems Architecture ///</span>
+        </div>
+    </div>
+
+    <main class="w-full max-w-[1600px] mx-auto border-r border-l border-b border-[#1a1a1a]">
+        
+        <!-- Hero Section -->
+        <div class="grid-layout">
+            <!-- Name Block -->
+            <div class="col-span-12 lg:col-span-8 grid-item min-h-[60vh] flex flex-col justify-between">
+                <div class="flex justify-between items-start">
+                    <span class="text-xs uppercase tracking-widest">Portfolio 2025</span>
+                    <span class="text-xs uppercase tracking-widest text-[#2b00ff]">● Live</span>
+                </div>
+                
+                <div>
+                    <h1 class="huge-text font-bold mb-4">
+                        ANMOL<br>SHARMA
+                    </h1>
+                    <p class="max-w-md text-sm leading-relaxed mt-8">
+                        Merging <span class="border-b border-black pb-0.5">liberal arts philosophy</span> with rigorous engineering. 
+                        Building human-centered AI systems and robust full-stack architectures.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Sidebar Info -->
+            <div class="col-span-12 lg:col-span-4 grid grid-cols-1">
+                <div class="grid-item border-r-0 flex flex-col justify-center hover-invert">
+                    <h2 class="serif text-2xl mb-2">Role</h2>
+                    <p class="text-sm opacity-70">Independent Creator &<br>Full Stack Engineer</p>
+                </div>
+                <div class="grid-item border-r-0 flex flex-col justify-center hover-invert">
+                    <h2 class="serif text-2xl mb-2">Stack</h2>
+                    <p class="text-sm opacity-70">Python, TypeScript, Rust<br>Next.js, PyTorch, Linux</p>
+                </div>
+                <div class="grid-item border-r-0 flex flex-col justify-center hover-accent cursor-pointer group">
+                    <h2 class="serif text-2xl mb-2 group-hover:italic transition-all">Location</h2>
+                    <p class="text-sm opacity-70">Jaipur, India<br>Remote Compatible</p>
+                    <div class="mt-4 text-xs uppercase tracking-widest group-hover:underline">→ Contact Me</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Title -->
+        <div class="border-b border-black p-8">
+            <h2 class="serif text-4xl">Selected Works (04)</h2>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid-layout border-t-0 border-l-0">
+            
+            <!-- Project 01 -->
+            <a href="#" class="col-span-12 md:col-span-6 grid-item hover-invert group min-h-[400px] flex flex-col justify-between">
+                <div class="flex justify-between w-full">
+                    <span class="text-xs font-bold font-mono">01 / WEB</span>
+                    <span class="text-xs font-bold font-mono opacity-0 group-hover:opacity-100 transition-opacity">VIEW SOURCE ↗</span>
+                </div>
+                
+                <div>
+                    <h3 class="serif text-4xl mb-4 group-hover:translate-x-2 transition-transform duration-300">ProspectiveName</h3>
+                    <p class="text-sm max-w-xs mb-6 opacity-80 leading-relaxed">
+                        A Civic Connect platform. Enabling transparent reporting and tracking of city issues like potholes.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="badge">TypeScript</span>
+                        <span class="badge">React</span>
+                        <span class="badge">Civic Tech</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Project 02 -->
+            <a href="#" class="col-span-12 md:col-span-6 grid-item hover-invert group min-h-[400px] flex flex-col justify-between">
+                <div class="flex justify-between w-full">
+                    <span class="text-xs font-bold font-mono">02 / CONFIG</span>
+                    <span class="text-xs font-bold font-mono opacity-0 group-hover:opacity-100 transition-opacity">VIEW SOURCE ↗</span>
+                </div>
+                
+                <div>
+                    <h3 class="serif text-4xl mb-4 group-hover:translate-x-2 transition-transform duration-300">omarchy-nvim</h3>
+                    <p class="text-sm max-w-xs mb-6 opacity-80 leading-relaxed">
+                        Highly optimized Neovim configuration tailored for full-stack speed and efficiency.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="badge">Lua</span>
+                        <span class="badge">Neovim</span>
+                        <span class="badge">DevTools</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Project 03 -->
+            <a href="#" class="col-span-12 md:col-span-6 grid-item hover-invert group min-h-[400px] flex flex-col justify-between">
+                <div class="flex justify-between w-full">
+                    <span class="text-xs font-bold font-mono">03 / AI</span>
+                    <span class="text-xs font-bold font-mono opacity-0 group-hover:opacity-100 transition-opacity">VIEW SOURCE ↗</span>
+                </div>
+                
+                <div>
+                    <h3 class="serif text-4xl mb-4 group-hover:translate-x-2 transition-transform duration-300">Voice AI</h3>
+                    <p class="text-sm max-w-xs mb-6 opacity-80 leading-relaxed">
+                        Emotion-aware voice interface. Using NLP to detect user sentiment in real-time audio streams.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="badge">Python</span>
+                        <span class="badge">NLP</span>
+                        <span class="badge">PyTorch</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Project 04 -->
+            <a href="#" class="col-span-12 md:col-span-6 grid-item hover-invert group min-h-[400px] flex flex-col justify-between">
+                <div class="flex justify-between w-full">
+                    <span class="text-xs font-bold font-mono">04 / HEALTH</span>
+                    <span class="text-xs font-bold font-mono opacity-0 group-hover:opacity-100 transition-opacity">VIEW SOURCE ↗</span>
+                </div>
+                
+                <div>
+                    <h3 class="serif text-4xl mb-4 group-hover:translate-x-2 transition-transform duration-300">MedPal</h3>
+                    <p class="text-sm max-w-xs mb-6 opacity-80 leading-relaxed">
+                        Healthcare assistance application focusing on patient data management and accessibility.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="badge">Python</span>
+                        <span class="badge">Data</span>
+                        <span class="badge">HealthTech</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Experience Grid -->
+        <div class="grid-layout border-t-0 border-l-0">
+            <div class="col-span-12 md:col-span-4 grid-item bg-[#1a1a1a] text-[#f4f4f0]">
+                <h2 class="serif text-3xl">Experience<br>Log</h2>
+            </div>
+            
+            <div class="col-span-12 md:col-span-8 grid grid-cols-1">
+                <!-- XP Item -->
+                <div class="grid-item border-l-0 border-r-0 flex flex-col md:flex-row gap-4 hover:bg-white transition-colors">
+                    <div class="md:w-32 text-xs font-bold pt-1">2024—NOW</div>
+                    <div>
+                        <h4 class="text-xl font-bold mb-1">Independent Creator</h4>
+                        <p class="text-sm opacity-70 max-w-md">Building ML tools & documenting Linux workflows. Creating minimalist UX strategies.</p>
+                    </div>
+                </div>
+                <!-- XP Item -->
+                <div class="grid-item border-l-0 border-r-0 flex flex-col md:flex-row gap-4 hover:bg-white transition-colors">
+                    <div class="md:w-32 text-xs font-bold pt-1">2023—2024</div>
+                    <div>
+                        <h4 class="text-xl font-bold mb-1">Teleperformance</h4>
+                        <p class="text-sm opacity-70 max-w-md">Technical Support Executive. Managed critical Japanese enterprise clients.</p>
+                    </div>
+                </div>
+                <!-- XP Item -->
+                <div class="grid-item border-l-0 border-r-0 flex flex-col md:flex-row gap-4 hover:bg-white transition-colors">
+                    <div class="md:w-32 text-xs font-bold pt-1">2022—2024</div>
+                    <div>
+                        <h4 class="text-xl font-bold mb-1">Freelance</h4>
+                        <p class="text-sm opacity-70 max-w-md">Developed Python CLI utilities and system architecture solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="grid-layout border-t-0 border-l-0 border-b-0">
+            <a href="mailto:ozymandias.work@gmail.com" class="col-span-12 grid-item min-h-[300px] flex items-center justify-center hover-accent group cursor-pointer border-b-0">
+                <div class="text-center">
+                    <p class="text-sm uppercase tracking-widest mb-4">Start a Project</p>
+                    <h2 class="huge-text group-hover:scale-110 transition-transform duration-500 font-bold">
+                        LET'S TALK
+                    </h2>
+                </div>
+            </a>
+            <div class="col-span-12 flex border-t border-black">
+                <a href="https://github.com/anmolsharma152" target="_blank" class="flex-1 py-4 text-center border-r border-black hover:bg-black hover:text-white transition-colors text-xs uppercase tracking-widest">
+                    GitHub
+                </a>
+                <a href="https://linkedin.com/in/anmolsharma152" target="_blank" class="flex-1 py-4 text-center border-r border-black hover:bg-black hover:text-white transition-colors text-xs uppercase tracking-widest">
+                    LinkedIn
+                </a>
+                <a href="#" class="flex-1 py-4 text-center hover:bg-black hover:text-white transition-colors text-xs uppercase tracking-widest">
+                    Twitter
+                </a>
+            </div>
+        </footer>
+
+    </main>
+
+</body>
+</html>

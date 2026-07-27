@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma [Engineer]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background-color: #F8F9FA;
+            color: #1A1A1A;
+        }
+        
+        .mono {
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        /* Border Grid System */
+        .grid-border {
+            border: 1px solid #E5E7EB;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            border-left: 1px solid #E5E7EB;
+            border-top: 1px solid #E5E7EB;
+        }
+
+        .grid-item {
+            border-right: 1px solid #E5E7EB;
+            border-bottom: 1px solid #E5E7EB;
+            background: #FFFFFF;
+        }
+
+        .tech-pill {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 2px 6px;
+            border: 1px solid #E5E7EB;
+            background: #F9FAFB;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-12 min-h-screen flex flex-col items-center">
+
+    <main class="w-full max-w-6xl">
+        
+        <!-- Header Row -->
+        <div class="grid-container">
+            <div class="grid-item col-span-12 md:col-span-8 p-8 flex flex-col justify-between h-64">
+                <div class="flex justify-between items-start">
+                    <h1 class="text-3xl font-semibold tracking-tight">Anmol Sharma</h1>
+                    <span class="mono text-xs text-gray-400 bg-gray-50 px-2 py-1">ID: #AS-2025</span>
+                </div>
+                <div>
+                    <p class="text-xl md:text-2xl font-light text-gray-600 max-w-lg">
+                        Building <span class="font-normal text-black">human-centered technology</span> with a liberal arts perspective.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="grid-item col-span-12 md:col-span-4 p-8 bg-gray-50 flex flex-col justify-center space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span class="mono text-xs uppercase text-gray-500">Status: Available</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <span class="mono text-xs text-gray-400 uppercase">Role</span>
+                    <span class="font-medium">Full-Stack & AI Engineer</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <span class="mono text-xs text-gray-400 uppercase">Base</span>
+                    <span class="font-medium">Jaipur, India</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tech Stack Row -->
+        <div class="grid-container border-t-0">
+            <div class="grid-item col-span-12 p-4 flex gap-4 overflow-x-auto items-center">
+                <span class="mono text-xs font-bold mr-4">STACK_INIT >></span>
+                <span class="tech-pill">Python</span>
+                <span class="tech-pill">React</span>
+                <span class="tech-pill">Next.js</span>
+                <span class="tech-pill">TensorFlow</span>
+                <span class="tech-pill">PyTorch</span>
+                <span class="tech-pill">Docker</span>
+                <span class="tech-pill">AWS</span>
+                <span class="tech-pill">Neovim</span>
+            </div>
+        </div>
+
+        <!-- Projects Row -->
+        <div class="grid-container border-t-0">
+            
+            <!-- Project 1 -->
+            <div class="grid-item col-span-12 md:col-span-4 p-8 hover:bg-gray-50 transition-colors group">
+                <div class="flex justify-between items-start mb-12">
+                    <span class="mono text-xs text-gray-400">01</span>
+                    <svg class="w-5 h-5 text-gray-300 group-hover:text-black transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </div>
+                <h3 class="font-medium text-lg mb-2">ProspectiveName</h3>
+                <p class="text-sm text-gray-500 mb-6 leading-relaxed">Civic Connect platform for transparent city issue resolution and tracking.</p>
+                <div class="flex gap-2">
+                    <span class="mono text-xs text-blue-600">TypeScript</span>
+                    <span class="mono text-xs text-blue-600">React</span>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="grid-item col-span-12 md:col-span-4 p-8 hover:bg-gray-50 transition-colors group">
+                <div class="flex justify-between items-start mb-12">
+                    <span class="mono text-xs text-gray-400">02</span>
+                    <svg class="w-5 h-5 text-gray-300 group-hover:text-black transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </div>
+                <h3 class="font-medium text-lg mb-2">omarchy-nvim</h3>
+                <p class="text-sm text-gray-500 mb-6 leading-relaxed">Customized LazyVim configuration optimized for full-stack developer speed.</p>
+                <div class="flex gap-2">
+                    <span class="mono text-xs text-purple-600">Lua</span>
+                    <span class="mono text-xs text-purple-600">Neovim</span>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="grid-item col-span-12 md:col-span-4 p-8 hover:bg-gray-50 transition-colors group">
+                <div class="flex justify-between items-start mb-12">
+                    <span class="mono text-xs text-gray-400">03</span>
+                    <svg class="w-5 h-5 text-gray-300 group-hover:text-black transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </div>
+                <h3 class="font-medium text-lg mb-2">Emotion Voice AI</h3>
+                <p class="text-sm text-gray-500 mb-6 leading-relaxed">NLP tool focused on emotion-aware voice interfaces and minimalist UX.</p>
+                <div class="flex gap-2">
+                    <span class="mono text-xs text-green-600">Python</span>
+                    <span class="mono text-xs text-green-600">NLP</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experience Row -->
+        <div class="grid-container border-t-0">
+            <div class="grid-item col-span-12 md:col-span-3 p-8 bg-gray-50">
+                <h2 class="mono text-xs font-bold uppercase tracking-widest">Experience_Log</h2>
+            </div>
+            <div class="grid-item col-span-12 md:col-span-9 p-8">
+                <div class="space-y-8">
+                    <div class="flex flex-col md:flex-row md:items-baseline">
+                        <span class="mono text-xs text-gray-400 w-32">2024-PRES</span>
+                        <div>
+                            <h4 class="font-medium">Independent Creator</h4>
+                            <p class="text-sm text-gray-500 mt-1">Building ML/NLP tools & documenting Linux workflows.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-baseline">
+                        <span class="mono text-xs text-gray-400 w-32">2023-2024</span>
+                        <div>
+                            <h4 class="font-medium">Technical Support @ Teleperformance</h4>
+                            <p class="text-sm text-gray-500 mt-1">Resolved complex technical issues for Japanese clients.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-baseline">
+                        <span class="mono text-xs text-gray-400 w-32">2022-2024</span>
+                        <div>
+                            <h4 class="font-medium">Freelance Developer</h4>
+                            <p class="text-sm text-gray-500 mt-1">Python CLI utilities and Linux system mentorship.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Row -->
+        <div class="grid-container border-t-0">
+            <div class="grid-item col-span-12 p-8 flex flex-col md:flex-row justify-between items-center bg-black text-white">
+                <div class="mb-4 md:mb-0">
+                    <h2 class="text-xl font-medium">Ready to collaborate?</h2>
+                    <p class="text-gray-400 text-sm mt-1">ozymandias.work@gmail.com</p>
+                </div>
+                <div class="flex gap-6">
+                    <a href="https://github.com/anmolsharma152" class="mono text-xs hover:text-gray-300">GITHUB</a>
+                    <a href="https://linkedin.com/in/anmolsharma152" class="mono text-xs hover:text-gray-300">LINKEDIN</a>
+                    <a href="#" class="mono text-xs hover:text-gray-300">TWITTER</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</body>
+</html>

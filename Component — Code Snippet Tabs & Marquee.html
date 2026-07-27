@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Pattern — Code Snippet Tabs & Marquee</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #09090b;
+            color: #fafafa;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        /* MARQUEE STYLING */
+        .marquee-wrapper {
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            overflow: hidden;
+            border-top: 1px solid #27272a;
+            border-bottom: 1px solid #27272a;
+            padding: 18px 0;
+            margin-bottom: 40px;
+        }
+        .marquee-content {
+            display: flex;
+            gap: 40px;
+            animation: marqueeScroll 20s linear infinite;
+            white-space: nowrap;
+            font-weight: 700;
+            color: #a1a1aa;
+        }
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* CODE DRAWER STYLING */
+        .code-box {
+            background: #18181b;
+            border: 1px solid #27272a;
+            border-radius: 16px;
+            padding: 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88rem;
+            color: #38bdf8;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 style="margin-bottom: 20px;">Code Snippet Drawer & Infinite Marquee</h2>
+
+        <!-- INFINITE MARQUEE -->
+        <div class="marquee-wrapper">
+            <div class="marquee-content">
+                <span>LANGGRAPH</span> • <span>PGVECTOR</span> • <span>RUST WASM</span> • <span>FASTAPI</span> • <span>TAURI</span> •
+                <span>LANGGRAPH</span> • <span>PGVECTOR</span> • <span>RUST WASM</span> • <span>FASTAPI</span> • <span>TAURI</span> •
+            </div>
+        </div>
+
+        <!-- CODE DRAWER -->
+        <div class="code-box">
+            <pre><code>// vad_processor: Client-side Rust WebAssembly VAD Binding
+#[wasm_bindgen]
+pub struct VadProcessor {
+    session: ort::Session,
+}
+
+#[wasm_bindgen]
+impl VadProcessor {
+    pub fn is_speech(&mut self, pcm_chunk: &[f32]) -> Result<bool, JsValue> {
+        let prob = self.run_onnx_inference(pcm_chunk)?;
+        Ok(prob > 0.5)
+    }
+}</code></pre>
+        </div>
+
+    </div>
+
+</body>
+</html>

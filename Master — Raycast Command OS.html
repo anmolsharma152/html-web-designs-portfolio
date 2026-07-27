@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma — Raycast Command OS Studio</title>
+    <meta name="description" content="Raycast Command OS inspired developer portfolio for Anmol Sharma. Features command dock navigation, tactical telemetry widgets, and real project launchpads.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-raycast: #0c0d10;
+            --surface-raycast: #16181d;
+            --surface-active: #22252e;
+            --border-raycast: #2a2e39;
+            --accent-red: #ff6363;
+            --accent-orange: #ff9f43;
+            --accent-cyan: #00d2d3;
+            --text-heading: #f8fafc;
+            --text-body: #94a3b8;
+            --font-head: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-raycast);
+            color: var(--text-body);
+            font-family: var(--font-head);
+            overflow-x: hidden;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .app-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px 120px 24px;
+        }
+
+        /* ── RAYCAST COMMAND DOCK BAR ───────────────────── */
+        .raycast-dock {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(22, 24, 29, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--border-raycast);
+            border-radius: 9999px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 15px rgba(255, 99, 99, 0.15);
+            z-index: 9999;
+        }
+        .dock-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: transparent;
+            border-radius: 9999px;
+            color: var(--text-body);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .dock-item:hover, .dock-item.active {
+            background: var(--surface-active);
+            color: var(--text-heading);
+        }
+        .kbd-pill {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--accent-orange);
+        }
+
+        /* ── HERO SECTION ───────────────────────────────── */
+        .hero-banner {
+            background: var(--surface-raycast);
+            border: 1px solid var(--border-raycast);
+            border-radius: 28px;
+            padding: 48px;
+            margin-bottom: 40px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .status-dot {
+            display: inline-block;
+            width: 8px; height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            margin-right: 8px;
+            box-shadow: 0 0 10px #10b981;
+        }
+
+        .title-huge {
+            font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+            font-weight: 800;
+            color: var(--text-heading);
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+        }
+        .title-huge span {
+            background: linear-gradient(135deg, #ff6363, #ff9f43);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ── PROJECT LAUNCHPADS GRID ────────────────────── */
+        .launchpad-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+        .launchpad-card {
+            background: var(--surface-raycast);
+            border: 1px solid var(--border-raycast);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.2s ease;
+        }
+        .launchpad-card:hover {
+            border-color: var(--accent-red);
+            transform: translateY(-3px);
+            background: var(--surface-active);
+        }
+
+        @media (max-width: 850px) {
+            .hero-banner { grid-template-columns: 1fr; }
+            .raycast-dock { width: 90%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+
+        <!-- HERO BANNER -->
+        <section class="hero-banner">
+            <div>
+                <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-orange); margin-bottom: 16px;">
+                    <span class="status-dot"></span>RAYCAST COMMAND OS // SSLA & IIT MANDI CCE
+                </div>
+                <h1 class="title-huge">Command-First <span>AI Systems Studio</span></h1>
+                <p style="color: var(--text-body); font-size: 1.05rem; margin-bottom: 28px;">
+                    Engineering production-grade agentic platforms (`Disha`, `CodexEngine`), client-side Rust/WASM VAD (`vad_processor`), and edge Linux biometrics (`Aura`).
+                </p>
+                <div style="display: flex; gap: 12px;">
+                    <a href="#launchpad" class="dock-item active" style="background: var(--accent-red); color: #fff;">Explore Launchpads →</a>
+                </div>
+            </div>
+
+            <div style="background: #0c0d10; border: 1px solid var(--border-raycast); border-radius: 20px; padding: 28px; font-family: var(--font-mono); font-size: 0.85rem;">
+                <div style="color: var(--accent-cyan); margin-bottom: 12px;">// SYSTEM STATUS TELEMETRY</div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px; color: var(--text-heading);">
+                    <span>Disha Engine:</span> <span style="color: #10b981;">ONLINE [99.9%]</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px; color: var(--text-heading);">
+                    <span>VAD Latency:</span> <span style="color: var(--accent-orange);">&lt; 150ms</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; color: var(--text-heading);">
+                    <span>Aura Daemon:</span> <span style="color: #10b981;">PAM ACTIVE</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECT LAUNCHPADS -->
+        <section id="launchpad">
+            <h2 style="font-size: 2rem; font-weight: 800; color: var(--text-heading); margin-bottom: 24px;">Project Launchpads</h2>
+            
+            <div class="launchpad-grid">
+                
+                <article class="launchpad-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-red);">01 // DISHA PLATFORM</span>
+                        <span class="kbd-pill">⌘ 1</span>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 10px;">Personal Intelligence</h3>
+                    <p style="color: var(--text-body); font-size: 0.95rem;">Production-grade agentic Personal Intelligence platform powered by LangGraph, pgvector, and async PostgreSQL memory management.</p>
+                </article>
+
+                <article class="launchpad-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-orange);">02 // CODEXENGINE</span>
+                        <span class="kbd-pill">⌘ 2</span>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 10px;">Agentic RAG Engine</h3>
+                    <p style="color: var(--text-body); font-size: 0.95rem;">Agentic RAG engine featuring hybrid search, pgvector index, LangGraph orchestration, and async FastAPI backend.</p>
+                </article>
+
+                <article class="launchpad-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan);">03 // VAD PROCESSOR</span>
+                        <span class="kbd-pill">⌘ 3</span>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 10px;">Rust / WASM VAD</h3>
+                    <p style="color: var(--text-body); font-size: 0.95rem;">Real-time, client-side Voice Activity Detection (VAD) built with Rust, WebAssembly, and ONNX Runtime for low-latency audio.</p>
+                </article>
+
+                <article class="launchpad-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: #10b981;">04 // AURA DAEMON</span>
+                        <span class="kbd-pill">⌘ 4</span>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 10px;">Edge Linux Biometrics</h3>
+                    <p style="color: var(--text-body); font-size: 0.95rem;">Privacy-focused Arch Linux biometric authentication daemon decoupled via Unix domain sockets and PAM integration.</p>
+                </article>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- RAYCAST FLOATING DOCK BAR -->
+    <nav class="raycast-dock">
+        <a href="#launchpad" class="dock-item active">🚀 Launchpads <span class="kbd-pill">⌘L</span></a>
+        <a href="https://github.com/anmolsharma152" target="_blank" class="dock-item">🐙 GitHub <span class="kbd-pill">⌘G</span></a>
+        <a href="mailto:anmolsharma152@gmail.com" class="dock-item">📧 Contact <span class="kbd-pill">⌘C</span></a>
+    </nav>
+
+</body>
+</html>

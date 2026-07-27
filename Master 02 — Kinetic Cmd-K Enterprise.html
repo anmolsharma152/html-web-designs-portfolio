@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma — Enterprise AI Architect [Cmd+K Enabled]</title>
+    <meta name="description" content="Enterprise AI Systems Architect. Features Pristine Light Mode, Cmd+K Command Palette, live GitHub API fetching, and dynamic title typing.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        :root {
+            --bg-body: #ffffff;
+            --surface-card: #ffffff;
+            --border-card: #e2e8f0;
+            --accent-blue: #2563eb;
+            --accent-indigo: #4f46e5;
+            --text-heading: #0f172a;
+            --text-body: #334155;
+            --text-muted: #64748b;
+            --font-head: 'Plus Jakarta Sans', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 20px 25px -5px rgba(0, 0, 0, 0.02);
+            --shadow-hover: 0 10px 15px -3px rgba(37, 99, 235, 0.08), 0 25px 30px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-body);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ── BACKGROUND GRID DOT PATTERN ─────────────────── */
+        .bg-dots {
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(#cbd5e1 1.2px, transparent 1.2px);
+            background-size: 28px 28px;
+            opacity: 0.45;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ── THREE.JS SPHERE BACKGROUND ─────────────────── */
+        #three-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.35;
+        }
+
+        /* ── CONTAINER ──────────────────────────────────── */
+        .app-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── NAVBAR ─────────────────────────────────────── */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 32px;
+            margin-top: 16px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-card);
+            border-radius: 9999px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 16px;
+            z-index: 100;
+        }
+        .nav-logo {
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: var(--text-heading);
+        }
+
+        /* CMD + K TRIGGER BUTTON */
+        .cmdk-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            background: #f1f5f9;
+            border: 1px solid var(--border-card);
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .cmdk-trigger:hover {
+            border-color: var(--accent-blue);
+            color: var(--text-heading);
+        }
+        .kbd-badge {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        /* ── HERO SECTION ───────────────────────────────── */
+        .hero {
+            padding: 90px 0 70px 0;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(37, 99, 235, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 9999px;
+            color: var(--accent-blue);
+            font-weight: 700;
+            font-size: 0.82rem;
+            margin-bottom: 24px;
+        }
+        .hero-title {
+            font-family: var(--font-head);
+            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -1.5px;
+            color: var(--text-heading);
+            margin-bottom: 16px;
+        }
+        .hero-typing {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            height: 40px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .typing-cursor {
+            display: inline-block;
+            width: 3px; height: 1.1em;
+            background: var(--accent-blue);
+            margin-left: 6px;
+            animation: blink 0.8s infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .btn-enterprise {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 30px;
+            background: var(--accent-blue);
+            color: #ffffff;
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: 12px;
+            text-decoration: none;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
+            transition: all 0.2s ease;
+        }
+        .btn-enterprise:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        /* ── GITHUB REPOS GRID ───────────────────────────── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 28px;
+            margin-bottom: 100px;
+        }
+        .repo-card {
+            background: #ffffff;
+            border: 1px solid var(--border-card);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+        .repo-card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+        }
+
+        /* ── CMD + K MODAL DIALOG ────────────────────────── */
+        .cmdk-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 100px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+        .cmdk-modal-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .cmdk-dialog {
+            background: #ffffff;
+            border: 1px solid var(--border-card);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            transform: scale(0.95);
+            transition: transform 0.2s ease;
+        }
+        .cmdk-modal-backdrop.open .cmdk-dialog {
+            transform: scale(1);
+        }
+
+        .cmdk-input-box {
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--border-card);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .cmdk-input {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-family: var(--font-head);
+            font-size: 1.1rem;
+            color: var(--text-heading);
+        }
+
+        .cmdk-list {
+            max-height: 320px;
+            overflow-y: auto;
+            padding: 12px;
+            list-style: none;
+        }
+        .cmdk-item {
+            padding: 12px 16px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-heading);
+            transition: background 0.15s;
+        }
+        .cmdk-item:hover {
+            background: #f1f5f9;
+            color: var(--accent-blue);
+        }
+
+        @media (max-width: 800px) {
+            .hero { grid-template-columns: 1fr; }
+            .navbar { flex-direction: column; gap: 16px; border-radius: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-dots"></div>
+    <div id="three-canvas"></div>
+
+    <div class="app-container">
+
+        <!-- NAVBAR WITH CMD+K TRIGGER -->
+        <nav class="navbar">
+            <div class="nav-logo">Anmol Sharma</div>
+            <button class="cmdk-trigger" id="open-cmdk">
+                <span>Search / Commands</span>
+                <span class="kbd-badge">⌘K</span>
+            </button>
+        </nav>
+
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div>
+                <div class="hero-badge">⚡ Enterprise AI Architect // SSLA & IIT Mandi CCE</div>
+                <h1 class="hero-title">Engineering Autonomous AI & Voice Infrastructure</h1>
+                
+                <div class="hero-typing">
+                    <span id="typing-text"></span><span class="typing-cursor"></span>
+                </div>
+
+                <p style="color: var(--text-body); font-size: 1.1rem; margin-bottom: 30px;">
+                    Specializing in production-grade agentic platforms (`Disha`, `CodexEngine`), client-side Rust/WASM VAD (`vad_processor`), and edge Linux biometrics (`Aura`).
+                </p>
+
+                <button class="btn-enterprise" id="open-cmdk-btn">Launch Command Palette ⌘K</button>
+            </div>
+
+            <div style="background: #ffffff; border: 1px solid var(--border-card); border-radius: 24px; padding: 32px; box-shadow: var(--shadow-card);">
+                <div style="font-family: var(--font-head); font-weight: 800; font-size: 1.1rem; margin-bottom: 20px; color: var(--text-heading);">Live System Telemetry</div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; margin-bottom: 12px;">
+                    <span>Disha Platform</span>
+                    <strong style="color: var(--accent-blue);">LangGraph + pgvector</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; margin-bottom: 12px;">
+                    <span>vad_processor</span>
+                    <strong style="color: var(--accent-blue);">Rust / WASM / ONNX</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span>Aura Daemon</span>
+                    <strong style="color: var(--accent-blue);">Arch Linux PAM</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- LIVE GITHUB REPOSITORIES -->
+        <section id="projects">
+            <h2 style="font-family: var(--font-head); font-size: 2.2rem; font-weight: 800; color: var(--text-heading); margin-bottom: 8px;">Live GitHub Repositories</h2>
+            <p style="color: var(--text-muted); margin-bottom: 36px;">Fetched live from <a href="https://github.com/anmolsharma152" target="_blank" style="color: var(--accent-blue); font-weight: 700;">@anmolsharma152</a>.</p>
+
+            <div class="projects-grid" id="github-grid">
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">Fetching GitHub API data...</div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- CMD + K MODAL DIALOG -->
+    <div class="cmdk-modal-backdrop" id="cmdk-backdrop">
+        <div class="cmdk-dialog">
+            <div class="cmdk-input-box">
+                🔍 <input type="text" class="cmdk-input" id="cmdk-search" placeholder="Type a command or search repos..." autofocus>
+            </div>
+            <ul class="cmdk-list" id="cmdk-list">
+                <li class="cmdk-item" onclick="location.href='#projects'; closeCmdK();">
+                    <span>🚀 View Live GitHub Repos</span>
+                    <span class="kbd-badge">Jump</span>
+                </li>
+                <li class="cmdk-item" onclick="window.open('https://github.com/anmolsharma152/Disha', '_blank'); closeCmdK();">
+                    <span>🧠 Disha — Agentic Personal Intelligence</span>
+                    <span class="kbd-badge">GitHub</span>
+                </li>
+                <li class="cmdk-item" onclick="window.open('https://github.com/anmolsharma152/CodexEngine', '_blank'); closeCmdK();">
+                    <span>⚡ CodexEngine — Agentic RAG Engine</span>
+                    <span class="kbd-badge">GitHub</span>
+                </li>
+                <li class="cmdk-item" onclick="window.open('https://github.com/anmolsharma152/vad_processor', '_blank'); closeCmdK();">
+                    <span>🎤 vad_processor — Rust / WASM VAD</span>
+                    <span class="kbd-badge">GitHub</span>
+                </li>
+                <li class="cmdk-item" onclick="window.open('mailto:anmolsharma152@gmail.com'); closeCmdK();">
+                    <span>📧 Email Anmol Sharma</span>
+                    <span class="kbd-badge">Mail</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SCRIPTS: TYPING + THREE.JS + CMD+K + GITHUB API -->
+    <script>
+        // Typing Loop
+        const titles = ['AI Engineer', 'Systems Developer', 'Generative AI Specialist', 'ML Systems Architect'];
+        let tIdx = 0, cIdx = 0, isDel = false;
+        const typeEl = document.getElementById('typing-text');
+        function loop() {
+            const cur = titles[tIdx];
+            typeEl.textContent = isDel ? cur.substring(0, cIdx - 1) : cur.substring(0, cIdx + 1);
+            cIdx += isDel ? -1 : 1;
+            let spd = isDel ? 30 : 60;
+            if (!isDel && cIdx === cur.length) { spd = 1400; isDel = true; }
+            else if (isDel && cIdx === 0) { isDel = false; tIdx = (tIdx + 1) % titles.length; spd = 400; }
+            setTimeout(loop, spd);
+        }
+        loop();
+
+        // Cmd+K Modal Listeners
+        const backdrop = document.getElementById('cmdk-backdrop');
+        function openCmdK() { backdrop.classList.add('open'); document.getElementById('cmdk-search').focus(); }
+        function closeCmdK() { backdrop.classList.remove('open'); }
+
+        document.getElementById('open-cmdk').addEventListener('click', openCmdK);
+        document.getElementById('open-cmdk-btn').addEventListener('click', openCmdK);
+        backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeCmdK(); });
+
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openCmdK(); }
+            if (e.key === 'Escape') closeCmdK();
+        });
+
+        // Three.js Background Canvas
+        const container = document.getElementById('three-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 4.8;
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+        const mesh = new THREE.Mesh(new THREE.IcosahedronGeometry(2.4, 2), new THREE.MeshBasicMaterial({ color: 0x2563eb, wireframe: true, transparent: true, opacity: 0.2 }));
+        scene.add(mesh);
+        function anim() {
+            requestAnimationFrame(anim);
+            mesh.rotation.x += 0.002; mesh.rotation.y += 0.003;
+            renderer.render(scene, camera);
+        }
+        anim();
+
+        // GitHub Live Repos Fetch
+        const REPO_MAP = {
+            Disha: 'Agentic Personal Intelligence platform powered by LangGraph, pgvector, and async PostgreSQL.',
+            CodexEngine: 'Agentic RAG engine with hybrid search, pgvector, LangGraph, and async FastAPI.',
+            vad_processor: 'Real-time client-side Voice Activity Detection (VAD) built with Rust, WebAssembly, and ONNX Runtime.',
+            Aura: 'Arch Linux biometric auth daemon decoupled via Unix domain sockets and PAM.'
+        };
+        async function fetchRepos() {
+            const grid = document.getElementById('github-grid');
+            try {
+                const res = await fetch('https://api.github.com/users/anmolsharma152/repos?sort=updated&per_page=50');
+                const data = await res.json();
+                const filtered = data.filter(r => !r.fork && !['anmolsharma152', 'nextjs-portfolio'].includes(r.name.toLowerCase())).slice(0, 6);
+                grid.innerHTML = '';
+                filtered.forEach(repo => {
+                    const card = document.createElement('div');
+                    card.className = 'repo-card';
+                    card.innerHTML = `
+                        <div>
+                            <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 1.2rem; color: var(--text-heading); margin-bottom: 10px;">
+                                ${repo.name}
+                                <span style="font-size: 0.75rem; background: #f1f5f9; padding: 2px 8px; border-radius: 99px;">${repo.language || 'Python'}</span>
+                            </div>
+                            <p style="color: var(--text-body); font-size: 0.9rem; margin-bottom: 20px;">${REPO_MAP[repo.name] || repo.description || 'Production machine learning system.'}</p>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid #f1f5f9; padding-top: 14px;">
+                            <span>⭐ ${repo.stargazers_count} stars &nbsp;•&nbsp; 🍴 ${repo.forks_count} forks</span>
+                            <a href="${repo.html_url}" target="_blank" style="color: var(--accent-blue); font-weight: 700; text-decoration: none;">GitHub ↗</a>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            } catch (e) {
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 30px; color: #ef4444;">Unable to fetch GitHub API.</div>';
+            }
+        }
+        fetchRepos();
+    </script>
+</body>
+</html>

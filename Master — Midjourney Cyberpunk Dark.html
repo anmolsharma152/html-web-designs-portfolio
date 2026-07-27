@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma — Midjourney Cyberpunk AI Studio</title>
+    <meta name="description" content="Midjourney Sci-Fi Cyberpunk portfolio for Anmol Sharma. Features interactive particle canvas physics, neon glow cards, and high-contrast badges.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-cyber: #030509;
+            --surface-cyber: #090d16;
+            --border-cyber: #1e293b;
+            --accent-gold: #f59e0b;
+            --accent-cyan: #06b6d4;
+            --accent-neon: #10b981;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --font-head: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-cyber);
+            color: var(--text-main);
+            font-family: var(--font-head);
+            overflow-x: hidden;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        #particle-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .app-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px 100px 24px;
+        }
+
+        .cyber-card {
+            background: var(--surface-cyber);
+            border: 1px solid var(--border-cyber);
+            border-radius: 24px;
+            padding: 36px;
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.08);
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+        }
+        .cyber-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 40px rgba(6, 182, 212, 0.25);
+        }
+
+        .badge-gold {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 9999px;
+            color: var(--accent-gold);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="particle-canvas"></canvas>
+
+    <div class="app-container">
+
+        <header style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0; margin-bottom: 60px;">
+            <div style="font-size: 1.4rem; font-weight: 900; letter-spacing: -1px;">ANMOL SHARMA // STUDIO</div>
+            <div class="badge-gold">AI SYSTEMS ARCHITECT</div>
+        </header>
+
+        <section style="margin-bottom: 60px;">
+            <h1 style="font-size: clamp(2.8rem, 6vw, 4.8rem); font-weight: 900; line-height: 1.05; letter-spacing: -1.5px; margin-bottom: 20px;">
+                NEURAL <span style="color: var(--accent-cyan);">AGENTIC</span> PIPELINES
+            </h1>
+            <p style="font-size: 1.2rem; color: var(--text-dim); max-width: 680px;">
+                Engineering production-grade agentic platforms, sub-150ms audio pipelines, and edge Linux authentication daemons.
+            </p>
+        </section>
+
+        <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
+            
+            <article class="cyber-card">
+                <div class="badge-gold" style="margin-bottom: 12px;">01 // DISHA</div>
+                <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 10px;">Personal Intelligence</h3>
+                <p style="color: var(--text-dim); font-size: 0.95rem;">LangGraph, pgvector, and async PostgreSQL memory state management.</p>
+            </article>
+
+            <article class="cyber-card">
+                <div class="badge-gold" style="margin-bottom: 12px;">02 // VAD PROCESSOR</div>
+                <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 10px;">Rust / WASM VAD</h3>
+                <p style="color: var(--text-dim); font-size: 0.95rem;">Real-time, client-side Voice Activity Detection with ONNX Runtime inference.</p>
+            </article>
+
+        </section>
+
+    </div>
+
+    <!-- CANVAS PARTICLE TRAIL SCRIPT -->
+    <script>
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize);
+        resize();
+
+        window.addEventListener('mousemove', (e) => {
+            for (let i = 0; i < 3; i++) {
+                particles.push({
+                    x: e.clientX,
+                    y: e.clientY,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2,
+                    radius: Math.random() * 3 + 1,
+                    alpha: 1
+                });
+            }
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, idx) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha -= 0.02;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(6, 182, 212, ${p.alpha})`;
+                ctx.fill();
+                if (p.alpha <= 0) particles.splice(idx, 1);
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>

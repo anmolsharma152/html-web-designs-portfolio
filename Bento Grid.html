@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F3F4F6;
+            color: #111827;
+        }
+        
+        .bento-card {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            height: 100%;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+        
+        .bento-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.01);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Tech Stack Marquee */
+        .marquee-container { mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+        .marquee-content { animation: scroll 20s linear infinite; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    </style>
+</head>
+<body class="p-4 md:p-8 min-h-screen flex items-center justify-center">
+
+    <div class="max-w-6xl w-full mx-auto grid grid-cols-1 md:grid-cols-4 grid-rows-auto md:grid-rows-4 gap-4 md:gap-6">
+        
+        <!-- 1. Hero Card (Span 2x2) -->
+        <div class="bento-card md:col-span-2 md:row-span-2 flex flex-col justify-between">
+            <div>
+                <div class="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold mb-6">
+                    <span class="w-2 h-2 rounded-full bg-blue-500 mr-2 animate-pulse"></span>
+                    Available for work
+                </div>
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+                    Hi, I'm <br><span class="gradient-text">Anmol Sharma</span>.
+                </h1>
+                <p class="text-gray-500 text-lg leading-relaxed">
+                    Full-Stack & AI Engineer. I build human-centered technology with a liberal arts perspective.
+                </p>
+            </div>
+            <div class="mt-8 flex gap-3">
+                <a href="mailto:ozymandias.work@gmail.com" class="bg-gray-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-black transition-colors">Contact Me</a>
+                <a href="#projects" class="bg-gray-100 text-gray-900 px-6 py-3 rounded-xl font-bold hover:bg-gray-200 transition-colors">Work</a>
+            </div>
+        </div>
+
+        <!-- 2. Location Card -->
+        <div class="bento-card md:col-span-1 md:row-span-1 bg-gray-900 text-white flex flex-col justify-center items-center text-center relative overflow-hidden group">
+            <!-- Simulated Map Background -->
+            <div class="absolute inset-0 opacity-20 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/World_map_blank_without_borders.svg/2000px-World_map_blank_without_borders.svg.png')] bg-cover bg-center group-hover:scale-110 transition-transform duration-700"></div>
+            <div class="relative z-10">
+                <div class="text-3xl mb-2">📍</div>
+                <h3 class="font-bold text-lg">Jaipur, India</h3>
+                <p class="text-gray-400 text-xs">Local Time: <span id="clock">12:00</span></p>
+            </div>
+        </div>
+
+        <!-- 3. Socials Card (GitHub) -->
+        <a href="https://github.com/anmolsharma152" target="_blank" class="bento-card md:col-span-1 md:row-span-1 bg-gray-100 flex flex-col justify-center items-center hover:bg-white border-2 border-transparent hover:border-gray-200">
+            <svg class="w-10 h-10 mb-2" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.11.82-.257.82-.572 0-.28-.01-1.017-.014-2.002-3.337.724-4.04-1.608-4.04-1.608-.546-1.385-1.334-1.75-1.334-1.75-1.087-.745.082-.73.082-.73 1.205.085 1.838 1.24 1.838 1.24 1.07 1.833 2.81 1.304 3.49.997.108-.775.42-1.304.762-1.604-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.467-2.383 1.235-3.22-.12-.3-.535-1.52.117-3.176 0 0 1.008-.322 3.301 1.233.957-.266 1.983-.4 3.003-.404 1.02.004 2.046.138 3.003.404 2.293-1.555 3.3-1.233 3.3-1.233.652 1.656.237 2.876.117 3.176.77.837 1.233 1.91 1.233 3.22 0 4.61-2.805 5.626-5.477 5.92-.42.36-.803 1.094-.803 2.21 0 1.603-.014 2.894-.014 3.284 0 .317.218.687.825.57A12 12 0 0024 12C24 5.373 18.627 0 12 0z"/></svg>
+            <span class="font-bold">GitHub</span>
+            <span class="text-xs text-gray-500">Check my code</span>
+        </a>
+
+        <!-- 4. Tech Stack Marquee (Span 2 cols) -->
+        <div class="bento-card md:col-span-2 md:row-span-1 flex items-center overflow-hidden">
+            <div class="marquee-container w-full overflow-hidden whitespace-nowrap">
+                <div class="marquee-content inline-flex items-center space-x-8 font-bold text-gray-400 text-xl uppercase">
+                    <span>Python</span> <span>React</span> <span>Next.js</span> <span>TensorFlow</span> <span>Linux</span> <span>Docker</span> <span>Neovim</span> <span>AWS</span>
+                    <span>Python</span> <span>React</span> <span>Next.js</span> <span>TensorFlow</span> <span>Linux</span> <span>Docker</span> <span>Neovim</span> <span>AWS</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Featured Project A (Span 2 cols) -->
+        <div class="bento-card md:col-span-2 md:row-span-2 bg-gradient-to-br from-indigo-500 to-purple-600 text-white p-0 overflow-hidden relative group">
+            <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors"></div>
+            <div class="p-8 h-full flex flex-col justify-between relative z-10">
+                <div>
+                    <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Featured</span>
+                    <h3 class="text-3xl font-bold mt-4">ProspectiveName</h3>
+                    <p class="text-indigo-100 mt-2 max-w-sm">Civic Connect web application for transparent city issue tracking.</p>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex gap-2">
+                         <span class="text-xs font-bold opacity-75">React</span>
+                         <span class="text-xs font-bold opacity-75">TypeScript</span>
+                    </div>
+                    <span class="bg-white text-indigo-600 p-3 rounded-full hover:scale-110 transition-transform cursor-pointer">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Project B -->
+        <div class="bento-card md:col-span-1 md:row-span-1 flex flex-col justify-between">
+            <div class="w-10 h-10 rounded-lg bg-green-100 text-green-600 flex items-center justify-center mb-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+            </div>
+            <div>
+                <h3 class="font-bold text-lg">omarchy-nvim</h3>
+                <p class="text-gray-500 text-xs mt-1">Blazing fast Neovim config.</p>
+            </div>
+        </div>
+
+        <!-- 7. Project C -->
+        <div class="bento-card md:col-span-1 md:row-span-1 flex flex-col justify-between">
+            <div class="w-10 h-10 rounded-lg bg-yellow-100 text-yellow-600 flex items-center justify-center mb-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+            </div>
+            <div>
+                <h3 class="font-bold text-lg">Voice AI</h3>
+                <p class="text-gray-500 text-xs mt-1">Emotion-aware assistant.</p>
+            </div>
+        </div>
+
+        <!-- 8. Experience/Bio (Span 4 cols - bottom bar) -->
+        <div class="bento-card md:col-span-4 md:row-span-1 flex flex-col md:flex-row items-center justify-between">
+            <div class="flex items-center gap-4 mb-4 md:mb-0">
+                <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-500">AS</div>
+                <div>
+                    <h4 class="font-bold">Independent Creator</h4>
+                    <p class="text-xs text-gray-500">Formerly Teleperformance & Freelance</p>
+                </div>
+            </div>
+            <div class="flex gap-4 text-sm font-bold text-gray-500">
+                <span>Machine Learning</span>
+                <span>•</span>
+                <span>Data Science</span>
+                <span>•</span>
+                <span>DevOps</span>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Simple Clock
+        function updateClock() {
+            const now = new Date();
+            const options = { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' };
+            document.getElementById('clock').innerText = now.toLocaleTimeString('en-US', options);
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>

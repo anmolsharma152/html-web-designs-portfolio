@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma — AI Engineer & Systems Developer</title>
+    <meta name="description" content="Personal Portfolio of Anmol Sharma. AI Engineer & Systems Developer specializing in Generative AI, agentic systems, low-latency ML pipelines, and edge AI. IIT Mandi DSAI.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --surface-card: rgba(18, 24, 38, 0.7);
+            --surface-hover: rgba(26, 34, 53, 0.85);
+            --border-card: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(99, 102, 241, 0.4);
+            --accent-primary: #6366f1; /* Indigo */
+            --accent-purple: #a855f7;  /* Purple */
+            --accent-emerald: #10b981; /* Emerald */
+            --accent-amber: #f59e0b;   /* Amber */
+            --text-primary: #f8fafc;
+            --text-muted: #94a3b8;
+            --font-head: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ── THREE.JS 3D ROTATING SPHERE CANVAS ──────────── */
+        #three-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.55;
+        }
+
+        /* ── TOP SCROLL PROGRESS BAR ────────────────────── */
+        .scroll-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-purple));
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+        }
+
+        /* ── MAIN LAYOUT CONTAINER ──────────────────────── */
+        .app-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── NAVIGATION BAR ─────────────────────────────── */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border-card);
+            backdrop-filter: blur(10px);
+        }
+        .nav-logo {
+            font-family: var(--font-head);
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+        .nav-menu a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-menu a:hover { color: #fff; }
+
+        /* ── HERO SECTION ───────────────────────────────── */
+        .hero {
+            padding: 100px 0 80px 0;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 9999px;
+            color: var(--accent-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            width: fit-content;
+            margin-bottom: 24px;
+        }
+        .hero-title {
+            font-family: var(--font-head);
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.08;
+            letter-spacing: -1.5px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #ffffff 40%, var(--accent-primary) 80%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-typing {
+            font-family: var(--font-head);
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-weight: 600;
+            color: var(--text-muted);
+            height: 48px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+        }
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background: var(--accent-primary);
+            margin-left: 6px;
+            animation: pulseCursor 0.8s infinite;
+        }
+        @keyframes pulseCursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 720px;
+            margin-bottom: 36px;
+        }
+
+        /* ── BUTTON STYLING ─────────────────────────────── */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-purple));
+            color: #fff;
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.25);
+            transition: all 0.2s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-family: var(--font-head);
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            text-decoration: none;
+            border: 1px solid var(--border-card);
+            transition: all 0.2s ease;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ── SCROLL REVEAL CARDS ────────────────────────── */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+            margin-bottom: 100px;
+        }
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-heading {
+            font-family: var(--font-head);
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        .section-sub {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 40px;
+        }
+
+        /* ── EXPERTISE GRID ─────────────────────────────── */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+        .exp-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            padding: 30px;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+        .exp-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            background: var(--surface-hover);
+        }
+        .exp-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(99, 102, 241, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--accent-primary);
+            font-size: 1.4rem;
+        }
+        .exp-title {
+            font-family: var(--font-head);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .exp-desc {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+        }
+
+        /* ── LIVE GITHUB PROJECTS GRID ───────────────────── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        .repo-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            padding: 28px;
+            backdrop-filter: blur(14px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+        .repo-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+        }
+        .repo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 14px;
+        }
+        .repo-name {
+            font-family: var(--font-head);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .repo-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .repo-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 14px;
+        }
+        .repo-badge {
+            padding: 3px 10px;
+            border-radius: 999px;
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* ── LOADING SPINNER ────────────────────────────── */
+        .spinner-box {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 0;
+            color: var(--text-muted);
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1s infinite linear;
+            margin: 0 auto 16px auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* ── CONTACT & FOOTER ───────────────────────────── */
+        .contact-box {
+            background: var(--surface-card);
+            border: 1px solid var(--border-card);
+            border-radius: 24px;
+            padding: 50px;
+            text-align: center;
+            backdrop-filter: blur(16px);
+        }
+        
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 16px; }
+            .hero-title { font-size: 2.5rem; }
+            .contact-box { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- THREE.JS 3D ROTATING SPHERE CANVAS -->
+    <div id="three-canvas"></div>
+
+    <!-- TOP SCROLL PROGRESS BAR -->
+    <div class="scroll-progress" id="progress-bar"></div>
+
+    <div class="app-container">
+
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <div class="nav-logo">Anmol Sharma</div>
+            <ul class="nav-menu">
+                <li><a href="#about">About</a></li>
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#projects">GitHub Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hero-badge">⚡ SSLA Alumni & IIT Mandi CCE Deep Learning</div>
+            <h1 class="hero-title">Hi, I'm Anmol Sharma</h1>
+            
+            <div class="hero-typing">
+                <span id="typing-text"></span><span class="typing-cursor"></span>
+            </div>
+
+            <p class="hero-desc">
+                Building production-grade agentic platforms, edge intelligence, and low-latency reinforcement learning engines. Bridging advanced research and high-performance software engineering.
+            </p>
+
+            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                <a href="#projects" class="btn-primary">Explore Live Projects ↓</a>
+                <a href="#contact" class="btn-secondary">Get In Touch</a>
+            </div>
+        </section>
+
+        <!-- ABOUT & EXPERTISE SECTION -->
+        <section class="scroll-reveal" id="expertise">
+            <h2 class="section-heading">Areas of Expertise</h2>
+            <p class="section-sub">Combining specialized AI architecture with robust systems engineering.</p>
+            
+            <div class="expertise-grid">
+                <div class="exp-card">
+                    <div class="exp-icon">🧠</div>
+                    <h3 class="exp-title">Generative AI & Agents</h3>
+                    <p class="exp-desc">Orchestrating multi-agent systems with LangGraph, CrewAI, async pgvector memory, and hybrid graph search.</p>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-icon">⚡</div>
+                    <h3 class="exp-title">Machine Learning & CV</h3>
+                    <p class="exp-desc">Building deep learning models (PyTorch) and CPU-optimized computer vision pipelines (YOLO, MediaPipe, DeepFace).</p>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-icon">🖥️</div>
+                    <h3 class="exp-title">Edge & Low-Latency AI</h3>
+                    <p class="exp-desc">Optimizing local speech inference (Whisper + Kokoro), client-side VAD in Rust/WASM, and offline biometric auth daemons.</p>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-icon">🌐</div>
+                    <h3 class="exp-title">Liberal Arts Perspective</h3>
+                    <p class="exp-desc">Leveraging a background in economics & public policy (SSLA) for human-centric design, ethics, and clear technical communication.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LIVE GITHUB PROJECTS SECTION -->
+        <section class="scroll-reveal" id="projects">
+            <h2 class="section-heading">Live GitHub Repositories</h2>
+            <p class="section-sub">Fetched in real-time from <a href="https://github.com/anmolsharma152" target="_blank" style="color: var(--accent-primary);">@anmolsharma152</a> on GitHub.</p>
+
+            <div class="projects-grid" id="github-projects-container">
+                <div class="spinner-box">
+                    <div class="spinner"></div>
+                    <div>Fetching live GitHub repositories...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section class="scroll-reveal" id="contact">
+            <div class="contact-box">
+                <h2 style="font-family: var(--font-head); font-size: 2.4rem; font-weight: 800; margin-bottom: 16px;">Let's Build Something Extraordinary</h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 30px auto; font-size: 1.05rem;">
+                    Interested in collaborating on AI Systems, Agentic Architectures, or Low-Latency Edge Deployments?
+                </p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="mailto:anmolsharma152@gmail.com" class="btn-primary">Send Email →</a>
+                    <a href="https://github.com/anmolsharma152" target="_blank" class="btn-secondary">GitHub Profile ↗</a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- SCRIPTS: THREE.JS SPHERE + TYPING + LIVE GITHUB API -->
+    <script>
+        // ── 1. TYPING ANIMATION ────────────────────────────
+        const TITLES = [
+            'AI Engineer',
+            'Machine Learning Engineer',
+            'Generative AI Specialist',
+            'Applied Scientist',
+            'ML Systems Developer'
+        ];
+        let titleIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById('typing-text');
+
+        function typeLoop() {
+            const currentTitle = TITLES[titleIdx];
+            if (isDeleting) {
+                typingElement.textContent = currentTitle.substring(0, charIdx - 1);
+                charIdx--;
+            } else {
+                typingElement.textContent = currentTitle.substring(0, charIdx + 1);
+                charIdx++;
+            }
+
+            let speed = isDeleting ? 30 : 60;
+            if (!isDeleting && charIdx === currentTitle.length) {
+                speed = 1200;
+                isDeleting = true;
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                titleIdx = (titleIdx + 1) % TITLES.length;
+                speed = 400;
+            }
+            setTimeout(typeLoop, speed);
+        }
+        typeLoop();
+
+        // ── 2. SCROLL PROGRESS BAR & REVEALS ──────────────
+        const progressBar = document.getElementById('progress-bar');
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+
+        const reveals = document.querySelectorAll('.scroll-reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.15 });
+        reveals.forEach(el => observer.observe(el));
+
+        // ── 3. THREE.JS ROTATING SPHERE CANVAS ────────────
+        const container = document.getElementById('three-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 4.5;
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        // Wireframe Icosahedron Sphere
+        const geometry = new THREE.IcosahedronGeometry(2.4, 2);
+        const material = new THREE.MeshBasicMaterial({
+            color: 0x6366f1,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.25
+        });
+        const sphereMesh = new THREE.Mesh(geometry, material);
+        scene.add(sphereMesh);
+
+        let targetX = 0, targetY = 0;
+        document.addEventListener('mousemove', (e) => {
+            targetX = (e.clientX / window.innerWidth - 0.5) * 1.5;
+            targetY = (e.clientY / window.innerHeight - 0.5) * 1.5;
+        });
+
+        function animateSphere() {
+            requestAnimationFrame(animateSphere);
+            sphereMesh.rotation.x += 0.002;
+            sphereMesh.rotation.y += 0.003;
+            sphereMesh.rotation.x += (targetY * 0.3 - sphereMesh.rotation.x) * 0.05;
+            sphereMesh.rotation.y += (targetX * 0.3 - sphereMesh.rotation.y) * 0.05;
+            renderer.render(scene, camera);
+        }
+        animateSphere();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // ── 4. LIVE GITHUB REPO FETCHING ──────────────────
+        const REPO_FALLBACKS = {
+            Disha: 'A production-grade, agentic Personal Intelligence platform powered by LangGraph, pgvector, and async PostgreSQL.',
+            Aura: 'A privacy-focused, edge-optimized Arch Linux biometric auth daemon decoupled via Unix domain sockets and PAM.',
+            CodexEngine: 'A production-ready Agentic RAG engine with hybrid search, pgvector, LangGraph, and async FastAPI.',
+            WellnessMate: 'Multi-agent health companion built with CrewAI and MediaPipe real-time posture tracking in a Tauri desktop shell.',
+            vad_processor: 'Real-time, client-side Voice Activity Detection (VAD) built with Rust, WebAssembly, and ONNX Runtime.',
+            wikirag: 'A lightweight, fully offline RAG engine for Wikipedia querying using FAISS, RoBERTa, and Python.',
+            RecSys_RL: 'Reinforcement Learning algorithms and environments designed for dynamic recommendation and personalization.',
+            'Fine-tuning-on-Job-Description-Corpus': 'Fine-tuning transformer models on specialized job description corpora for automated skill mapping.',
+            'ML-Foundations': 'Implementations of foundational machine learning algorithms from scratch.'
+        };
+
+        async function fetchGitHubRepos() {
+            const container = document.getElementById('github-projects-container');
+            try {
+                const res = await fetch('https://api.github.com/users/anmolsharma152/repos?sort=updated&per_page=50');
+                if (!res.ok) throw new Error('Failed to load repositories');
+                const data = await res.json();
+
+                const filtered = data
+                    .filter(repo => !repo.fork && !['anmolsharma152', 'nextjs-portfolio', 'anmolsharma152.github.io'].includes(repo.name.toLowerCase()))
+                    .sort((a, b) => {
+                        const hasHomeA = !!a.homepage;
+                        const hasHomeB = !!b.homepage;
+                        if (hasHomeA && !hasHomeB) return -1;
+                        if (!hasHomeA && hasHomeB) return 1;
+                        return new Date(b.updated_at) - new Date(a.updated_at);
+                    })
+                    .slice(0, 9);
+
+                container.innerHTML = '';
+
+                filtered.forEach(repo => {
+                    const desc = REPO_FALLBACKS[repo.name] || repo.description || 'Advanced software engineering & machine learning project.';
+                    const lang = repo.language || 'Python';
+                    const stars = repo.stargazers_count;
+                    const forks = repo.forks_count;
+                    
+                    const card = document.createElement('div');
+                    card.className = 'repo-card';
+                    card.innerHTML = `
+                        <div>
+                            <div class="repo-header">
+                                <span class="repo-name">${repo.name}</span>
+                                <span class="repo-badge">${lang}</span>
+                            </div>
+                            <p class="repo-desc">${desc}</p>
+                        </div>
+                        <div class="repo-meta">
+                            <span>⭐ ${stars} stars</span>
+                            <span>🍴 ${forks} forks</span>
+                            <a href="${repo.html_url}" target="_blank" style="margin-left: auto; color: var(--accent-primary); text-decoration: none; font-weight: 600;">GitHub ↗</a>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (err) {
+                container.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #ef4444;">
+                        Unable to fetch live GitHub repos. <a href="https://github.com/anmolsharma152" target="_blank" style="color: #fff;">Visit GitHub Profile directly ↗</a>
+                    </div>
+                `;
+            }
+        }
+        fetchGitHubRepos();
+    </script>
+</body>
+</html>

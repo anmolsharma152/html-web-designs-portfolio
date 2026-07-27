@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmol Sharma | The Architect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cursor-x: 50%;
+            --cursor-y: 50%;
+            /* Warm Tungsten/Gold Light */
+            --spotlight-color: rgba(251, 191, 36, 0.12); 
+        }
+
+        body {
+            background-color: #020202; /* Pitch Black */
+            color: #d4d4d4;
+            font-family: 'Lato', sans-serif;
+            overflow-x: hidden;
+            cursor: crosshair; /* Precision cursor */
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Warm Spotlight */
+        .spotlight-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(
+                800px circle at var(--cursor-x) var(--cursor-y), 
+                var(--spotlight-color),
+                transparent 45%
+            );
+            z-index: 1;
+            pointer-events: none;
+            mix-blend-mode: screen;
+        }
+
+        /* Heavy Grain for Film Look */
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.08;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Slow, elegant fade ins */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Gold Text Gradient */
+        .gold-text {
+            background: linear-gradient(to bottom, #fcd34d, #b45309);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Elegant Line Separators */
+        .separator {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.3), transparent);
+            width: 100%;
+            margin: 2rem 0;
+        }
+
+        /* Hover Reveal for Projects */
+        .project-row {
+            transition: all 0.4s ease;
+            border-left: 2px solid transparent;
+        }
+        .project-row:hover {
+            border-left: 2px solid #fbbf24;
+            padding-left: 1rem;
+            background: linear-gradient(90deg, rgba(251, 191, 36, 0.05), transparent);
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #555; }
+    </style>
+</head>
+<body class="relative">
+
+    <div class="spotlight-bg"></div>
+    <div class="noise-overlay"></div>
+
+    <main class="relative z-10 max-w-5xl mx-auto px-6">
+        
+        <!-- Minimal Top Nav -->
+        <nav class="flex justify-between items-center py-10 opacity-0 fade-up" style="transition-delay: 0.1s;">
+            <div class="text-xs tracking-[0.2em] uppercase text-amber-500/80">AS — Portfolio</div>
+            <a href="mailto:ozymandias.work@gmail.com" class="text-xs tracking-[0.2em] uppercase hover:text-amber-400 transition-colors">Contact</a>
+        </nav>
+
+        <!-- Center Stage Hero -->
+        <section class="min-h-[70vh] flex flex-col justify-center items-center text-center">
+            
+            <div class="mb-6 opacity-0 fade-up" style="transition-delay: 0.2s;">
+                <span class="inline-block px-3 py-1 border border-amber-500/30 rounded-full text-[10px] tracking-[0.3em] uppercase text-amber-500/80">
+                    Est. 2024
+                </span>
+            </div>
+
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-medium tracking-tighter leading-none mb-8 opacity-0 fade-up" style="transition-delay: 0.4s;">
+                <span class="serif italic block text-gray-500 text-4xl md:text-6xl lg:text-7xl mb-2">The</span>
+                CREATIVE<br>
+                <span class="gold-text">ENGINEER</span>
+            </h1>
+
+            <p class="max-w-lg text-lg text-gray-400 font-light leading-relaxed opacity-0 fade-up" style="transition-delay: 0.6s;">
+                Combining liberal arts philosophy with full-stack architecture. 
+                <br><span class="text-amber-500/60 italic serif">Bridging data & human experience.</span>
+            </p>
+        </section>
+
+        <div class="separator opacity-0 fade-up" style="transition-delay: 0.8s;"></div>
+
+        <!-- Role & Stack -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-12 py-12 text-center md:text-left opacity-0 fade-up" style="transition-delay: 1s;">
+            <div>
+                <h3 class="serif text-2xl text-white mb-2 italic">Role</h3>
+                <p class="text-sm tracking-widest uppercase text-gray-500">Full-Stack & AI</p>
+            </div>
+            <div>
+                <h3 class="serif text-2xl text-white mb-2 italic">Focus</h3>
+                <p class="text-sm tracking-widest uppercase text-gray-500">NLP & User Experience</p>
+            </div>
+            <div>
+                <h3 class="serif text-2xl text-white mb-2 italic">Toolkit</h3>
+                <p class="text-sm tracking-widest uppercase text-gray-500">Python / TS / Rust</p>
+            </div>
+        </section>
+
+        <div class="separator opacity-0 fade-up"></div>
+
+        <!-- Selected Works (Credits Style) -->
+        <section id="work" class="py-24">
+            <h2 class="serif text-4xl md:text-5xl mb-16 text-center italic text-gray-600 opacity-0 fade-up">Selected Works</h2>
+
+            <div class="space-y-4">
+                <!-- Project 1 -->
+                <a href="#" class="project-row block py-6 group opacity-0 fade-up">
+                    <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+                        <div class="md:w-1/3">
+                            <span class="text-xs text-amber-500/50 font-mono tracking-widest">01</span>
+                        </div>
+                        <div class="md:w-1/3 text-center md:text-left">
+                            <h3 class="text-3xl serif group-hover:text-amber-400 transition-colors">ProspectiveName</h3>
+                        </div>
+                        <div class="md:w-1/3 text-center md:text-right">
+                            <span class="text-xs uppercase tracking-widest text-gray-500 group-hover:text-white transition-colors">Civic Connect Platform</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 2 -->
+                <a href="#" class="project-row block py-6 group opacity-0 fade-up">
+                    <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+                        <div class="md:w-1/3">
+                            <span class="text-xs text-amber-500/50 font-mono tracking-widest">02</span>
+                        </div>
+                        <div class="md:w-1/3 text-center md:text-left">
+                            <h3 class="text-3xl serif group-hover:text-amber-400 transition-colors">omarchy-nvim</h3>
+                        </div>
+                        <div class="md:w-1/3 text-center md:text-right">
+                            <span class="text-xs uppercase tracking-widest text-gray-500 group-hover:text-white transition-colors">Dev Environment</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="#" class="project-row block py-6 group opacity-0 fade-up">
+                    <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+                        <div class="md:w-1/3">
+                            <span class="text-xs text-amber-500/50 font-mono tracking-widest">03</span>
+                        </div>
+                        <div class="md:w-1/3 text-center md:text-left">
+                            <h3 class="text-3xl serif group-hover:text-amber-400 transition-colors">Voice AI</h3>
+                        </div>
+                        <div class="md:w-1/3 text-center md:text-right">
+                            <span class="text-xs uppercase tracking-widest text-gray-500 group-hover:text-white transition-colors">Emotion NLP</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Project 4 -->
+                <a href="#" class="project-row block py-6 group opacity-0 fade-up">
+                    <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+                        <div class="md:w-1/3">
+                            <span class="text-xs text-amber-500/50 font-mono tracking-widest">04</span>
+                        </div>
+                        <div class="md:w-1/3 text-center md:text-left">
+                            <h3 class="text-3xl serif group-hover:text-amber-400 transition-colors">MedPal</h3>
+                        </div>
+                        <div class="md:w-1/3 text-center md:text-right">
+                            <span class="text-xs uppercase tracking-widest text-gray-500 group-hover:text-white transition-colors">Healthcare Tech</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section class="py-24 border-t border-white/5 opacity-0 fade-up">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <div>
+                    <h2 class="serif text-4xl mb-8">The Journey</h2>
+                    <p class="text-gray-400 font-light leading-relaxed mb-8">
+                        My career has been defined by a pursuit of clarity. Whether documenting complex Linux workflows or building voice interfaces that understand emotion, I aim to make technology feel less like a machine and more like an extension of the mind.
+                    </p>
+                    <a href="https://linkedin.com/in/anmolsharma152" target="_blank" class="text-amber-500 hover:text-white transition-colors text-sm uppercase tracking-widest border-b border-amber-500/30 pb-1">Read Full Bio on LinkedIn</a>
+                </div>
+                <div class="space-y-8">
+                    <div>
+                        <span class="text-xs font-mono text-gray-600 block mb-1">2024 — PRESENT</span>
+                        <h4 class="text-xl text-white">Independent Creator</h4>
+                        <p class="text-sm text-gray-500 mt-1">Building ML Tools & UX Strategy</p>
+                    </div>
+                    <div>
+                        <span class="text-xs font-mono text-gray-600 block mb-1">2023 — 2024</span>
+                        <h4 class="text-xl text-white">Technical Support Exec</h4>
+                        <p class="text-sm text-gray-500 mt-1">Teleperformance (Japanese Client Support)</p>
+                    </div>
+                    <div>
+                        <span class="text-xs font-mono text-gray-600 block mb-1">2022 — 2024</span>
+                        <h4 class="text-xl text-white">Freelance Developer</h4>
+                        <p class="text-sm text-gray-500 mt-1">Python CLI & System Architecture</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-24 text-center opacity-0 fade-up">
+            <div class="mb-12">
+                <a href="mailto:ozymandias.work@gmail.com" class="serif text-5xl md:text-7xl italic text-gray-700 hover:text-amber-400 transition-all duration-500">
+                    Let's Talk.
+                </a>
+            </div>
+            <div class="flex justify-center gap-8 text-xs uppercase tracking-[0.2em] text-gray-500">
+                <a href="https://github.com/anmolsharma152" class="hover:text-white transition-colors">GitHub</a>
+                <a href="https://linkedin.com/in/anmolsharma152" class="hover:text-white transition-colors">LinkedIn</a>
+                <a href="#" class="hover:text-white transition-colors">Resume</a>
+            </div>
+            <p class="mt-12 text-[10px] text-gray-800 uppercase tracking-widest">
+                © 2025 Anmol Sharma • Jaipur
+            </p>
+        </footer>
+
+    </main>
+
+    <script>
+        // Smooth Spotlight
+        const body = document.querySelector('body');
+        let mouseX = 0, mouseY = 0;
+        let currentX = 0, currentY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateSpotlight() {
+            // Linear interpolation for smooth lag effect
+            currentX += (mouseX - currentX) * 0.1;
+            currentY += (mouseY - currentY) * 0.1;
+
+            document.documentElement.style.setProperty('--cursor-x', currentX + 'px');
+            document.documentElement.style.setProperty('--cursor-y', currentY + 'px');
+
+            requestAnimationFrame(animateSpotlight);
+        }
+        animateSpotlight();
+
+        // Reveal Animations on Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

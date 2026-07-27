@@ -1,6 +1,6 @@
 # 🎨 Master Design System, Motion Engineering & UI Patterns Guide
 
-> A comprehensive, top-tier educational handbook for modern front-end engineers, UI/UX designers, and systems architects. Covers zero-dependency front-end design, SOTA motion engines (Lenis, GSAP), 2D rigid-body physics (Matter.js), WebGL GLSL shaders, Glassmorphism 2.0, next-gen CSS primitives, and modular component design patterns.
+> A comprehensive, top-tier educational handbook for modern front-end engineers, UI/UX designers, and systems architects. Covers zero-dependency front-end design, SOTA motion engines (Lenis, GSAP), 2D rigid-body physics (Matter.js), WebGL GLSL shaders, Glassmorphism 2.0, next-gen CSS primitives, and modular component design patterns across all 35+ portfolio templates.
 
 ---
 
@@ -13,76 +13,111 @@ graph TD
     A["Front-End Master Suite Architecture"] --> B["1. SOTA Motion Engines (Lenis, GSAP, Matter.js)"]
     A --> C["2. WebGL & GPU Shaders (Three.js, GLSL, Web Audio)"]
     A --> D["3. Modern Design Paradigms (Glass 2.0, Porcelain Light, Vercel Beam, Raycast OS)"]
-    A --> E["4. Next-Gen CSS Primitives (@container, :has(), @starting-style)"]
-    A --> F["5. Real Systems Copy Mappings (Disha, CodexEngine, vad_processor, Aura)"]
+    A --> E["4. Specialized Aesthetics (Brutalist, Swiss, Vintage Newspaper, Hacker, Noir)"]
+    A --> F["5. Next-Gen CSS Primitives (@container, :has(), @starting-style)"]
 ```
 
 ---
 
 ## 🖼️ 2. Visual Master Catalogue & Design Gallery
 
-Below is a visual showcase of the flagship design systems in this collection:
+Below is an exhaustive visual showcase of all template aesthetics in this collection:
 
 ### 1. SOTA Lenis Inertia & GSAP Kinetic Portfolio
-![SOTA Lenis Inertia & GSAP Kinetic](/home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/lenis_gsap_kinetic_mockup.jpg)
+![SOTA Lenis Inertia & GSAP Kinetic](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/lenis_gsap_kinetic_mockup.jpg)
 * **Key Features**: Lenis smooth momentum scroll engine (`@studio-freight/lenis`), GSAP ScrollTrigger pinned horizontal scroll, kinetic split typography.
 * **Primary Template**: [`Master 05 — Lenis Smooth Inertia & GSAP Kinetic.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Master%2005%20%E2%80%94%20Lenis%20Smooth%20Inertia%20&%20GSAP%20Kinetic.html)
 
 ---
 
 ### 2. Matter.js Physics & Vercel Border Beam
-![Matter.js Physics & Vercel Border Beam](/home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/matter_physics_vercel_beam_mockup.jpg)
+![Matter.js Physics & Vercel Border Beam](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/matter_physics_vercel_beam_mockup.jpg)
 * **Key Features**: Interactive Matter.js 2D rigid-body gravity canvas for skills & tech badges, Vercel-style rotating conic laser border beams.
 * **Primary Template**: [`Master 06 — Matter.js Physics & Vercel Border Beam.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Master%2006%20%E2%80%94%20Matter.js%20Physics%20&%20Vercel%20Border%20Beam.html)
 
 ---
 
 ### 3. Spatial Glassmorphism 2.0 & 3D Bento
-![Spatial Glassmorphism 2.0 & 3D Bento](/home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/spatial_glass_3d_mockup_1785179737378.jpg)
+![Spatial Glassmorphism 2.0 & 3D Bento](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/spatial_glass_3d_mockup_1785179737378.jpg)
 * **Key Features**: Multi-layered frosted glass panels (`backdrop-filter: blur(20px)`), specular top border glare, 3D mouse perspective card tilt math, Three.js 3D wireframe canvas.
-* **Primary Template**: [`Master 01 — Modern Bento Spatial 3D.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Master%2001%20%E2%80%94%20Modern%20Bento%20Spatial%203D.html)
+* **Primary Template**: [`Master 01 — Modern Bento Spatial 3D.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Master%2001%20%E2%80%94%20Modern%20Bento%20Spatial%203D.html) & [`Spatial Glass 3D Bento.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Spatial%20Glass%203D%20Bento.html)
 
 ---
 
 ### 4. Raycast Command OS & Quick Action Dock
-![Raycast Command OS](/home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/raycast_command_os_mockup_1785179750479.jpg)
+![Raycast Command OS](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/raycast_command_os_mockup_1785179750479.jpg)
 * **Key Features**: Keyboard-driven Cmd+K modal dialog, macOS floating glass quick-action dock, status pills, and hotkey listeners.
-* **Primary Template**: [`Master — Raycast Command OS.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Master%20%E2%80%94%20Raycast%20Command%20OS.html)
+* **Primary Template**: [`Master — Raycast Command OS.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Master%20%E2%80%94%20Raycast%20Command%20OS.html) & [`Component — Raycast Floating Dock & Quick Actions.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Component%20%E2%80%94%20Raycast%20Floating%20Dock%20&%20Quick%20Actions.html)
 
 ---
 
 ### 5. Pristine Porcelain Enterprise Light Mode
-![Pristine Porcelain Enterprise Light Mode](/home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/porcelain_light_mode_mockup_1785179724592.jpg)
+![Pristine Porcelain Enterprise Light Mode](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/porcelain_light_mode_mockup_1785179724592.jpg)
 * **Key Features**: Crisp white (`#ffffff` / `#f8fafc`) backdrop with radial dot grid pattern, deep royal blue (`#2563eb`) accents, and elevated multi-shadow cards.
-* **Primary Template**: [`Enterprise Kinetic Light.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Enterprise%20Kinetic%20Light.html)
+* **Primary Template**: [`Enterprise Kinetic Light.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Enterprise%20Kinetic%20Light.html) & [`Master 02 — Kinetic Cmd-K Enterprise.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Master%2002%20%E2%80%94%20Kinetic%20Cmd-K%20Enterprise.html)
 
 ---
 
 ### 6. Stripe Press Luxury Mesh Gradient
-![Stripe Press Luxury Mesh Gradient](/home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/stripe_mesh_gradient_mockup_1785179764080.jpg)
+![Stripe Press Luxury Mesh Gradient](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/stripe_mesh_gradient_mockup_1785179764080.jpg)
 * **Key Features**: Dynamic HTML5 multi-color mesh gradient canvas, fluid particle movement, high-contrast dark typography.
-* **Primary Template**: [`Master — Stripe Enterprise Glass.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Master%20%E2%80%94%20Stripe%20Enterprise%20Glass.html)
+* **Primary Template**: [`Master — Stripe Enterprise Glass.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Master%20%E2%80%94%20Stripe%20Enterprise%20Glass.html) & [`Component — Stripe Mesh Gradient Canvas.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Component%20%E2%80%94%20Stripe%20Mesh%20Gradient%20Canvas.html)
 
 ---
 
 ### 7. CAD Technical Blueprint Grid
-![CAD Technical Schematic & Blueprint Grid](/home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/cad_blueprint_mockup_1785179791754.jpg)
+![CAD Technical Schematic & Blueprint Grid](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/cad_blueprint_mockup_1785179791754.jpg)
 * **Key Features**: Technical grid overlays, coordinate crosshairs, architectural dimension lines, and monospace telemetry badges.
 * **Primary Template**: [`Technial Grid.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Technial%20Grid.html)
 
 ---
 
 ### 8. Neo-Brutalist Hard Offset Physics
-![Neo-Brutalist Hard Offset Shadow Physics](/home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/neo_brutalist_mockup_1785179777008.jpg)
+![Neo-Brutalist Hard Offset Shadow Physics](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/neo_brutalist_mockup_1785179777008.jpg)
 * **Key Features**: High-saturation primary colors, 3px solid black outlines (`border: 3px solid #000`), hard offset drop shadows (`box-shadow: 4px 4px 0px #000`).
 * **Primary Template**: [`Neo Brutalist.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Neo%20Brutalist.html)
+
+---
+
+### 9. Elegant Brutalist Monolithic Grid
+![Elegant Brutalist Monolithic Grid](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/elegant_brutalist_mockup.jpg)
+* **Key Features**: High contrast monochrome black and white palette, bold architectural serif headers, stark structural grid lines, raw form layout.
+* **Primary Template**: [`Elegant Brutalist.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Elegant%20Brutalist.html)
+
+---
+
+### 10. Vintage Editorial Newspaper Print
+![Vintage Editorial Newspaper Print](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/vintage_newspaper_mockup.jpg)
+* **Key Features**: Cream paper texture background (`#fbf9f5`), multi-column CSS newspaper layout (`column-count: 3`), drop caps, decorative editorial section dividers, classic serif typography.
+* **Primary Template**: [`Vintage Newspaper.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Vintage%20Newspaper.html)
+
+---
+
+### 11. Swiss International Typographic Style
+![Swiss International Typographic Style](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/swiss_minimalist_mockup.jpg)
+* **Key Features**: Ultra-clean white canvas, asymmetric grid alignment, bold Helvetica sans-serif typography, red accent lines, precision layout spacing.
+* **Primary Template**: [`Swiss Minimalist.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Swiss%20Minimalist.html)
+
+---
+
+### 12. Hacker Command-Line Terminal
+![Hacker Command-Line Terminal](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/hacker_terminal_mockup.jpg)
+* **Key Features**: Pure pitch black canvas (`#000000`), neon green matrix text (`#00ff66`), monospace ASCII art headers, command-line prompt input listeners, system status telemetry.
+* **Primary Template**: [`Hacker.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Hacker.html)
+
+---
+
+### 13. Cinematic Spotlight & Filmic Luxury
+![Cinematic Spotlight & Filmic Luxury](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/assets/cinematic_spotlight_mockup.jpg)
+* **Key Features**: Deep dark luxury canvas, interactive mouse-following radial cursor spotlight reveal, filmic blur overlays, gold/amber typography.
+* **Primary Template**: [`Cinematic Spotlight.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Cinematic%20Spotlight.html) & [`Cinematic Noir.html`](file:///home/anmol/Projects/HTML%20Web%20Designs%20for%20portfolio%20website/Cinematic%20Noir.html)
 
 ---
 
 ## 🌊 3. State-of-the-Art (SOTA) Motion Engineering
 
 ### 1. Lenis Smooth Scroll Engine (`@studio-freight/lenis`)
-Lenis recalculates scroll events with inertia physics to create smooth 60fps scrolling:
+Lenis recalculates scroll events with inertia physics to create smooth 60fps scrolling, synchronized with GSAP ScrollTrigger ticker:
 
 ```javascript
 const lenis = new Lenis({
@@ -91,29 +126,33 @@ const lenis = new Lenis({
     smoothWheel: true
 });
 
-function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
+gsap.registerPlugin(ScrollTrigger);
+
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+});
+gsap.ticker.lagSmoothing(0);
 ```
 
 ### 2. GSAP ScrollTrigger Horizontal Pinning
 Pins a section in place while translating child elements horizontally based on scroll progress:
 
 ```javascript
-gsap.to("#horizontal", {
+const horizontalSection = document.getElementById("horizontal");
+gsap.to(horizontalSection, {
     x: () => -(horizontalSection.scrollWidth - window.innerWidth),
     ease: "none",
     scrollTrigger: {
         trigger: "#projects",
         start: "top top",
-        end: () => "+=" + horizontalSection.scrollWidth,
+        end: () => "+=" + (horizontalSection.scrollWidth - window.innerWidth),
         pin: true,
         scrub: 1,
         invalidateOnRefresh: true
     }
 });
+ScrollTrigger.refresh();
 ```
 
 ### 3. Matter.js 2D Rigid-Body Physics Engine
@@ -219,31 +258,37 @@ function playBeep() {
 
 ---
 
-## 📐 5. Next-Gen CSS Primitives
+## 🛠️ 5. Complete Template & Component Directory
 
-- **Container Queries (`@container`)**: Components adapt based on parent container width rather than viewport width.
-- **Parent Selector (`:has()`)**: Style parent elements dynamically when children are focused, hovered, or checked.
-- **Entry Animations (`@starting-style`)**: Native CSS entry and exit transitions for DOM elements without JS animation libraries.
-- **Subgrid (`grid-template-rows: subgrid`)**: Nested cards line up header and footer boundaries seamlessly.
+### 👑 Master Portfolio Templates:
+* [`Master 01 — Modern Bento Spatial 3D.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Master%2001%20%E2%80%94%20Modern%20Bento%20Spatial%203D.html)
+* [`Master 02 — Kinetic Cmd-K Enterprise.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Master%2002%20%E2%80%94%20Kinetic%20Cmd-K%20Enterprise.html)
+* [`Master 03 — Interactive Architecture Visualizer.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Master%2003%20%E2%80%94%20Interactive%20Architecture%20Visualizer.html)
+* [`Master 04 — View Transitions Scrollytelling.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Master%2004%20%E2%80%94%20View%20Transitions%20Scrollytelling.html)
+* [`Master 05 — Lenis Smooth Inertia & GSAP Kinetic.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Master%2005%20%E2%80%94%20Lenis%20Smooth%20Inertia%20&%20GSAP%20Kinetic.html)
+* [`Master 06 — Matter.js Physics & Vercel Border Beam.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Master%2006%20%E2%80%94%20Matter.js%20Physics%20&%20Vercel%20Border%20Beam.html)
+* [`Master — Raycast Command OS.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Master%20%E2%80%94%20Raycast%20Command%20OS.html)
+* [`Master — Stripe Enterprise Glass.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Master%20%E2%80%94%20Stripe%20Enterprise%20Glass.html)
+* [`Master — Supabase Developer Hub.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Master%20%E2%80%94%20Supabase%20Developer%20Hub.html)
+* [`Master — Midjourney Cyberpunk Dark.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Master%20%E2%80%94%20Midjourney%20Cyberpunk%20Dark.html)
+
+### 🎨 Creative Aesthetic Explorations:
+* [`Elegant Brutalist.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Elegant%20Brutalist.html)
+* [`Vintage Newspaper.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Vintage%20Newspaper.html)
+* [`Swiss Minimalist.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Swiss%20Minimalist.html)
+* [`Hacker.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Hacker.html)
+* [`Neo Brutalist.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Neo%20Brutalist.html)
+* [`Technial Grid.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Technial%20Grid.html)
+* [`Cinematic Spotlight.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Cinematic%20Spotlight.html)
+* [`Cinematic Noir.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Cinematic%20Noir.html)
+* [`The Systems Architect.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/The%20Systems%20Architect.html)
+* [`Bento Grid.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Bento%20Grid.html)
+* [`Linear.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Linear.html)
+* [`Brainrot.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Brainrot.html)
 
 ---
 
-## 🛠️ 6. Standalone Component Reference Files
-
-| Component File | Key Mechanics & Patterns |
-| :--- | :--- |
-| [`Component — CmdK Command Palette.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Component%20%E2%80%94%20CmdK%20Command%20Palette.html) | Modal backdrop, keyboard `Cmd+K` listener, focus trap, search input filtering. |
-| [`Component — Fuse.js Fuzzy CmdK Search.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Component%20%E2%80%94%20Fuse.js%20Fuzzy%20CmdK%20Search.html) | Weighted fuzzy search across title, desc, and tech keys with score ranking. |
-| [`Component — Lenis Inertia Scroll Container.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Component%20%E2%80%94%20Lenis%20Inertia%20Scroll%20Container.html) | Standalone Lenis inertia scroll engine container setup. |
-| [`Component — Matter.js Interactive Physics Canvas.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Component%20%E2%80%94%20Matter.js%20Interactive%20Physics%20Canvas.html) | Standalone drag-and-drop rigid body gravity box with collision boundaries. |
-| [`Component — Vercel Border Beam & Shimmer Card.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Component%20%E2%80%94%20Vercel%20Border%20Beam%20&%20Shimmer%20Card.html) | Pure CSS conic gradient rotating border laser beam effect. |
-| [`Component — Apple Dynamic Island Pill.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Component%20%E2%80%94%20Apple%20Dynamic%20Island%20Pill.html) | Expanding spring-animated status pill micro-drawer container. |
-| [`Component — 3D Tilt Cards & Glass 2.0.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Component%20%E2%80%94%203D%20Tilt%20Cards%20%26%20Glass%202.0.html) | Standalone card tilt physics math & frosted glass styling. |
-| [`Component — Pipeline Dataflow Visualizer.html`](file:///home/anmol/Projects/HTML%20Web%20Designs/Component%20%E2%80%94%20Pipeline%20Dataflow%20Visualizer.html) | Interactive node graph flow for system pipelines. |
-
----
-
-## 🎯 7. Real Project Copy Mappings
+## 🎯 6. Real Project Copy Mappings
 
 All master templates map directly to real software projects:
 

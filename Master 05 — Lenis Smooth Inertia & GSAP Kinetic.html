@@ -368,23 +368,17 @@
             smoothWheel: true
         });
 
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
+        // Register GSAP Plugins
+        gsap.registerPlugin(ScrollTrigger);
 
-        // Synchronize Lenis with GSAP ScrollTrigger
+        // Synchronize Lenis RAF loop strictly through GSAP Ticker
         lenis.on('scroll', ScrollTrigger.update);
         gsap.ticker.add((time) => {
             lenis.raf(time * 1000);
         });
         gsap.ticker.lagSmoothing(0);
 
-        // 2. Register GSAP Plugins
-        gsap.registerPlugin(ScrollTrigger);
-
-        // 3. Scroll Progress Indicator
+        // 2. Scroll Progress Indicator
         gsap.to("#progress", {
             width: "100%",
             ease: "none",
@@ -396,7 +390,7 @@
             }
         });
 
-        // 4. Pinned Horizontal Scroll Section
+        // 3. Pinned Horizontal Scroll Section
         const horizontalSection = document.getElementById("horizontal");
         gsap.to(horizontalSection, {
             x: () => -(horizontalSection.scrollWidth - window.innerWidth),
@@ -404,14 +398,14 @@
             scrollTrigger: {
                 trigger: "#projects",
                 start: "top top",
-                end: () => "+=" + horizontalSection.scrollWidth,
+                end: () => "+=" + (horizontalSection.scrollWidth - window.innerWidth),
                 pin: true,
                 scrub: 1,
                 invalidateOnRefresh: true
             }
         });
 
-        // 5. Kinetic Text Reveal Effect
+        // 4. Kinetic Text Reveal Effect
         const kineticText = document.getElementById("kinetic-text");
         const words = kineticText.innerText.split(" ");
         kineticText.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
@@ -428,6 +422,9 @@
                 scrub: true
             }
         });
+
+        // Refresh ScrollTrigger after pinning setup
+        ScrollTrigger.refresh();
     </script>
 </body>
 </html>
